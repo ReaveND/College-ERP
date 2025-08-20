@@ -1,7 +1,7 @@
 # ERP-CMS
 An ERP project for a College using MERN
 
-# Important Tips:
+## Important Tips:
 ### Creating a Project:
 > npm create vite@latest {appname}
 ### Installing Node_Modules:
@@ -12,4 +12,4 @@ An ERP project for a College using MERN
 > npm i react-router-dom
 ### Installing Tailwins CSS:
 > npm install -D tailwindcss postcss autoprefixer
-> npx tailwindcss init -p
+> npx tailwindcss init -p    
