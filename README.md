@@ -13,7 +13,7 @@ An ERP project for a College using MERN
 ### Installing Tailwins CSS:
 > npm install tailwindcss @tailwindcss/vite
 ### Configuring Tailwind plugin in Vite Config:
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite'  
 import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [
