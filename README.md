@@ -11,5 +11,14 @@ An ERP project for a College using MERN
 ### Installing Router:
 > npm i react-router-dom
 ### Installing Tailwins CSS:
-> npm install -D tailwindcss postcss autoprefixer
-> npx tailwindcss init -p    
+> npm install tailwindcss @tailwindcss/vite
+### Configuring Tailwind plugin in Vite Config:
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+### Importing Tailwind on the CSS file accessing it:
+> @import "tailwindcss";
