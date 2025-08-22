@@ -6,6 +6,10 @@ An ERP project for a College using MERN
 ```
 https://github.com/ReaveND/College-ERP.git
 ```
+### Project Document:
+```
+https://docs.google.com/document/d/1h0JSdxRTWBdVbRVBjvPhtlRKa_EjC6-YSWTdBZTxlYw/edit?usp=sharing
+```
 ### Creating a Project:
 ```
  npm create vite@latest {appname}
