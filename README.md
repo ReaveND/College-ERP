@@ -3,7 +3,9 @@ An ERP project for a College using MERN
 
 ## Important Tips:
 ### Creating a Project:
-> npm create vite@latest {appname}
+```
+ npm create vite@latest {appname}
+
 ### Installing Node_Modules:
 > npm install/i
 ### Installing Styled Components:
