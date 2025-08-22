@@ -7,17 +7,33 @@ An ERP project for a College using MERN
  npm create vite@latest {appname}
 ```
 ### Installing Node_Modules:
-```npm install/i```
+```
+npm install/i
+```
 ### Installing Styled Components:
-```npm i styled-components```
+```
+npm i styled-components
+```
 ### Installing Router:
-```npm i react-router-dom```
+```
+npm i react-router-dom
+```
 ### Installing Tailwins CSS:
-```npm install tailwindcss @tailwindcss/vite```
+```
+npm install tailwindcss @tailwindcss/vite
+```
 ### Configuring Tailwind plugin in Vite Config:
-```import tailwindcss from '@tailwindcss/vite'```
-```tailwindcss()```
+```
+import tailwindcss from '@tailwindcss/vite'
+```
+```
+tailwindcss()
+```
 ### Importing Tailwind on the CSS file accessing it:
-```@import "tailwindcss";```
+```
+@import "tailwindcss";
+```
 ### Importing Font-Awesome CDN:
-```<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>```
+```
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+```
