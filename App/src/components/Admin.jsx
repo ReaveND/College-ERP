@@ -9,13 +9,13 @@ const Admin = () => {
             <div className="min-h-screen bg-gray-100 flex">
                 {/* Sidebar - hidden on small screens */}
                 <aside className="w-64 p-4 hidden md:block">
-                    <h3 className="text-2xl font-bold text-center mb-4">Admin Panel</h3>
+                    <h3 className="text-2xl font-bold text-center mb-4 bg-[#ffffff] py-2 rounded-tl-2xl rounded-br-2xl">Admin Panel</h3>
                     <hr className="mb-4" />
                     <nav className="space-y-1 font-sans text-sm font-semibold text-gray-700">
-                    <NavLink to="/dashboard" className="block px-5 py-2 rounded hover:bg-gray-200"><i className="fas fa-chart-line text-gray-700 mx-3"></i>Dashboard</NavLink>
-                    <NavLink to="/users" className="block px-5 py-2 rounded hover:bg-gray-200"><i class="fa-brands fa-screenpal text-gray mx-3"></i>Users</NavLink>
-                    <NavLink to="/settings" className="block px-5 py-2 rounded hover:bg-gray-200"><i class="fa-solid fa-sliders text-gray mx-3"></i>Settings</NavLink>
-                    <NavLink to="/reports" className="block px-5 py-2 rounded hover:bg-gray-200"><i class="fa-solid fa-file-lines text-gray mx-3"></i>Reports</NavLink>
+                    <NavLink to="/" className="block px-5 py-2 rounded hover:bg-gray-200"><i className="fas fa-chart-line text-gray-700 mx-3"></i>Dashboard</NavLink>
+                    <NavLink to="/" className="block px-5 py-2 rounded hover:bg-gray-200"><i class="fa-brands fa-screenpal text-gray mx-3"></i>Users</NavLink>
+                    <NavLink to="/" className="block px-5 py-2 rounded hover:bg-gray-200"><i class="fa-solid fa-sliders text-gray mx-3"></i>Settings</NavLink>
+                    <NavLink to="/" className="block px-5 py-2 rounded hover:bg-gray-200"><i class="fa-solid fa-file-lines text-gray mx-3"></i>Reports</NavLink>
                     </nav>
                 </aside>
 
