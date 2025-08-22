@@ -22,7 +22,7 @@ npm i react-router-dom
 ```
 npm install tailwindcss @tailwindcss/vite
 ```
-### Configuring Tailwind plugin in Vite Config:
+### Configuring Tailwind plugin in Vite Config (vite.config.js):
 ```
 import tailwindcss from '@tailwindcss/vite'
 ```
