@@ -2,6 +2,10 @@
 An ERP project for a College using MERN
 
 ## Important Tips:
+### Cloning the Repo through CLI:
+```
+https://github.com/ReaveND/College-ERP.git
+```
 ### Creating a Project:
 ```
  npm create vite@latest {appname}
