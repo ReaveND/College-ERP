@@ -8,7 +8,7 @@ An ERP project for a College using MERN
 ```
 ### Installing Node_Modules:
 ```
-npm install/i
+npm i
 ```
 ### Installing Styled Components:
 ```
