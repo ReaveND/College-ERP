@@ -6,3 +6,4 @@ An ERP project for a College using MERN
 [![ERP Dashboard](https://img.shields.io/badge/ERP%20Dashboard-Wiki-ff0000?style=for-the-badge&logo=react&logoColor=red)](https://github.com/ReaveND/College-ERP/wiki)
 
 
+[![ERP Dashboard](https://img.shields.io/badge/ERP%20Dashboard-Wiki-e63946?style=for-the-badge&logo=react&logoColor=white)](https://github.com/ReaveND/College-ERP/wiki)
