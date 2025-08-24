@@ -1,0 +1,29 @@
+name: Solo Dev Auto-Approve & Merge
+
+on:
+  pull_request:
+    types: [labeled, opened, reopened, synchronize]
+
+jobs:
+  auto-approve-and-merge:
+    if: |
+      github.event.pull_request.user.login == 'ReaveND' &&
+      contains(github.event.pull_request.labels.*.name, 'auto-merge')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment before merging
+        run: |
+          gh pr comment "${{ github.event.pull_request.html_url }}" --body "Merging started by ReaveND"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-approve PR
+        uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-merge PR using gh CLI
+        run: |
+          gh pr merge "${{ github.event.pull_request.html_url }}" --squash --auto
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
