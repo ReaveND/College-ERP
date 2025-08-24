@@ -1,5 +1,9 @@
 name: Solo Dev Auto-Approve & Merge
 
+permissions:
+  pull-requests: write
+  issues: write
+
 on:
   pull_request:
     types: [labeled, opened, reopened, synchronize]
