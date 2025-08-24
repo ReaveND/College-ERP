@@ -7,13 +7,15 @@ import Logo from "../assets/logo.png";
 const Admin = () => {
 
   const location = useLocation();
-  const hideHeader = location.pathname === '/dashboard';
+  const hideHeader = ['/Dashboard', '/User'].includes(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
   
-  useEffect(() => {
-  setShowDashboard(location.pathname === '/dashboard');
+useEffect(() => {
+  const show = ['/Dashboard', '/User'].includes(location.pathname);
+  setShowDashboard(show);
 }, [location.pathname]);
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
@@ -25,24 +27,36 @@ const Admin = () => {
         <hr className="mb-4" />
         <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
           <NavLink
-            to={location.pathname === '/dashboard' ? '/' : '/dashboard'}
+            to={location.pathname === '/Dashboard' ? '/' : '/Dashboard'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/dashboard' ? '/' : '/dashboard';
+              const targetPath = location.pathname === '/Dashboard' ? '/' : '/Dashboard';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/dashboard');
+              setShowDashboard(targetPath === '/Dashboard');
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/dashboard' ? 'bg-red-500 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Dashboard' ? 'bg-red-500 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
             <i className="fas fa-chart-line mr-3"></i>Dashboard
           </NavLink>
 
           {/* Future links - disabled for now */}
-          <span className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
-            <i className="fa-brands fa-screenpal mr-3"></i>Users
-          </span>
+          <NavLink
+            to={location.pathname === '/User' ? '/' : '/User'}
+            onClick={(e) => {
+              e.preventDefault(); // prevent default NavLink behavior
+              const targetPath = location.pathname === '/User' ? '/' : '/User';
+              navigate(targetPath);
+              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+            }}
+            className={`block px-5 py-2 rounded transition-colors ${
+              location.pathname === '/User' ? 'bg-blue-500 text-white font-bold' : 'hover:bg-gray-200'
+            }`}
+          >
+            <i className="fas fa-user mr-3"></i>User
+          </NavLink>
+
           <span className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
             <i className="fa-solid fa-sliders mr-3"></i>Settings
           </span>
