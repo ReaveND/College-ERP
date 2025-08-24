@@ -11,6 +11,12 @@ jobs:
       contains(github.event.pull_request.labels.*.name, 'auto-merge')
     runs-on: ubuntu-latest
     steps:
+      - name: Comment before merging
+        run: |
+          gh pr comment "${{ github.event.pull_request.html_url }}" --body "Merging started by ReaveND"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Auto-approve PR
         uses: hmarr/auto-approve-action@v3
         with:
@@ -18,7 +24,6 @@ jobs:
 
       - name: Auto-merge PR using gh CLI
         run: |
-          gh pr merge "$PR_URL" --squash --auto
+          gh pr merge "${{ github.event.pull_request.html_url }}" --squash --auto
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
