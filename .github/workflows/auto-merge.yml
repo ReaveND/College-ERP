@@ -1,46 +1,23 @@
-name: Smart Auto Merge
+name: Solo Dev Auto-Approve & Merge
 
 on:
-  pull_request_review:
-    types: [submitted]
   pull_request:
-    types: [labeled]
+    types: [labeled, opened, reopened, synchronize]
 
 jobs:
-  merge-on-review:
-    if: github.event.review.state == 'approved' && github.event.review.user.login == 'ReaveND'
+  auto-approve-and-merge:
+    if: |
+      github.event.pull_request.user.login == 'ReaveND' &&
+      contains(github.event.pull_request.labels.*.name, 'auto-merge')
     runs-on: ubuntu-latest
     steps:
-      - name: Merge PR on Review
-        uses: actions/github-script@v6
+      - name: Auto-approve PR
+        uses: hmarr/auto-approve-action@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const pr = context.payload.pull_request;
-            if (pr.mergeable_state === 'clean') {
-              await github.rest.pulls.merge({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: pr.number,
-                merge_method: 'squash'
-              });
-            }
 
-  merge-on-label:
-    if: github.event.label.name == 'automerge'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Merge PR on Label
-        uses: actions/github-script@v6
+      - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const pr = context.payload.pull_request;
-            if (pr.mergeable_state === 'clean') {
-              await github.rest.pulls.merge({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: pr.number,
-                merge_method: 'squash'
-              });
-            }
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: squash
