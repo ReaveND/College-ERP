@@ -126,11 +126,11 @@ const lineChartOptions = {
 
 // Pie Chart Component
 const DashboardCharts = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto p-6">
+  <div className="grid grid-cols-1 flex-row md:grid-cols-2 gap-6 max-w-6xl mx-auto p-6">
     {/* Doughnut Chart */}
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-4 text-center">Dashboard</h2>
-      <div className="relative h-[300px]">
+      <div className="relative h-[300px] md:grid-cols-12">
         <Doughnut data={chartjsData} options={chartjsOptions} />
       </div>
     </div>
@@ -138,7 +138,7 @@ const DashboardCharts = () => (
     {/* Line Chart */}
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-4 text-center">Monthly Enrollment</h2>
-      <div className="relative h-[300px]">
+      <div className="relative h-[300px] md:grid-cols-12">
         <Line data={lineChartData} options={lineChartOptions} />
       </div>
     </div>
