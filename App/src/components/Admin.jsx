@@ -69,7 +69,7 @@ const Admin = () => {
                 Vedanta Institute of Technology
               </h2>
               <button className="h-11 px-6 bg-red-500 text-white text-lg rounded-3xl whitespace-nowrap cursor-pointer">
-                Contact Us
+                <a href="tel:+91-9433558306">Contact Us</a>
               </button>
             </div>
             <div className="max-w-4xl bg-transparent shadow mx-auto p-6 mt-35 flex justify-center sm:flex-row [text-shadow:_1px_1px_2px_gray]">
