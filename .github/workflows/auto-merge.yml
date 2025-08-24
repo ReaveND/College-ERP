@@ -19,7 +19,7 @@ jobs:
         run: |
           gh pr comment "${{ github.event.pull_request.html_url }}" --body "Merging started by ReaveND"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOKEN_REAVEND }}
 
       - name: Auto-approve PR
         uses: hmarr/auto-approve-action@v3
@@ -30,4 +30,4 @@ jobs:
         run: |
           gh pr merge "${{ github.event.pull_request.html_url }}" --squash --auto
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOKEN_REAVEND }}
