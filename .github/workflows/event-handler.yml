@@ -10,6 +10,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      # 🔐 Authenticate GitHub CLI
       - name: Authenticate GitHub CLI
         run: gh auth login --with-token < <(echo "${{ secrets.GITHUB_TOKEN }}")
         env:
@@ -60,7 +61,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 📦 PR closed after merging
+      # 📦 PR merged
       - name: Comment on PR merged
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
         run: |
