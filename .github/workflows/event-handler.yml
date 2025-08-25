@@ -10,8 +10,8 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up GitHub CLI
-        run: gh auth setup-git
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token < <(echo "${{ secrets.GITHUB_TOKEN }}")
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -47,7 +47,7 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         run: |
           gh pr comment ${{ github.event.pull_request.number }} \
-            --body "🚀 Thanks for the PR, @${{ github.event.pull_request.user.login }}! @${ReaveND} will review it shortly!"
+            --body "🚀 Thanks for the PR, @${{ github.event.pull_request.user.login }}! @ReaveND will review it shortly!"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -65,6 +65,6 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
         run: |
           gh pr comment ${{ github.event.pull_request.number }} \
-            --body "🎉 PR merged by @${ReaveND}! Great work, @${{ github.event.pull_request.user.login }}. Thanks for contributing!"
+            --body "🎉 PR merged by @ReaveND! Great work, @${{ github.event.pull_request.user.login }}. Thanks for contributing!"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
