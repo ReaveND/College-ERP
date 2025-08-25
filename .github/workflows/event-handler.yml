@@ -1,4 +1,4 @@
-name: Comment Bot
+name: Issues and PR Handler
 
 on:
   issues:
@@ -10,12 +10,6 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      # 🔐 Authenticate GitHub CLI
-      - name: Authenticate GitHub CLI
-        run: gh auth login --with-token < <(echo "${{ secrets.GITHUB_TOKEN }}")
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       # 🆕 Issue opened
       - name: Comment on issue opened
         if: github.event_name == 'issues' && github.event.action == 'opened'
