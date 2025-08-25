@@ -41,26 +41,26 @@ jobs:
       - name: Comment on PR opened
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         run: |
-          gh pr comment ${{ github.event.pull_request.html_url }} \
-            --body "🚀 Thanks for the PR, @${{ github.event.pull_request.user.login }}! @ReaveND will review it shortly!"
+          gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+            -f body="🚀 Thanks for the PR, @${{ github.event.pull_request.user.login }}! @ReaveND will review it shortly!"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
+      
       # ❌ PR closed without merging
       - name: Comment on PR closed without merge
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && !github.event.pull_request.merged
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
-            --body "❌ This PR was closed without merging. If you’d like to revisit it, feel free to reopen or submit a new one."
+          gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+            -f body="❌ This PR was closed without merging. If you’d like to revisit it, feel free to reopen or submit a new one."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      
       # 📦 PR merged
       - name: Comment on PR merged
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
-            --body "🎉 PR merged by @ReaveND! Great work, @${{ github.event.pull_request.user.login }}. Thanks for contributing!"
+          gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+            -f body="🎉 PR merged by @ReaveND! Great work, @${{ github.event.pull_request.user.login }}. Thanks for contributing!"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
