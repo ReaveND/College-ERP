@@ -1,4 +1,4 @@
-name: Solo Dev Auto-Approve & Merge
+name: ReaveND Auto-Approve
 
 permissions:
   pull-requests: write
