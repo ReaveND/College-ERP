@@ -154,7 +154,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Students */}
         <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-400 shadow-md">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#FF6384] shadow-md">
             <i className="fa-solid fa-user-group text-white"></i>
           </div>
           <div className="ml-4">
@@ -165,7 +165,7 @@ const Dashboard = () => {
 
         {/* Courses */}
         <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-400 shadow-md">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#D91818] shadow-md">
             <i className="fa-solid fa-book-open text-white"></i>
           </div>
           <div className="ml-4">
@@ -176,7 +176,7 @@ const Dashboard = () => {
 
         {/* Teachers */}
         <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-400 shadow-md">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#FFCE56] shadow-md">
             <i className="fa-solid fa-graduation-cap text-white"></i>
           </div>
           <div className="ml-4">
@@ -187,7 +187,7 @@ const Dashboard = () => {
 
         {/* Subjects */}
         <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-400 shadow-md">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#4BC0C0] shadow-md">
             <i className="fa-solid fa-address-book text-white"></i>
           </div>
           <div className="ml-4">
