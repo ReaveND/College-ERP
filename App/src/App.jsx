@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Admin from './components/Admin';
 import Dashboard from './components/Dashboard';
-import User from './components/User';
+import Admission from './components/Admission';
+import Users from './components/Users';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Route path="/" element={<Admin />}>
           {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
           <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="User" element={<User />} />
+          <Route path="Admission" element={<Admission />} />
+          <Route path="Users" element={<Users />} />
         </Route>
       </Routes>
     </Router>

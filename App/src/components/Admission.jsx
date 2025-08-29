@@ -33,7 +33,7 @@ const statusColors = {
   Inactive: 'bg-gray-700 text-gray-300',
 };
 
-const User = () => {
+const Admission = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 8;
 
@@ -133,4 +133,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Admission;

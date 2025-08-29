@@ -7,12 +7,12 @@ import Logo from "../assets/logo.png";
 const Admin = () => {
 
   const location = useLocation();
-  const hideHeader = ['/Dashboard', '/User'].includes(location.pathname);
+  const hideHeader = ['/Dashboard', '/Admission', '/Users'].includes(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
   
 useEffect(() => {
-  const show = ['/Dashboard', '/User'].includes(location.pathname);
+  const show = ['/Dashboard', '/Admission', '/Users'].includes(location.pathname);
   setShowDashboard(show);
 }, [location.pathname]);
 
@@ -35,28 +35,43 @@ useEffect(() => {
               setShowDashboard(targetPath === '/Dashboard');
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/Dashboard' ? 'bg-red-500 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Dashboard' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
             <i className="fas fa-chart-line mr-3"></i>Dashboard
           </NavLink>
 
-          {/* Future links - disabled for now */}
           <NavLink
-            to={location.pathname === '/User' ? '/' : '/User'}
+            to={location.pathname === '/Admission' ? '/' : '/Admission'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/User' ? '/' : '/User';
+              const targetPath = location.pathname === '/Admission' ? '/' : '/Admission';
               navigate(targetPath);
               setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/User' ? 'bg-blue-500 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admission' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i className="fas fa-user mr-3"></i>User
+            <i class="fa-solid fa-ticket mr-3"></i>Admission
           </NavLink>
 
+          <NavLink
+            to={location.pathname === '/Users' ? '/' : '/Users'}
+            onClick={(e) => {
+              e.preventDefault(); // prevent default NavLink behavior
+              const targetPath = location.pathname === '/Users' ? '/' : '/Users';
+              navigate(targetPath);
+              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+            }}
+            className={`block px-5 py-2 rounded transition-colors ${
+              location.pathname === '/Users' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+            }`}
+          >
+            <i class="fa-solid fa-users mr-3"></i>Users
+          </NavLink>
+
+          {/* Future links - disabled for now */}
           <span className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
             <i className="fa-solid fa-sliders mr-3"></i>Settings
           </span>
