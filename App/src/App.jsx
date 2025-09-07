@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 // import Users from './components/Users';
 //import StudentProfile from './components/Profile';
 import Student from './components/Student';
+import StudentProfile from './components/Profile';
+import StudentData from './components/StudentData';
 
 
 
@@ -19,7 +21,9 @@ function App() {
           <Route path="Admission" element={<Admission />} />
           <Route path="Users" element={<Users />} />
         </Route> */}
-        <Route path='/' element={<Student />}></Route>
+        <Route path='/' element={<Student />}>
+          <Route path='/StudentProfile' element={<StudentProfile StudentData={StudentData} />} />
+        </Route>
         {/* <Route path='/' element={<StudentProfile />}></Route> */}
       </Routes>
     </Router>
