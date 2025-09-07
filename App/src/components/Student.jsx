@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import "../assets/css/std.css";
 import Logo from "../assets/logo.png";
@@ -56,6 +56,16 @@ const TypingIntro = () => {
 };
 
 const Student = () => {
+    const location = useLocation();
+    const hideHeader = ['/StudentProfile'].includes(location.pathname);
+    const [,setShowProfile] = useState(false);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+    const show = ['/StudentProfile'].includes(location.pathname);
+    setShowProfile(show);
+    }, [location.pathname]);
+
     return(
         <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
             {/* Sidebar */}
@@ -72,7 +82,23 @@ const Student = () => {
                 </div>
                 <hr className="bg-yellow-600 h-0.5 mb-4" />
                 <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink
+                to={location.pathname === '/' ? '/StudentProfile' : location.pathname}
+                onClick={(e) => {
+                    if (location.pathname !== '/') {
+                    e.preventDefault(); // prevent navigation if not on root
+                    return;
+                    }
+                    const targetPath = '/StudentProfile';
+                    navigate(targetPath);
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/StudentProfile'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
                     <i className="fa-regular fa-user mr-3"></i>My Profile
                 </NavLink>
 
@@ -119,22 +145,27 @@ const Student = () => {
                 <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
                 
                 {/* Header */}
-                    <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
-                    <img
-                        src={Logo}
-                        alt="Logo"
-                        className="w-24 h-24 object-cover rounded-full [box-shadow:_0_0_25px_#FFD700]"
-                    />
-                    <h2 className="lg:text-4xl text-white sm:text-2xl font-bold text-center sm:text-left flex-1 sm:ml-0 lg:ml-5">
-                        Vedanta Institute of Technology
-                    </h2>
-                    <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
-                        <a href="tel:+91-9064285877">Contact Us</a>
-                    </button>
-                    </div>
-                    <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-transparent shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
-                        <TypingIntro />
-                    </div>
+                {!hideHeader &&(
+                    <>
+                        <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
+                        <img
+                            src={Logo}
+                            alt="Logo"
+                            className="w-24 h-24 object-cover rounded-full [box-shadow:_0_0_25px_#FFD700]"
+                        />
+                        <h2 className="lg:text-4xl text-white sm:text-2xl font-bold text-center sm:text-left flex-1 sm:ml-0 lg:ml-5">
+                            Vedanta Institute of Technology
+                        </h2>
+                        <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
+                            <a href="tel:+91-9064285877">Contact Us</a>
+                        </button>
+                        </div>
+                        <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-transparent shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
+                            <TypingIntro />
+                        </div>
+                    </>
+                )}
+                <Outlet />
                 </div>
             </main>
         </div>
