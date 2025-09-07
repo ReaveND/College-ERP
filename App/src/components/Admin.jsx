@@ -4,6 +4,59 @@ import { useState, useEffect } from 'react';
 import "../assets/css/admin.css";
 import Logo from "../assets/logo.png";
 
+// TypingIntro Component
+const TypingIntro = () => {
+  const lines = ["Welcome", "to", "Admin Portal"];
+  const typingSpeed = 80;
+  const pauseAfterLine = 1000;
+  const pauseAfterSet = 2000;
+
+  const [displayLines, setDisplayLines] = useState(["", "", ""]);
+
+  useEffect(() => {
+    let lineIndex = 0;
+    let charIndex = 0;
+    let buffer = ["", "", ""];
+
+    const typeNextChar = () => {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          buffer = ["", "", ""];
+          setDisplayLines(["", "", ""]);
+          lineIndex = 0;
+          charIndex = 0;
+          typeNextChar();
+        }, pauseAfterSet);
+        return;
+      }
+
+      const currentLine = lines[lineIndex];
+      if (charIndex < currentLine.length) {
+        buffer[lineIndex] += currentLine.charAt(charIndex);
+        setDisplayLines([...buffer]);
+        charIndex++;
+        setTimeout(typeNextChar, typingSpeed);
+      } else {
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeNextChar, pauseAfterLine);
+      }
+    };
+
+    typeNextChar();
+  }, []);
+
+  return (
+    <div className="text-yellow-600 [text-shadow:_0px_0px_6px_#e0b159] font-mono flex flex-col items-center justify-center space-y-2 text-3xl sm:text-4xl md:text-5xl font-extrabold w-full max-w-[90vw] sm:max-w-xl text-center">
+      <span>{displayLines[0]}</span>
+      <span>{displayLines[1]}</span>
+      <span>{displayLines[2]}</span>
+    </div>
+
+  );
+};
+
+
 const Admin = () => {
 
   const location = useLocation();
@@ -20,11 +73,18 @@ useEffect(() => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 p-4 shadow hidden md:block">
-        <h3 className="text-2xl font-bold text-center mb-4 py-2 rounded-tl-2xl rounded-br-2xl">
-          Admin Panel
-        </h3>
-        <hr className="mb-4" />
+      <aside className="w-full md:w-64 p-4 pt-1 shadow hidden md:block">
+        <div className="flex justify-center items-center">
+          <img
+                  src={Logo}
+                  alt="Logo"
+                  className="w-16 h-16 object-cover rounded-full mx-auto"
+                />
+          <h3 className="text-2xl text-blue-950 font-bold text-center mb-1 py-2 rounded-tl-2xl rounded-br-2xl mr-2">
+            Admin Panel
+          </h3>
+        </div>
+        <hr className="bg-yellow-600 h-0.5 mb-4"/>
         <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
           <NavLink
             to={location.pathname === '/Dashboard' ? '/' : '/Dashboard'}
@@ -88,21 +148,21 @@ useEffect(() => {
           {/* Header */}
           {!hideHeader &&(
           <>
-            <div className="bg-[#e9e9e9] flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
+            <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
               <img
                 src={Logo}
                 alt="Logo"
-                className="w-20 h-20 object-cover rounded-full shadow-md"
+                className="w-24 h-24 object-cover rounded-full [box-shadow:_0_0_25px_#FFD700]"
               />
-              <h2 className="text-xl sm:text-2xl font-bold text-center sm:text-left flex-1">
+              <h2 className="sm:text-2xl lg:text-4xl font-bold text-center text-white sm:text-left flex-1 sm:ml-0 lg:ml-5">
                 Vedanta Institute of Technology
               </h2>
-              <button className="h-11 px-6 bg-red-500 text-white text-lg rounded-3xl whitespace-nowrap cursor-pointer">
+              <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
                 <a href="tel:+91-9433558306">Contact Us</a>
               </button>
             </div>
-            <div className="max-w-4xl bg-transparent shadow mx-auto p-6 mt-35 flex justify-center sm:flex-row [text-shadow:_1px_1px_2px_gray]">
-              <h1 className="text-4xl font-bold leading-snug"><img src="https://readme-typing-svg.herokuapp.com/?font=Jersey+20+Charted&color=F70000&size=50&center=true&vCenter=true&width=500&height=70&duration=4000&lines=Hi+There+!+👋;+I'm+Rupak+Sarkar+!;+Nice+to+Meet+You+(●'◡'●);" width={"600"}/></h1>
+            <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-transparent shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
+              <TypingIntro />
             </div>
           </>
           )}
