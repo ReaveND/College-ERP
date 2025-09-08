@@ -1,135 +1,319 @@
-import React, { useState } from 'react';
-import { FaEdit, FaTrash, FaUserShield } from 'react-icons/fa';
+import React from "react";
+import Logo from "../assets/logo.png";
 
-const users = [
-  // Add more users here to test pagination
-  { id: 'u001', name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active', createdAt: '2025-08-01', lastLogin: '2025-08-23' },
-  { id: 'u002', name: 'Bob Singh', email: 'bob@example.com', role: 'Editor', status: 'Suspended', createdAt: '2025-07-15', lastLogin: '2025-08-20' },
-  { id: 'u003', name: 'Clara Mendes', email: 'clara@example.com', role: 'Viewer', status: 'Inactive', createdAt: '2025-06-10', lastLogin: '2025-07-30' },
-{ id: 'u004', name: 'David Kim', email: 'david@example.com', role: 'Editor', status: 'Active', createdAt: '2025-08-05', lastLogin: '2025-08-24' },
-{ id: 'u005', name: 'Ella Zhang', email: 'ella@example.com', role: 'Admin', status: 'Suspended', createdAt: '2025-05-22', lastLogin: '2025-08-10' },
-{ id: 'u006', name: 'Farhan Ali', email: 'farhan@example.com', role: 'Viewer', status: 'Active', createdAt: '2025-07-01', lastLogin: '2025-08-21' },
-{ id: 'u007', name: 'Grace Lee', email: 'grace@example.com', role: 'Editor', status: 'Active', createdAt: '2025-06-18', lastLogin: '2025-08-22' },
-{ id: 'u008', name: 'Hiro Tanaka', email: 'hiro@example.com', role: 'Admin', status: 'Inactive', createdAt: '2025-04-30', lastLogin: '2025-07-15' },
-{ id: 'u009', name: 'Isla Patel', email: 'isla@example.com', role: 'Viewer', status: 'Active', createdAt: '2025-08-10', lastLogin: '2025-08-24' },
-{ id: 'u010', name: 'Jack Thompson', email: 'jack@example.com', role: 'Editor', status: 'Suspended', createdAt: '2025-07-25', lastLogin: '2025-08-19' },
-{ id: 'u011', name: 'Kavita Rao', email: 'kavita@example.com', role: 'Admin', status: 'Active', createdAt: '2025-06-05', lastLogin: '2025-08-23' },
-{ id: 'u012', name: 'Leo Martins', email: 'leo@example.com', role: 'Viewer', status: 'Inactive', createdAt: '2025-05-12', lastLogin: '2025-07-28' },
-{ id: 'u013', name: 'Maya Chen', email: 'maya@example.com', role: 'Editor', status: 'Active', createdAt: '2025-08-15', lastLogin: '2025-08-24' },
-{ id: 'u014', name: 'Nikhil Das', email: 'nikhil@example.com', role: 'Admin', status: 'Suspended', createdAt: '2025-07-03', lastLogin: '2025-08-18' },
-{ id: 'u015', name: 'Olivia Brooks', email: 'olivia@example.com', role: 'Viewer', status: 'Active', createdAt: '2025-06-28', lastLogin: '2025-08-22' },
-{ id: 'u016', name: 'Pedro Alvarez', email: 'pedro@example.com', role: 'Editor', status: 'Inactive', createdAt: '2025-05-19', lastLogin: '2025-07-20' },
-{ id: 'u017', name: 'Qi Wei', email: 'qi@example.com', role: 'Admin', status: 'Active', createdAt: '2025-08-12', lastLogin: '2025-08-24' },
-{ id: 'u018', name: 'Riya Kapoor', email: 'riya@example.com', role: 'Viewer', status: 'Suspended', createdAt: '2025-07-08', lastLogin: '2025-08-17' },
-{ id: 'u019', name: 'Samir Mehta', email: 'samir@example.com', role: 'Editor', status: 'Active', createdAt: '2025-06-15', lastLogin: '2025-08-23' },
-{ id: 'u020', name: 'Tara Singh', email: 'tara@example.com', role: 'Admin', status: 'Inactive', createdAt: '2025-05-01', lastLogin: '2025-07-10' }
-
-  // ...add 20+ users for realistic pagination
-];
-
-const statusColors = {
-  Active: 'bg-green-700 text-green-100',
-  Suspended: 'bg-red-700 text-red-100',
-  Inactive: 'bg-gray-700 text-gray-300',
-};
+const inputClass =
+  "bg-white text-black border border-gray-300 rounded-md px-3 py-2 w-full max-w-xs placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 file:bg-blue-950 file:text-white file:px-2 file:rounded-sm file:cursor-pointer";
+const selectClass = inputClass;
 
 const Admission = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 8;
-
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-  const totalPages = Math.ceil(users.length / usersPerPage);
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) setCurrentPage(page);
-  };
-
   return (
-    <>
-        
-        <div className="p-6 bg-gray-900 text-gray-100 rounded-2xl shadow-md">
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-semibold ml-18 text-gray-100">User Management</h2>
-                <div className="relative w-68 mr-8">
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="w-full pl-9 pr-3 py-1.5 bg-gray-800 text-gray-100 placeholder-gray-400 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                    />
-                    <i className="fa-solid fa-magnifying-glass fa-beat-fade absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+    <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden">
+      {/* Header */}
+        <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
+            <div className="flex items-center gap-4">
+                <img
+                src={Logo}
+                alt="Logo"
+                className="w-24 h-24 mx-auto object-cover rounded-full [box-shadow:_0_0_25px_#FFD700]"
+                />
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center ml-3">
+                Vedanta Institute of Technology
+                </h2>
+            </div>
+        </header>
+
+
+      {/* Title */}
+      <section className="px-4 text-center">
+        <hr className="bg-black w-[60%] mx-auto" />
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold my-6">
+          Student Admission Form
+        </h1>
+        <hr className="bg-black w-[60%] mx-auto" />
+      </section>
+
+      {/* Form */} {/* Student Details */}
+      <section className="flex justify-center px-4 sm:px-6 lg:px-10 my-6">
+        <form >
+            <div className="bg-blue-950 text-white w-full max-w-6xl rounded-xl shadow-2xl p-6 space-y-6">
+                <h3 className="text-2xl sm:text-3xl text-center mb-2">Personal Details</h3>
+                <hr className="bg-white mb-4" />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+                    {/* Name */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Name <span className="text-white">*</span></label>
+                    <input type="text" name="name" placeholder="Enter Your Name" required className={inputClass} />
+                    </div>
+
+                    {/* Mobile Number */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Mobile Number <span className="text-white">*</span></label>
+                    <input type="text" name="mob" placeholder="Enter Your Mobile Number" required className={inputClass} />
+                    </div>
+
+                    {/* Email ID */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Email ID <span className="text-white">*</span></label>
+                    <input type="email" name="email" placeholder="Enter Your Email ID" required className={inputClass} />
+                    </div>
+
+                    {/* Date of Birth */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Date of Birth <span className="text-white">*</span></label>
+                    <input type="date" name="dob" required className={inputClass} />
+                    </div>
+
+                    {/* Gender */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Gender <span className="text-white">*</span></label>
+                    <select name="gender" required className={selectClass}>
+                        <option disabled selected value="">--Select Your Gender--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    </div>
+
+                    {/* Address */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Address <span className="text-white">*</span></label>
+                    <input type="text" name="addr" placeholder="Enter Your Address" required className={inputClass} />
+                    </div>
+
+                    {/* District */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">District <span className="text-white">*</span></label>
+                    <input type="text" name="district" placeholder="Enter Your District" required className={inputClass} />
+                    </div>
+
+                    {/* State */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">State <span className="text-white">*</span></label>
+                    <input type="text" name="state" placeholder="Enter Your State" required className={inputClass} />
+                    </div>
+
+                    {/* Category */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Category <span className="text-white">*</span></label>
+                    <select name="category" required className={selectClass}>
+                        <option disabled selected value="">--Select Your Category--</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="OBC">OBC</option>
+                        <option value="General">General</option>
+                    </select>
+                    </div>
+
+                    {/* Religion */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Religion <span className="text-white">*</span></label>
+                    <select name="religion" required className={selectClass}>
+                        <option disabled selected value="">--Select Your Religion--</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Muslim">Muslim</option>
+                        <option value="Christian">Christian</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    </div>
+
+                    {/* Profile Picture */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Profile Picture <span className="text-white">*</span></label>
+                    <input type="file" name="image" required className={inputClass} />
+                    </div>
+
+                    {/* Signature */}
+                    <div className="flex flex-col w-full max-w-xs">
+                    <label className="mb-1 self-start w-full max-w-xs">Signature <span className="text-white">*</span></label>
+                    <input type="file" name="sign" required className={inputClass} />
+                    </div>
                 </div>
             </div>
-        <div className="overflow-x-auto">
-        
-            <table className="min-w-full text-sm text-left ring-1 ring-gray-300 rounded-md">
-                <thead className="bg-gray-800 text-gray-300 uppercase">
-                    <tr>
-                    <th className="px-4 py-2">User ID</th>
-                    <th className="px-4 py-2">Name</th>
-                    <th className="px-4 py-2">Email</th>
-                    <th className="px-4 py-2">Role</th>
-                    <th className="px-4 py-2">Status</th>
-                    <th className="px-4 py-2">Created</th>
-                    <th className="px-4 py-2">Last Login</th>
-                    <th className="px-4 py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {currentUsers.map(user => (
-                    <tr key={user.id} className="border-b border-gray-700 even:bg-gray-800 hover:bg-gray-700 hover:ring-2 hover:ring-blue-500">
-                    <td className="px-4 py-3">{user.id}</td>
-                    <td className="px-4 py-3">{user.name}</td>
-                    <td className="px-4 py-3">{user.email}</td>
-                    <td className="px-4 py-3">{user.role}</td>
-                    <td className="px-4 py-3">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[user.status]}`}>
-                        {user.status}
-                    </span>
-                    </td>
-                    <td className="px-4 py-2">{user.createdAt}</td>
-                    <td className="px-4 py-2">{user.lastLogin}</td>
-                    <td className="px-4 py-2 flex gap-2 text-gray-500">
-                    <button title="Edit" className="hover:text-blue-600"><FaEdit /></button>
-                    <button title="Delete" className="hover:text-red-600"><FaTrash /></button>
-                    <button title="Promote" className="hover:text-green-600"><FaUserShield /></button>
-                    </td>
-                </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
 
-        {/* Pagination Controls */}
-        <div className="flex justify-center items-center mt-4 gap-2">
-            <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className="px-3 py-1 text-sm bg-gray-600 rounded hover:bg-gray-500 disabled:opacity-50"
-            disabled={currentPage === 1}
-            >
-            Prev
+            {/* Guardian Details */}
+            <div className="bg-blue-950 text-white w-full max-w-6xl rounded-xl shadow-2xl p-6 space-y-6 mt-8">
+                <h3 className="text-2xl sm:text-3xl text-center mb-2">Guardian Details</h3>
+                <hr className="bg-white mb-4" />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+                    {/* Father's Name */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Father's Name <span className="text-white">*</span></label>
+                        <input type="text" name="fatherName" placeholder="Enter Your Father's Name" required className={inputClass} />
+                    </div>
+
+                    {/* Father's Mobile Number */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Father's Mobile Number <span className="text-white">*</span></label>
+                        <input type="text" name="fatherMobile" placeholder="Enter Your Father's Mobile Number" required className={inputClass} />
+                    </div>
+
+                    {/* Father's Email */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Father's Email <span className="text-white">*</span></label>
+                        <input type="email" name="fatherEmail" placeholder="Enter Your Father's Email" required className={inputClass} />
+                    </div>
+
+                    {/* Father's Educational Qualification */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Father's Educational Qualification <span className="text-white">*</span></label>
+                        <input type="text" name="fatherEducation" placeholder="Enter Father's Educational Qualification" required className={inputClass} />
+                    </div>
+
+                    {/* Father's Occupation */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Father's Occupation <span className="text-white">*</span></label>
+                        <input type="text" name="fatherOccupation" placeholder="Enter Father's Occupation" required className={inputClass} />
+                    </div>
+
+                    {/* Mother's Name */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Mother's Name <span className="text-white">*</span></label>
+                        <input type="text" name="motherName" placeholder="Enter Your Mother's Name" required className={inputClass} />
+                    </div>
+
+                    {/* Mother's Mobile */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Mother's Mobile Number <span className="text-white">*</span></label>
+                        <input type="text" name="motherMobile" placeholder="Enter Your Mother's Mobile Number" required className={inputClass} />
+                    </div>
+
+                    {/* Mother's Educational Qualification */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Mother's Educational Qualification <span className="text-white">*</span></label>
+                        <input type="text" name="motherEducation" placeholder="Enter Mother's Educational Qualification" required className={inputClass} />
+                    </div>
+
+                    {/* Mother's Occupation */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Mother's Occupation <span className="text-white">*</span></label>
+                        <input type="text" name="motherOccupation" placeholder="Enter Mother's Occupation" required className={inputClass} />
+                    </div>
+                </div>
+            </div>
+
+            {/* Academic Details */}
+            <div className="bg-blue-950 text-white w-full max-w-6xl rounded-xl shadow-2xl p-6 space-y-6 mt-8">
+                <h3 className="text-2xl sm:text-3xl text-center mb-2">Academic Details</h3>
+                <hr className="bg-white mb-4" />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+                    {/* School Name */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">School Name <span className="text-white">*</span></label>
+                        <input type="text" name="schoolName" placeholder="Enter Your School Name" required className={inputClass} />
+                    </div>
+
+                    {/* Board */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Board <span className="text-white">*</span></label>
+                        <input type="text" name="boardTen" placeholder="Enter Your Education Board" required className={inputClass} />
+                    </div>
+
+                    {/* Year of Passing */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Year of Passing <span className="text-white">*</span></label>
+                        <input type="text" name="yopTen" placeholder="Enter Your Passing Year" required className={inputClass} />
+                    </div>
+                </div>
+
+                <h3 className="text-2xl font-medium text-center mb-6">Marks in Tenth Grade Examination</h3>
+                <div className="grid grid-cols-1 bg-[#efefef] text-black rounded-xl shadow-md p-4 w-full max-w-5xl mx-auto mt-5">
+                    <div className="overflow-x-auto">
+                        <table className="table-auto w-full text-center border-collapse rounded-2xl shadow-2xl">
+                        <thead>
+                            <tr className="bg-gray-400">
+                            <th className="px-4 py-2 bg-[#efefef]">Subjects</th>
+                            <th className="px-4 py-2">First</th>
+                            <th className="px-4 py-2">Second</th>
+                            <th className="px-4 py-2">Third</th>
+                            <th className="px-4 py-2">Fourth</th>
+                            <th className="px-4 py-2">Fifth</th>
+                            <th className="px-4 py-2">Sixth</th>
+                            <th className="px-4 py-2">Seventh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td className="font-semibold px-4 py-2">Marks</td>
+                            <td><input type="text" name="mark1" className="border rounded px-2 py-1 w-full" /></td>
+                            <td><input type="text" name="mark2" className="border rounded px-2 py-1 w-full" /></td>
+                            <td><input type="text" name="mark3" className="border rounded px-2 py-1 w-full" /></td>
+                            <td><input type="text" name="mark4" className="border rounded px-2 py-1 w-full" /></td>
+                            <td><input type="text" name="mark5" className="border rounded px-2 py-1 w-full" /></td>
+                            <td><input type="text" name="mark6" className="border rounded px-2 py-1 w-full" /></td>
+                            <td><input type="text" name="mark7" className="border rounded px-2 py-1 w-full" /></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+                    {/* School Name */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">School Name <span className="text-white">*</span></label>
+                        <input type="text" name="schoolName" placeholder="Enter Your School Name" required className={inputClass} />
+                    </div>
+
+                    {/* Board */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Board <span className="text-white">*</span></label>
+                        <input type="text" name="boardTen" placeholder="Enter Your Education Board" required className={inputClass} />
+                    </div>
+
+                    {/* Year of Passing */}
+                    <div className="flex flex-col w-full max-w-xs">
+                        <label className="mb-1 text-white">Year of Passing <span className="text-white">*</span></label>
+                        <input type="text" name="yopTen" placeholder="Enter Your Passing Year" required className={inputClass} />
+                    </div>
+                </div>
+
+                <h3 className="text-2xl font-medium text-center mb-6">Marks in Twelvth Grade Examination</h3>
+                <div className="grid grid-cols-1 bg-[#efefef] text-black rounded-xl shadow-md p-4 w-full max-w-5xl mx-auto mt-5">
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full text-center border-collapse rounded-2xl shadow-2xl">
+                    <thead>
+                        <tr className="bg-gray-400">
+                        <th className="px-4 py-2 bg-[#efefef]">Subjects</th>
+                        <th className="px-4 py-2">First</th>
+                        <th className="px-4 py-2">Second</th>
+                        <th className="px-4 py-2">Third</th>
+                        <th className="px-4 py-2">Fourth</th>
+                        <th className="px-4 py-2">Fifth</th>
+                        <th className="px-4 py-2">Sixth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td className="font-semibold px-4 py-2">Marks</td>
+                        <td><input type="text" name="mark1" className="border rounded px-2 py-1 w-full" /></td>
+                        <td><input type="text" name="mark2" className="border rounded px-2 py-1 w-full" /></td>
+                        <td><input type="text" name="mark3" className="border rounded px-2 py-1 w-full" /></td>
+                        <td><input type="text" name="mark4" className="border rounded px-2 py-1 w-full" /></td>
+                        <td><input type="text" name="mark5" className="border rounded px-2 py-1 w-full" /></td>
+                        <td><input type="text" name="mark6" className="border rounded px-2 py-1 w-full" /></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-start my-6">
+            <button type="submit" className="ml-3 bg-transparent text-green-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-green-600 hover:text-white outline-3 outline-green-500">
+              Submit
             </button>
-            {[...Array(totalPages)].map((_, i) => (
-            <button
-                key={i}
-                onClick={() => handlePageChange(i + 1)}
-                className={`px-3 py-1 text-sm rounded ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-500 hover:bg-gray-400'}`}
-            >
-                {i + 1}
+            <button type="reset" className="mx-3 bg-transparent text-red-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-red-600 hover:text-white outline-3 outline-red-500">
+              Reset
             </button>
-            ))}
-            <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className="px-3 py-1 text-sm bg-gray-600 rounded hover:bg-gray-500 disabled:opacity-50"
-            disabled={currentPage === totalPages}
-            >
-            Next
-            </button>
-        </div>
-        </div>
-    </>
+          </div>
+          
+        </form>
+      </section>
+    </div>
   );
 };
 
