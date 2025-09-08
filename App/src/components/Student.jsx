@@ -103,10 +103,6 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
-                    <i className="fa-regular fa-clipboard mr-3"></i>Notice Board
-                </NavLink>
-
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
                     <i className="fa-regular fa-note-sticky mr-3"></i>Study Materials
                 </NavLink>
 
