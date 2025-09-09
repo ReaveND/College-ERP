@@ -24,7 +24,7 @@ jobs:
       - name: Trigger Repo B workflow
         run: |
           curl -X POST \
-            -H "Authorization: token ${{ secrets.TOKEN_REAVEND }}" \
+            -H "Authorization: token ${{ secrets.REPO_B_PAT }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/ReaveND/College-ERP-Backup/actions/workflows/sync.yml/dispatches \
             -d '{"ref":"main"}'
