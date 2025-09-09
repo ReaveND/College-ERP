@@ -69,7 +69,7 @@ const Student = () => {
     return(
         <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
             {/* Sidebar */}
-            <aside className="w-full md:w-70 p-4 pt-1 shadow hidden md:block">
+            <aside className="fixed top-0 left-0 h-screen w-64 shadow-lg z-20 p-4 pt-1 hidden md:block">
                 <div className="flex justify-center items-center">
                     <img
                         src={Logo}
@@ -137,7 +137,7 @@ const Student = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 px-4 sm:px-6 lg:px-6 py-4">
+            <main className="flex-1 md:ml-64 px-4 sm:px-6 lg:px-6 py-4">
                 <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
                 
                 {/* Header */}
