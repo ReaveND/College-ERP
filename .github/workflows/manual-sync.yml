@@ -1,0 +1,30 @@
+# .github/workflows/manual-sync.yml
+name: Manual Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      sync:
+        description: 'Trigger sync to Repo B'
+        required: true
+        default: 'yes'
+
+jobs:
+  sync:
+    if: ${{ github.event.inputs.sync == 'yes' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo A
+        uses: actions/checkout@v3
+
+      - name: Zip files or prepare payload
+        run: |
+          zip -r files.zip .
+
+      - name: Trigger Repo B workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.REPO_B_PAT }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/ReaveND/College-ERP-Backup/actions/workflows/sync.yml/dispatches \
+            -d '{"ref":"main"}'
