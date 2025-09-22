@@ -152,7 +152,7 @@ useEffect(() => {
               <img
                 src={Logo}
                 alt="Logo"
-                className="w-24 h-24 object-cover rounded-full [box-shadow:_0_0_25px_#FFD700]"
+                className="w-24 h-24 object-cover rounded-full border-4 border-[#e9e9e9]"
               />
               <h2 className="sm:text-2xl lg:text-4xl font-bold text-center text-white sm:text-left flex-1 sm:ml-0 lg:ml-5">
                 Vedanta Institute of Technology

@@ -1,0 +1,74 @@
+/* Full-screen background */
+.page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Login box */
+.login-container {
+  width: 280px;
+  padding: 40px 60px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* College Logo */
+.college-logo {
+  width: 100px;
+  border-radius: 50%; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+/* Input fields */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  margin: 12px 0;        
+  padding: 12px;         
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-sizing: border-box; 
+ 
+}
+/* Options (Remember Me + Forgot Password) */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 18px;
+  font-size: 14px;
+  color: #333;
+}
+
+.options a {
+  color: #003366;
+  font-weight: 500;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Login button */
+.login-container button {
+  display: block;
+  margin: 0 auto;
+  padding: 12px;
+  width: 150px;
+  background: linear-gradient(135deg, #003366, #004488);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.login-container button:hover {
+  background: linear-gradient(135deg, #002244, #003366);
+  transform: scale(1.05);
+}
+

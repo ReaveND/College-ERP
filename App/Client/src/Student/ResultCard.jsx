@@ -1,6 +1,6 @@
 // File: ResultCard.jsx
 import React from "react";
-import collegeLogo from "../../assets/logo college.jpeg";
+import collegeLogo from "../assets/logo.png"; 
 
 const ResultCard = () => {
   return (
