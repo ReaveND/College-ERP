@@ -1,7 +1,7 @@
 
 import React from "react";
-import collegeLogo from "../../assets/logo college.jpeg"; 
-import studentPhoto from "../../assets/faculty-photo.jpeg";
+import collegeLogo from "../assets/logo.png"; 
+import studentPhoto from "../assets/pfp.jpg";
 
 const AdmitCard = () => {
   return (

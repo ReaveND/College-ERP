@@ -57,12 +57,12 @@ const TypingIntro = () => {
 
 const Student = () => {
     const location = useLocation();
-    const hideHeader = ['/StudentProfile'].includes(location.pathname);
+    const hideHeader = ['/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard'].includes(location.pathname);
     const [,setShowProfile] = useState(false);
     const navigate = useNavigate();
     
     useEffect(() => {
-    const show = ['/StudentProfile'].includes(location.pathname);
+    const show = ['/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard'].includes(location.pathname);
     setShowProfile(show);
     }, [location.pathname]);
 
@@ -82,15 +82,12 @@ const Student = () => {
                 </div>
                 <hr className="bg-yellow-600 h-0.5 mb-4" />
                 <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
+
                 <NavLink
-                to={location.pathname === '/' ? '/StudentProfile' : location.pathname}
+                to="/StudentProfile"
                 onClick={(e) => {
-                    if (location.pathname !== '/') {
-                    e.preventDefault(); // prevent navigation if not on root
-                    return;
-                    }
-                    const targetPath = '/StudentProfile';
-                    navigate(targetPath);
+                    e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/StudentProfile');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
@@ -114,15 +111,51 @@ const Student = () => {
                     <i className="fa-solid fa-person-chalkboard mr-3"></i>Attendance
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
-                    <i className="fa-solid fa-pen-ruler mr-3"></i>Assignment
+                <NavLink
+                to="/AssignmentPage"
+                onClick={(e) => {
+                    e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/AssignmentPage');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/AssignmentPage'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
+                <i className="fa-solid fa-pen-ruler mr-3"></i>Assignment
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
-                    <i className="fab fa-wpforms mr-3"></i>Exam Form
+                <NavLink
+                to="/ExamForm"
+                onClick={(e) => {
+                    e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/ExamForm');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/ExamForm'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
+                <i className="fab fa-wpforms mr-3"></i>Exam Form
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink
+                to="/AdmitCard"
+                onClick={(e) => {
+                    e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/AdmitCard');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/AdmitCard'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
                     <i className="fa-solid fa-id-card mr-3"></i>Admit Card
                 </NavLink>
 
@@ -130,11 +163,35 @@ const Student = () => {
                     <i className="fa-solid fa-desktop mr-3"></i>Online Exam
                 </NavLink> future scope */} 
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink
+                to="/ResultCard"
+                onClick={(e) => {
+                    e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/ResultCard');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/ResultCard'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
                     <i className="fa-solid fa-square-poll-horizontal mr-3"></i>Result
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink
+                to="/SemExamFeesClearance"
+                onClick={(e) => {
+                    e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/SemExamFeesClearance');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/SemExamFeesClearance'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
                     <i className="fa-solid fa-money-check-dollar mr-3"></i>Sem/Exam Fees Clearance
                 </NavLink>
                 </nav>
@@ -151,7 +208,7 @@ const Student = () => {
                         <img
                             src={Logo}
                             alt="Logo"
-                            className="w-24 h-24 object-cover rounded-full [box-shadow:_0_0_25px_#FFD700]"
+                            className="w-24 h-24 object-cover rounded-full border-4 border-[#e9e9e9]"
                         />
                         <h2 className="lg:text-4xl text-white sm:text-2xl font-bold text-center sm:text-left flex-1 sm:ml-0 lg:ml-5">
                             Vedanta Institute of Technology
