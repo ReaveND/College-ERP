@@ -69,7 +69,7 @@ const Student = () => {
     return(
         <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
             {/* Sidebar */}
-            <aside className="fixed top-0 left-0 h-screen w-64 shadow-lg z-20 p-4 pt-1 hidden md:block">
+            <aside className="fixed top-0 left-0 h-screen w-68 shadow-lg z-20 p-4 pt-1 hidden md:block">
                 <div className="flex justify-center items-center">
                     <img
                         src={Logo}
@@ -115,6 +115,10 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                    <i className="fa-solid fa-pen-ruler mr-3"></i>Assignment
+                </NavLink>
+
+                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
                     <i className="fab fa-wpforms mr-3"></i>Exam Form
                 </NavLink>
 
@@ -122,22 +126,22 @@ const Student = () => {
                     <i className="fa-solid fa-id-card mr-3"></i>Admit Card
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                {/* <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
                     <i className="fa-solid fa-desktop mr-3"></i>Online Exam
-                </NavLink>
+                </NavLink> future scope */} 
 
                 <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
                     <i className="fa-solid fa-square-poll-horizontal mr-3"></i>Result
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400">
+                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
                     <i className="fa-solid fa-money-check-dollar mr-3"></i>Sem/Exam Fees Clearance
                 </NavLink>
                 </nav>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 md:ml-64 px-4 sm:px-6 lg:px-6 py-4">
+            <main className="flex-1 md:ml-68 px-4 sm:px-6 lg:px-6 py-4">
                 <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
                 
                 {/* Header */}
