@@ -60,12 +60,12 @@ const TypingIntro = () => {
 const Admin = () => {
 
   const location = useLocation();
-  const hideHeader = ['/Dashboard', '/Admission', '/Users'].includes(location.pathname);
+  const hideHeader = ['/Dashboard', '/Admission', '/StudentTable', '/Users'].includes(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
   
 useEffect(() => {
-  const show = ['/Dashboard', '/Admission', '/Users'].includes(location.pathname);
+  const show = ['/Dashboard', '/Admission', '/StudentTable', '/Users'].includes(location.pathname);
   setShowDashboard(show);
 }, [location.pathname]);
 
@@ -113,7 +113,22 @@ useEffect(() => {
               location.pathname === '/Admission' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-ticket mr-3"></i>Admission
+            <i class="fa-solid fa-users mr-3"></i>Admission
+          </NavLink>
+
+          <NavLink
+            to={location.pathname === '/StudentTable' ? '/' : '/StudentTable'}
+            onClick={(e) => {
+              e.preventDefault(); // prevent default NavLink behavior
+              const targetPath = location.pathname === '/StudentTable' ? '/' : '/StudentTable';
+              navigate(targetPath);
+              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+            }}
+            className={`block px-5 py-2 rounded transition-colors ${
+              location.pathname === '/StudentTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+            }`}
+          >
+            <i class="fa-solid fa-eye mr-3"></i>View Students
           </NavLink>
 
           <NavLink
@@ -142,7 +157,7 @@ useEffect(() => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 px-4 sm:px-6 lg:px-6 py-4">
+      <main className="flex-1 md:ml-64 px-4 sm:px-6 lg:px-6 py-4 overflow-x-hidden">
         <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
           
           {/* Header */}

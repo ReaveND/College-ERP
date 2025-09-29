@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+
+#vcheck{
+    color:#d69e2e;
+    font-size:14px;
+    display:none;
+}
+
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b; /* Tailwind's slate-800 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #facc15; /* Tailwind's yellow-400 */
+  border-radius: 4px;
+  border: 2px solid #1e293b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #fbbf24; /* Tailwind's yellow-300 */
+}
