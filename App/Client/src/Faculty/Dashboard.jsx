@@ -1,11 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import collegeLogo from "../assets/logo.png";
+
 
 const Dashboard = () => {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-blue-950 mb-6">Faculty Dashboard</h1>
-
+    <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md p-6 h-full">
+      {/* Header Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-6xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img src={collegeLogo} alt="College Logo" className="w-20 h-20 rounded-full" />
+          <h1 className="text-3xl font-bold text-blue-950">Faculty Dashboard</h1>
+        </div>
+        <div className="flex gap-4">
+          <a
+            href="/logout"
+            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-blue-950 p-6 rounded-xl shadow hover:shadow-lg transition text-white hover:bg-yellow-600 hover:text-black">
@@ -17,7 +32,7 @@ const Dashboard = () => {
           <p className="text-3xl font-bold mt-2">4</p>
         </div>
         <div className="bg-blue-950 p-6 rounded-xl shadow hover:shadow-lg transition text-white hover:bg-yellow-600 hover:text-black">
-          <h2 className="text-lg font-semibold">Assignments Pending</h2>
+          <h2 className="text-lg font-semibold">Assignments Uploaded</h2>
           <p className="text-3xl font-bold mt-2">15</p>
         </div>
         <div className="bg-blue-950 p-6 rounded-xl shadow hover:shadow-lg transition text-white hover:bg-yellow-600 hover:text-black">
@@ -41,25 +56,25 @@ const Dashboard = () => {
         <h2 className="text-xl font-bold text-blue-950 mb-4">Quick Links</h2>
         <div className="flex flex-wrap gap-4">
           <Link
-            to="/timetable"
+            to="/FacultyTimeTable"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             View Timetable
           </Link>
           <Link
-            to="/attendance"
+            to="/Attendance"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Mark Attendance
           </Link>
           <Link
-            to="/assignment"
+            to="/Assignment"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Manage Assignments
           </Link>
           <Link
-            to="/marksupload"
+            to="/MarksUpload"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Upload Marks

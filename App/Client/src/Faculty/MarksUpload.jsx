@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import collegeLogo from "../assets/logo.png";
 
 const MarksUpload = () => {
   const [studentId, setStudentId] = useState("");
@@ -37,11 +38,40 @@ const MarksUpload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start p-6">
-      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-5xl w-full">
+    <div className="max-w-6xl mx-auto bg-gray-100 shadow-md rounded-md min-h-screen p-6">
+      {/* Header Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img
+            src={collegeLogo}
+            alt="College Logo"
+            className="w-20 h-20 rounded-full"
+          />
+          <h1 className="text-3xl font-bold text-blue-950">
+            Upload Marks
+          </h1>
+        </div>
+        <div className="flex gap-4">
+          <a
+            href="/dashboard"
+            className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Back to Dashboard
+          </a>
+          <a
+            href="/logout"
+            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+
+      {/* Marks Upload Card */}
+      <div className="bg-white rounded-2xl shadow-lg p-8">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-blue-950 mb-6">
-          📝 Marks Upload
+          Marks Upload
         </h1>
 
         {/* Upload Form */}
@@ -109,7 +139,7 @@ const MarksUpload = () => {
 
         {/* Uploaded Records */}
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          📊 Uploaded Marks
+          Uploaded Marks
         </h2>
 
         {records.length === 0 ? (

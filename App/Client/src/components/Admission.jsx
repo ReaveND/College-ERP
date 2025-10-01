@@ -348,36 +348,6 @@ const Admission = () => {
                             <input type="text" name="HSyop" onChange={onValueChange} placeholder="Enter Your Passing Year" required className={inputClass} />
                         </div>
                     </div>
-
-                    {/* <h3 className="text-2xl font-medium text-center mb-6">Marks in Twelvth Grade Examination</h3>
-                    <div className="grid grid-cols-1 bg-[#efefef] text-black rounded-xl shadow-md p-4 w-full max-w-5xl mx-auto mt-5">
-                    <div className="overflow-x-auto">
-                        <table className="table-auto w-full text-center border-collapse rounded-2xl shadow-2xl">
-                        <thead>
-                            <tr className="bg-gray-400">
-                            <th className="px-4 py-2 bg-[#efefef]">Subjects</th>
-                            <th className="px-4 py-2">First</th>
-                            <th className="px-4 py-2">Second</th>
-                            <th className="px-4 py-2">Third</th>
-                            <th className="px-4 py-2">Fourth</th>
-                            <th className="px-4 py-2">Fifth</th>
-                            <th className="px-4 py-2">Sixth</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td className="font-semibold px-4 py-2">Marks</td>
-                            <td><input type="text" name="mark1" className="border rounded px-2 py-1 w-full" /></td>
-                            <td><input type="text" name="mark2" className="border rounded px-2 py-1 w-full" /></td>
-                            <td><input type="text" name="mark3" className="border rounded px-2 py-1 w-full" /></td>
-                            <td><input type="text" name="mark4" className="border rounded px-2 py-1 w-full" /></td>
-                            <td><input type="text" name="mark5" className="border rounded px-2 py-1 w-full" /></td>
-                            <td><input type="text" name="mark6" className="border rounded px-2 py-1 w-full" /></td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                    </div> */}
                 </div>
 
                 {/* Submit Button */}

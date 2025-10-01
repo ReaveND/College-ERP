@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import collegeLogo from "../assets/logo.png";
+
 
 const Attendance = () => {
   
@@ -33,8 +35,28 @@ const Attendance = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
-      <h1 className="text-3xl font-bold text-blue-950 mb-6">Mark Student Attendance</h1>
+    <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md h-full p-6 flex flex-col items-center">
+    {/* Header Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-6xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img src={collegeLogo} alt="College Logo" className="w-20 h-20 rounded-full" />
+          <h1 className="text-3xl font-bold text-blue-950">Attendance Sheet</h1>
+        </div>
+        <div className="flex gap-4">
+          <a
+            href="/Dashboard"
+            className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Back to Dashboard
+          </a>
+          <a
+            href="/logout"
+            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
 
       <div className="bg-white shadow-md rounded-lg w-full max-w-3xl p-6">
         <table className="min-w-full border">

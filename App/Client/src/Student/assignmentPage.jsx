@@ -1,5 +1,6 @@
 // File: AssignmentPage.jsx
 import React, { useState } from "react";
+import collegeLogo from "../assets/logo.png";
 
 const AssignmentPage = () => {
   const allAssignments = [
@@ -44,12 +45,54 @@ const AssignmentPage = () => {
       : allAssignments.filter((a) => a.status === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-6">
+    <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md p-6 h-full space-y-6">
+      {/* Inline CSS for marquee */}
+      <style>
+        {`
+          @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .animate-marquee {
+            display: inline-block;
+            padding-left: 0;          
+            animation: marquee 25s linear infinite; 
+          }
+        `}
+      </style>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <h1 className="text-4xl font-extrabold text-blue-950 mb-8 text-center drop-shadow-sm">
-          🎓 Student Assignments
-        </h1>
+        <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 rounded-2xl shadow-lg p-6 flex items-center justify-between mb-8">
+          <div className="flex items-center">
+            <img src={collegeLogo} alt="College Logo" className="h-20 w-20 mr-4" />
+            <h1 className="text-3xl font-extrabold text-blue-950 drop-shadow-sm">
+              Student Assignments
+            </h1>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex space-x-4">
+            <a
+              href="/Dashboard"
+              className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+               Back to Dashboard
+            </a>
+            <a
+              href="/logout"
+              className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+
+        {/* Moving Notice Banner */}
+        <div className="overflow-hidden bg-yellow-200 text-black rounded-lg py-3 relative mb-4">
+          <div className="animate-marquee whitespace-nowrap">
+            🔔 Reminder: Submit any pending assignments before the end of this month to avoid penalties!
+          </div>
+        </div>
 
         {/* Filter Buttons */}
         <div className="flex justify-center gap-4 mb-8">
