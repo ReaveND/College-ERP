@@ -1,5 +1,6 @@
 import React from "react";
-import ProfilePic from "../assets/faculty-photo.jpeg"; 
+import collegeLogo from "../assets/logo.png";
+import ProfilePic from "../assets/faculty-photo.jpg";
 
 const FacultyProfile = () => {
   const faculty = {
@@ -17,12 +18,36 @@ const FacultyProfile = () => {
       "Published 10 research papers in international journals",
       "Organized 5 national-level workshops",
     ],
-    hobbies: ["Reading", "Traveling", "Photography"]
+    hobbies: ["Reading", "Traveling", "Photography"],
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start p-6">
-      <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-5xl w-full grid md:grid-cols-3 gap-8">
+    <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md h-full p-6">
+      
+      {/* Header Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-6xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img src={collegeLogo} alt="College Logo" className="w-20 h-20 rounded-full" />
+          <h1 className="text-3xl font-bold text-blue-950">Faculty Profile</h1>
+        </div>
+        <div className="flex gap-4">
+          <a
+            href="/dashboard"
+            className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Back to Dashboard
+          </a>
+          <a
+            href="/logout"
+            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+
+      {/* Faculty Profile Card */}
+      <div className="bg-white rounded-3xl shadow-2xl p-14 max-w-5xl w-full mx-auto grid md:grid-cols-3 gap-8">
         
         {/* Left Column - Profile Image + Contact */}
         <div className="flex flex-col items-center md:items-start">
@@ -35,28 +60,17 @@ const FacultyProfile = () => {
           <p className="text-gray-600 mt-1">{faculty.department}</p>
           <p className="text-gray-500 mt-1">{faculty.email}</p>
 
-          {/* Phone & Office Info */}
           <div className="mt-4 space-y-2 text-gray-700">
             <p><span className="font-semibold">📞 Phone:</span> {faculty.phone}</p>
             <p><span className="font-semibold">🏢 Office:</span> {faculty.office}</p>
+            <p><span className="font-semibold">🎓 Experience:</span> {faculty.experience}</p>
+            <p><span className="font-semibold">🌟 Hobbies:</span> {faculty.hobbies.join(", ")}</p>
           </div>
         </div>
 
-        {/* Middle Column - Details */}
+        {/* Right Column - Details */}
         <div className="md:col-span-2 flex flex-col justify-between">
           
-          {/* Experience & Hobbies */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <span className="font-semibold text-gray-700">Experience</span>
-              <p className="text-gray-600">{faculty.experience}</p>
-            </div>
-            <div>
-              <span className="font-semibold text-gray-700">Hobbies</span>
-              <p className="text-gray-600">{faculty.hobbies.join(", ")}</p>
-            </div>
-          </div>
-
           {/* Bio */}
           <div className="mb-6 p-4 bg-gray-50 rounded-xl shadow-inner">
             <h2 className="text-xl font-semibold text-gray-800 mb-2">About Me</h2>
@@ -112,7 +126,6 @@ const FacultyProfile = () => {
               Contact
             </a>
           </div>
-
         </div>
       </div>
     </div>

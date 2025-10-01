@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import collegeLogo from "../assets/logo.png";
 
 const FacultyStudyMaterial = () => {
   const [materials, setMaterials] = useState([]);
@@ -44,11 +45,35 @@ const FacultyStudyMaterial = () => {
     : materials;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-start p-6">
-      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-3xl w-full">
+    <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md h-full p-6">
+      
+      {/* Header Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-6xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img src={collegeLogo} alt="College Logo" className="w-20 h-20 rounded-full" />
+          <h1 className="text-3xl font-bold text-blue-950">Upload Study Material</h1>
+        </div>
+        <div className="flex gap-4">
+          <a
+            href="/dashboard"
+            className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Back to Dashboard
+          </a>
+          <a
+            href="/logout"
+            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+
+      {/* Upload Materials Card */}
+      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-3xl w-full mx-auto">
         {/* Page Header */}
         <h1 className="text-2xl font-bold text-blue-950 mb-6">
-          📚 Upload Study Material
+          Upload Materials
         </h1>
 
         {/* Upload Form */}

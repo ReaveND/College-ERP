@@ -2,6 +2,7 @@ import ProfilePic from '../assets/pfp.jpg';
 
 const StudentData = {
   fullName: "Srabani Kar",
+  ID: "ST123456",
   rollNumber: "MCA2025-017",
   regNumber: "MCA25-0010",
   department: "Masters of Computer Application",

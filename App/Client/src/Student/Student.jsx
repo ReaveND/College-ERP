@@ -57,12 +57,12 @@ const TypingIntro = () => {
 
 const Student = () => {
     const location = useLocation();
-    const hideHeader = ['/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard'].includes(location.pathname);
+    const hideHeader = ['/Dashboard', '/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard', '/StudyMaterials', '/Library', '/AttendancePage'].includes(location.pathname);
     const [,setShowProfile] = useState(false);
     const navigate = useNavigate();
     
     useEffect(() => {
-    const show = ['/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard'].includes(location.pathname);
+    const show = ['/Dashboard', '/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard', '/StudyMaterials', '/Library', '/AttendancePage'].includes(location.pathname);
     setShowProfile(show);
     }, [location.pathname]);
 
@@ -84,9 +84,25 @@ const Student = () => {
                 <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
 
                 <NavLink
-                to="/StudentProfile"
+                to="/Dashboard"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
+                    navigate('/Dashboard');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/Dashboard'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
+                    <i className="fa-solid fa-gauge-high mr-3"></i>Dashboard
+                </NavLink>
+
+                <NavLink
+                to="/StudentProfile"
+                onClick={(e) => {
+                    e.preventDefault();
                     navigate('/StudentProfile');
                     setShowProfile(true);
                 }}
@@ -99,15 +115,50 @@ const Student = () => {
                     <i className="fa-regular fa-user mr-3"></i>My Profile
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink 
+                to="/StudyMaterials"
+                onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/StudyMaterials');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/StudyMaterials'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
                     <i className="fa-regular fa-note-sticky mr-3"></i>Study Materials
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink
+                to="/Library"
+                onClick={(e) => {
+                    e.preventDefault(); 
+                    navigate('/Library');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/Library'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}
+                >
                     <i className="fa-solid fa-book mr-3"></i>Library
                 </NavLink>
 
-                <NavLink className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
+                <NavLink 
+                to="/AttendancePage"
+                onClick={(e) => {
+                    e.preventDefault(); 
+                    navigate('/AttendancePage');
+                    setShowProfile(true);
+                }}
+                className={`block px-5 py-2 rounded transition-colors ${
+                    location.pathname === '/AttendancePage'
+                    ? 'bg-blue-950 text-white font-bold'
+                    : 'hover:bg-gray-200'
+                }`}                >
                     <i className="fa-solid fa-person-chalkboard mr-3"></i>Attendance
                 </NavLink>
 
@@ -216,8 +267,11 @@ const Student = () => {
                         <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
                             <a href="tel:+91-9064285877">Contact Us</a>
                         </button>
+                        <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
+                            <a href="/">Logout</a>
+                        </button>
                         </div>
-                        <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-transparent shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
+                        <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-gray-200 shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
                             <TypingIntro />
                         </div>
                     </>
