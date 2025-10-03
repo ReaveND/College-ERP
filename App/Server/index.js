@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const Connection = require('./Database/db.js');
-const Routes = require('./Routes/route.js');
+const StudentRoutes = require('./Routes/student-route.js');
+const FacultyRoutes = require('./Routes/faculty-route.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -23,7 +24,8 @@ Connection();
 
 app.use(bodyParser.json({ extended : true }));
 app.use(bodyParser.urlencoded({ extended : true }));
-app.use('/', Routes);
+app.use('/student', StudentRoutes);
+app.use('/faculty', FacultyRoutes);
 app.use('/Uploads', express.static('Uploads'));
 const PORT = process.env.PORT || 8000;
 

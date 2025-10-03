@@ -3,12 +3,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import Admin from './components/Admin';
-import Dashboard from './components/Dashboard';
-import Admission from './components/Admission';
-import Users from './components/Users';
-import StudentTable from './components/StudentTable';
-import AddAdmin from './components/addAdmin';
+import Admin from './Admin/Admin';
+import Dashboard from './Admin/Dashboard';
+import Admission from './Admin/Admission';
+import Users from './Admin/Users';
+import StudentTable from './Admin/StudentTable';
+import AddAdmin from './Admin/AddAdmin';
+import AddFaculty from './Admin/AddFaculty';
+import FacultyTable from './Admin/FacultyTable';
 
 // import Student from './Student/Student';
 // import Dashboard from './Student/Dashboard';
@@ -34,9 +36,6 @@ import AddAdmin from './components/addAdmin';
 // import Assignment from './Faculty/Assignment';
 // import LeaveRequest from './Faculty/LeaveRequest';
 
-// import Login from './components/login';
-
-
 
 function App() {
   return (
@@ -51,6 +50,8 @@ function App() {
             <Route path="/Users" element={<Users />} />
             <Route path="/StudentTable" element={<StudentTable />} />
             <Route path="/AddAdmin" element={<AddAdmin />} />
+            <Route path="/AddFaculty" element={<AddFaculty />} />
+            <Route path="/FacultyTable" element={<FacultyTable />} />
           </Route>
           
           {/* Student Panel */}
@@ -79,7 +80,7 @@ function App() {
             <Route path='/LeaveRequest' element={<LeaveRequest />} />
           </Route> */}
 
-          {/* <Route path='/' element={<Login />} /> */}
+          
         </Routes>
       </Router>
     </>
