@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Logo from "../assets/logo.png";
 import { FaEdit, FaTrash, FaUserShield } from 'react-icons/fa';
-import { getStudents } from '../Service/api.js';
+import { getFacultys } from '../Service/api.js';
 import dayjs from 'dayjs';
 
 
@@ -11,24 +11,24 @@ import dayjs from 'dayjs';
 //   Inactive: 'bg-gray-700 text-gray-300',
 // };
 
-const StudentTable = () => {
-  const [student, getStudent] = useState([]);
+const FacultyTable = () => {
+  const [faculty, getFaculty] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 8;
 
   useEffect(() => {
-    getStudentsData();
+    getFacultysData();
   }, []);
 
-  const getStudentsData = async () => {
-    const res = await getStudents();
-    getStudent(res.data); // assuming res.data is an array of user-like objects
+  const getFacultysData = async () => {
+    const res = await getFacultys();
+    getFaculty(res.data); 
   };
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = student.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(student.length / usersPerPage);
+  const currentUsers = faculty.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(faculty.length / usersPerPage);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) setCurrentPage(page);
@@ -53,7 +53,7 @@ const StudentTable = () => {
       {/* Table Section */}
       <div className="p-6 bg-gray-900 text-gray-100 rounded-2xl shadow-md mx-4">
         <div className="mb-4 flex flex-col gap-4">
-            <h2 className="text-3xl font-semibold text-gray-100 text-center">Student Data</h2>
+            <h2 className="text-3xl font-semibold text-gray-100 text-center">Faculty Data Table</h2>
             <hr className=' w-2/3 mx-auto'></hr>
             <div className="flex justify-end">
                 <div className="relative w-full max-w-xs">
@@ -74,16 +74,18 @@ const StudentTable = () => {
             <thead className="bg-gray-800 text-gray-300 uppercase">
               <tr>
                 <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Father's Name</th>
-                <th className="px-4 py-2">Mother's Name</th>
                 <th className="px-4 py-2">Mobile Number</th>
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Date of Birth</th>
                 <th className="px-4 py-2">Gender</th>
                 <th className="px-4 py-2">Address</th>
-                <th className="px-4 py-2">Course</th>
-                <th className="px-4 py-2">Marks in Madhyamik</th>
-                <th className="px-4 py-2">Marks in H.S.</th>
+                <th className="px-4 py-2">Education Qualification</th>
+                <th className="px-4 py-2">Specialization</th>
+                <th className="px-4 py-2">Department</th>
+                <th className="px-4 py-2">Designation</th>
+                <th className="px-4 py-2">Username</th>
+                <th className="px-4 py-2">Password</th>
+                <th className="px-4 py-2">Date of Joining</th>
                 <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
@@ -92,8 +94,6 @@ const StudentTable = () => {
               {currentUsers.map((data) => (
                 <tr key={data.id} className="border-b border-gray-700 even:bg-gray-800 hover:bg-gray-700 hover:ring-2 hover:ring-blue-500">
                     <td className="px-4 py-3">{data.name}</td>
-                    <td className="px-4 py-3">{data.fname}</td>
-                    <td className="px-4 py-3">{data.mname}</td>
                     <td className="px-4 py-3">{data.mobile}</td>
                     <td className="px-4 py-3">{data.email}</td>
                     <td className="px-4 py-3">
@@ -101,9 +101,13 @@ const StudentTable = () => {
                     </td>
                     <td className="px-4 py-3">{data.gender}</td>
                     <td className="px-4 py-3">{data.address}</td>
-                    <td className="px-4 py-3">{data.course}</td>
-                    <td className="px-4 py-3">{data.marks}</td>
-                    <td className="px-4 py-3">{data.HSmarks}</td>
+                    <td className="px-4 py-3">{data.qualification}</td>
+                    <td className="px-4 py-3">{data.specialization}</td>
+                    <td className="px-4 py-3">{data.department}</td>
+                    <td className="px-4 py-3">{data.designation}</td>
+                    <td className="px-4 py-3">{data.username}</td>
+                    <td className="px-4 py-3">{data.password}</td>
+                    <td className="px-4 py-3">{data.doj}</td>
 
                     <td className="px-4 py-2 flex gap-2 text-gray-500">
                         <button title="Edit" className="hover:text-blue-600"><FaEdit /></button>
@@ -147,4 +151,4 @@ const StudentTable = () => {
   );
 };
 
-export default StudentTable;
+export default FacultyTable;

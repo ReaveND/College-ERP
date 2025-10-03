@@ -1,7 +1,7 @@
 const express = require('express');
 const Student = require('../Model/student-model.js');
 const multer = require('multer');
-const { getStudent } = require('../Controller/student-controller.js');
+const { getStudent } = require('../Controller/controller.js');
 
 const router = express.Router();
 
@@ -48,7 +48,7 @@ router.post('/add', upload.single('image'), async(req, res) =>{
     } catch (error) {
         console.log("Error while adding Student!", error);
     }
-})
+});
 
 // Getting Student data
 

@@ -119,7 +119,7 @@ const Admission = () => {
                 const res = await addStudent(formData);
                 console.log("Response status:", res.status);
                 if(res.status === 201){
-                    toast.success(res.data || "User added successfully!");
+                    toast.success(res.data || "Student added successfully!");
                 }else{
                     console.log("Toast firing");
                     toast.error("Something went wrong. Please try again!", {
@@ -359,7 +359,6 @@ const Admission = () => {
                     Reset
                     </button>
                 </div>
-            
             </form>
         </section>
         </div>
