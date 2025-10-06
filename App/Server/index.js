@@ -3,6 +3,7 @@ const app = express();
 const Connection = require('./Database/db.js');
 const StudentRoutes = require('./Routes/student-route.js');
 const FacultyRoutes = require('./Routes/faculty-route.js');
+const AdminRoutes = require('./Routes/admin-route.js')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -26,6 +27,7 @@ app.use(bodyParser.json({ extended : true }));
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use('/student', StudentRoutes);
 app.use('/faculty', FacultyRoutes);
+app.use('/admin', AdminRoutes)
 app.use('/Uploads', express.static('Uploads'));
 const PORT = process.env.PORT || 8000;
 

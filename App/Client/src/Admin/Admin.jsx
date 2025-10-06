@@ -60,12 +60,12 @@ const TypingIntro = () => {
 const Admin = () => {
 
   const location = useLocation();
-  const hideHeader = ['/Dashboard', '/Admission', '/StudentTable', '/Users', '/AddAdmin', '/AddFaculty', '/FacultyTable'].includes(location.pathname);
+  const hideHeader = ['/Dashboard', '/Admission', '/StudentTable', '/Users', '/AddAdmin', '/AdminTable', '/AddFaculty', '/FacultyTable'].includes(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
   
 useEffect(() => {
-  const show = ['/Dashboard', '/Admission', '/StudentTable', '/Users', '/AddAdmin', '/AddFaculty', '/FacultyTable'].includes(location.pathname);
+  const show = ['/Dashboard', '/Admission', '/StudentTable', '/Users', '/AddAdmin', '/AdminTable', '/AddFaculty', '/FacultyTable'].includes(location.pathname);
   setShowDashboard(show);
 }, [location.pathname]);
 
@@ -159,6 +159,21 @@ useEffect(() => {
             }`}
           >
             <i class="fa-solid fa-user-plus mr-3"></i>Add Admin
+          </NavLink>
+
+          <NavLink
+            to={location.pathname === '/AdminTable' ? '/' : '/AdminTable'}
+            onClick={(e) => {
+              e.preventDefault(); // prevent default NavLink behavior
+              const targetPath = location.pathname === '/AdminTable' ? '/' : '/AdminTable';
+              navigate(targetPath);
+              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+            }}
+            className={`block px-5 py-2 rounded transition-colors ${
+              location.pathname === '/AdminTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+            }`}
+          >
+            <i class="fa-solid fa-eye mr-3"></i>View Admin
           </NavLink>
 
           <NavLink
