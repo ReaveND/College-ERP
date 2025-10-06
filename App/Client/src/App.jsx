@@ -9,6 +9,7 @@ import Admission from './Admin/Admission';
 import Users from './Admin/Users';
 import StudentTable from './Admin/StudentTable';
 import AddAdmin from './Admin/AddAdmin';
+import AdminTable from './Admin/AdminTable';
 import AddFaculty from './Admin/AddFaculty';
 import FacultyTable from './Admin/FacultyTable';
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/Users" element={<Users />} />
             <Route path="/StudentTable" element={<StudentTable />} />
             <Route path="/AddAdmin" element={<AddAdmin />} />
+            <Route path="/AdminTable" element={<AdminTable />} />
             <Route path="/AddFaculty" element={<AddFaculty />} />
             <Route path="/FacultyTable" element={<FacultyTable />} />
           </Route>

@@ -1,6 +1,26 @@
 import axios from 'axios';
 const URL = 'http://localhost:8000';
 
+// API call to add Admin
+export const addAdmin = async(data) => {
+    try {
+        return await axios.post(`${URL}/admin/add`, data, {
+      timeout: 2000, // ⏱️ 5-second timeout
+    });
+    } catch (error) {
+        console.log("Error while calling addAdmin API!", error);
+    }
+}
+
+// API call to get all Admins
+export const getAdmins = async() => {
+    try {
+       return axios.get(`${URL}/admin/all`);
+    } catch (error) {
+        console.log("Error while getting Data!!", error);
+    }
+}
+
 // API call to add Student
 export const addStudent = async(data) => {
     try {
@@ -33,7 +53,7 @@ export const addFaculty = async(data) => {
     }
 }
 
-// API call to get all Students
+// API call to get all Faculty
 export const getFacultys = async() => {
     try {
        return axios.get(`${URL}/faculty/all`);
