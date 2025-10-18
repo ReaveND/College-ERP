@@ -121,7 +121,7 @@ const FacultyTable = () => {
                             src={`http://localhost:8000/Uploads/${data.image}`}
                             alt={data.name}
                             onClick={() => setSelectedImage(data.image)}
-                            className="w-10 h-10 rounded-full object-cover border"
+                            className="w-10 h-10 rounded-full object-cover"
                         />
                         ) : (
                         'N/A'
@@ -141,7 +141,9 @@ const FacultyTable = () => {
                       <td className="px-4 py-3">{data.designation}</td>
                       <td className="px-4 py-3">{data.username}</td>
                       <td className="px-4 py-3">{data.password}</td>
-                      <td className="px-4 py-3">{data.doj}</td>
+                      <td className="px-4 py-3">
+                          {data.doj ? dayjs(data.doj).format('DD-MMM-YYYY') : ''}
+                      </td>
 
                       <td className="px-4 py-2 flex gap-2 text-gray-500">
                           <button title="Edit" className="hover:text-blue-600"><FaEdit /></button>
