@@ -55,7 +55,7 @@ const StudentTable = () => {
           </div>
         </div>
       )}
-      <div className="max-h-screen bg-gray-100 rounded-2xl overflow-hidden pb-6">
+      <div className="max-h-screen h-auto bg-gray-100 rounded-2xl overflow-hidden pb-6">
         {/* Header */}
         <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
           <div className="flex items-center gap-4">
@@ -71,7 +71,7 @@ const StudentTable = () => {
         </header>
 
         {/* Table Section */}
-        <div className="p-6 bg-gray-900 text-gray-100 rounded-2xl shadow-md mx-4">
+        <div className="p-6 bg-gradient-to-tr from-blue-900 to-blue-950 text-gray-100 rounded-2xl shadow-md mx-4">
           <div className="mb-4 flex flex-col gap-4">
               <h2 className="text-3xl font-semibold text-gray-100 text-center">Student Data Table</h2>
               <hr className=' w-2/3 mx-auto'></hr>
@@ -80,7 +80,7 @@ const StudentTable = () => {
                   <input
                       type="text"
                       placeholder="Search..."
-                      className="w-full pl-9 pr-3 py-1.5 bg-gray-800 text-gray-100 placeholder-gray-400 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full pl-9 pr-3 py-1.5 bg-blue-950 text-gray-100 placeholder-gray-400 border-2 border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                   <i className="fa-solid fa-magnifying-glass fa-beat-fade absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
                   </div>
@@ -89,9 +89,10 @@ const StudentTable = () => {
           
 
           <div className="overflow-x-auto scrollbar-hide">
-            <table className="min-w-max w-full text-sm text-left ring-1 ring-gray-300 rounded-md">
+            <table className="min-w-max w-full text-sm text-left shadow-lg rounded-md overflow-hidden">
 
-              <thead className="bg-gray-800 text-gray-300 uppercase">
+
+              <thead className="bg-blue-900 text-white uppercase text-center">
                 <tr>
                   <th className="px-4 py-2">Image</th>
                   <th className="px-4 py-2">Name</th>
@@ -111,32 +112,32 @@ const StudentTable = () => {
 
               <tbody>
                 {currentUsers.map((data) => (
-                  <tr key={data.id} className="border-b border-gray-700 even:bg-gray-800 hover:bg-gray-700 hover:ring-2 hover:ring-blue-500">
+                  <tr key={data.id} className="border-b font-bold text-center border-blue-800 even:bg-gray-300 odd:bg-gray-400 hover:bg-blue-200">
                       <td className="px-4 py-3">
                         {data.image ? (
                         <img
                             src={`http://localhost:8000/Uploads/${data.image}`}
                             alt={data.name}
                             onClick={() => setSelectedImage(data.image)}
-                            className="w-10 h-10 rounded-full object-cover border"
+                            className="w-10 h-10 rounded-full object-cover"
                         />
                         ) : (
                         'N/A'
                         )}
                       </td>
-                      <td className="px-4 py-3">{data.name}</td>
-                      <td className="px-4 py-3">{data.fname}</td>
-                      <td className="px-4 py-3">{data.mname}</td>
-                      <td className="px-4 py-3">{data.mobile}</td>
-                      <td className="px-4 py-3">{data.email}</td>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3 text-blue-900">{data.name}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.fname}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.mname}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.mobile}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.email}</td>
+                      <td className="px-4 py-3 text-blue-900">
                           {data.dob ? dayjs(data.dob).format('DD-MMM-YYYY') : ''}
                       </td>
-                      <td className="px-4 py-3">{data.gender}</td>
-                      <td className="px-4 py-3">{data.address}</td>
-                      <td className="px-4 py-3">{data.course}</td>
-                      <td className="px-4 py-3">{data.marks}</td>
-                      <td className="px-4 py-3">{data.HSmarks}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.gender}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.address}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.course}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.marks}</td>
+                      <td className="px-4 py-3 text-blue-900">{data.HSmarks}</td>
 
                       <td className="px-4 py-2 flex gap-2 text-gray-500">
                           <button title="Edit" className="hover:text-blue-600"><FaEdit /></button>
@@ -153,7 +154,7 @@ const StudentTable = () => {
           <div className="flex justify-center items-center mt-4 gap-2">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
-              className="px-3 py-1 text-sm bg-gray-600 rounded hover:bg-gray-500 disabled:opacity-50"
+              className="px-3 py-1 text-sm bg-gray-900 rounded hover:bg-gray-500 disabled:opacity-50"
               disabled={currentPage === 1}
             >
               Prev
@@ -169,7 +170,7 @@ const StudentTable = () => {
             ))}
             <button
               onClick={() => handlePageChange(currentPage + 1)}
-              className="px-3 py-1 text-sm bg-gray-600 rounded hover:bg-gray-500 disabled:opacity-50"
+              className="px-3 py-1 text-sm bg-gray-900 rounded hover:bg-gray-500 disabled:opacity-50"
               disabled={currentPage === totalPages}
             >
               Next
