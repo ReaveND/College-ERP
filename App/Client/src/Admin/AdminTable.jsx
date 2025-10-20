@@ -68,7 +68,7 @@ const AdminTable = () => {
         </header>
 
         {/* Table Section */}
-        <div className="p-6 bg-gray-900 text-gray-100 rounded-2xl shadow-md mx-4">
+        <div className="p-6 bg-gradient-to-tr from-blue-900 to-blue-950 text-gray-100 rounded-2xl shadow-md mx-4">
             <div className="mb-4 flex flex-col gap-4">
             <h2 className="text-3xl font-semibold text-gray-100 text-center">
                 Admin Data Table
@@ -79,7 +79,7 @@ const AdminTable = () => {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full pl-9 pr-3 py-1.5 bg-gray-800 text-gray-100 placeholder-gray-400 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full pl-9 pr-3 py-1.5 bg-blue-950 text-gray-100 placeholder-gray-400 border-2 border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 />
                 <i className="fa-solid fa-magnifying-glass fa-beat-fade absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
                 </div>
@@ -88,7 +88,7 @@ const AdminTable = () => {
 
             <div className="overflow-x-auto scrollbar-hide">
             <table className="min-w-max w-full text-sm text-left ring-1 ring-gray-300 rounded-md">
-                <thead className="bg-gray-800 text-gray-300 uppercase">
+                <thead className="bg-blue-950 text-white uppercase text-center">
                 <tr>
                     <th className="px-4 py-2">Image</th>
                     <th className="px-4 py-2">Name</th>
@@ -108,7 +108,7 @@ const AdminTable = () => {
                 {currentUsers.map((data) => (
                     <tr
                     key={data._id}
-                    className="border-b border-gray-700 even:bg-gray-800 hover:bg-gray-700 hover:ring-2 hover:ring-blue-500"
+                    className="border-b font-bold text-center border-blue-800 even:bg-gray-300 odd:bg-gray-400 hover:bg-blue-200"
                     >
                     <td className="px-4 py-3">
                         {data.image ? (
@@ -116,23 +116,23 @@ const AdminTable = () => {
                             src={`http://localhost:8000/Uploads/${data.image}`}
                             alt={data.name}
                             onClick={() => setSelectedImage(data.image)}
-                            className="w-10 h-10 rounded-full object-cover border"
+                            className="w-10 h-10 rounded-full object-cover"
                         />
                         ) : (
                         'N/A'
                         )}
                     </td>
-                    <td className="px-4 py-3">{data.name}</td>
-                    <td className="px-4 py-3">{data.mobile}</td>
-                    <td className="px-4 py-3">{data.email}</td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 text-blue-900">{data.name}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.mobile}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.email}</td>
+                    <td className="px-4 py-3 text-blue-900">
                         {data.dob ? dayjs(data.dob).format('DD-MMM-YYYY') : ''}
                     </td>
-                    <td className="px-4 py-3">{data.address}</td>
-                    <td className="px-4 py-3">{data.district}</td>
-                    <td className="px-4 py-3">{data.state}</td>
-                    <td className="px-4 py-3">{data.username}</td>
-                    <td className="px-4 py-3">{data.password}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.address}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.district}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.state}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.username}</td>
+                    <td className="px-4 py-3 text-blue-900">{data.password}</td>
                     <td className="px-4 py-2 flex gap-2 text-gray-500">
                         <button title="Edit" className="hover:text-blue-600">
                         <FaEdit />
