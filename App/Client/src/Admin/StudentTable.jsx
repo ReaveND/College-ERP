@@ -92,7 +92,7 @@ const StudentTable = () => {
             <table className="min-w-max w-full text-sm text-left shadow-lg rounded-md overflow-hidden">
 
 
-              <thead className="bg-blue-900 text-white uppercase text-center">
+              <thead className="bg-blue-950 text-white uppercase text-center">
                 <tr>
                   <th className="px-4 py-2">Image</th>
                   <th className="px-4 py-2">Name</th>
