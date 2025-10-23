@@ -3,7 +3,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import Login from './Admin/login.jsx';
+import Login from './Admin/login1.jsx';
+import AdminLogin from './Login/Admin-Login.jsx';
+import StudentLogin from './Login/Student-Login.jsx';
+import FacultyLogin from './Login/Faculty-Login.jsx';
 
 import HomePage from "./Homepage/HomePage";
 import AcademicPage from "./Homepage/AcademicPage";
@@ -60,7 +63,6 @@ function App() {
         <Routes>
           {/* HomePage */}
           <Route path='/' element={<HomePage/>}></Route>
-          <Route path='/Login' element={<Login/>}></Route>
           <Route path='/AcademicPage' element={<AcademicPage/>}></Route>
           <Route path='/FacultyPage' element={<FacultyPage/>}></Route>
           <Route path='/PlacementPage' element={<PlacementPage/>}></Route>
@@ -70,6 +72,11 @@ function App() {
           <Route path='/AcademicCalendar' element={<AcademicCalendar/>}></Route>         
           <Route path='/EventLife' element={<EventLife/>}></Route>
           <Route path='/CampusView' element={<CampusView/>}></Route>
+
+          {/* Login Pages */}
+          <Route path='/AdminLogin' element={<AdminLogin/>}></Route>
+          <Route path='/StudentLogin' element={<StudentLogin/>}></Route>
+          <Route path='/FacultyLogin' element={<FacultyLogin/>}></Route>
           
 
           {/* Admin Panel */}
