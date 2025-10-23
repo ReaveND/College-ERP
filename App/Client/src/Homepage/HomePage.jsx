@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoImg from "../assets/HomeIMG/logo.jpeg";
 import CampImg from '../assets/HomeIMG/campusview.jpg';
@@ -8,10 +8,12 @@ import eventimg from '../assets/HomeIMG/event.jpg';
 import AutoSlider from "./photosilde.jsx";
 import CourseCard from "./coursecard.jsx"
 import Header from './Header.jsx';
-import Login from '../Admin/login.jsx';
+import Modal from '../Modal.jsx';
 
 
 const Web = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
     return(
         <>
           <div className="bg-gray-100 shadow-md p-4">
@@ -28,7 +30,7 @@ const Web = () => {
   {/* College Name + Featured Statement */}
   <div className="flex flex-col justify-center">
     {/* College Name with underline */}
-    <span className="text-2xl md:text-3xl  font-extrabold text-blue-950 border-b-2 border-blue-950 pb-1">
+    <span className="text-2xl md:text-3xl font-extrabold text-blue-950 border-b-2 border-blue-950 pb-1">
       Vedanta Institute of Technology
     </span>
 
@@ -41,12 +43,22 @@ const Web = () => {
 
 
   {/* Right: Dashboard button */}
-  <NavLink
+  {/* <NavLink
     to="/Login"
     className="ml-auto mr-4 bg-blue-950 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
   >
     Dashboard
-  </NavLink>
+  </NavLink> */}
+
+  <div className="p-8 ml-auto">
+      <button
+        className="bg-blue-950 text-white px-4 py-2 rounded hover:bg-yellow-600 transition hover:scale-105 duration-500 cursor-pointer"
+        onClick={() => setIsModalOpen(true)}
+      >
+        Dashboard
+      </button>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </div>
 </div>
 
 
@@ -137,7 +149,7 @@ const Web = () => {
 
 
             
-            <div className='relative w-full'> 
+            <div className='relative w-full overflow-hidden'> 
             <AutoSlider />
                 <div className="absolute inset-0 flex flex-col justify-center items-start ml-[10%] py-[20%]">
   {/* Text box */}
