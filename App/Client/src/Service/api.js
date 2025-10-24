@@ -61,3 +61,27 @@ export const getFacultys = async() => {
         console.log("Error while getting Data!!", error);
     }
 }
+
+// API call for Admin Login
+export const logAdmin = async (credentials) => {
+  try {
+    return await axios.post(`${URL}/admin/login`, credentials, {
+      timeout: 2000,
+    });
+  } catch (error) {
+    console.log("Error while logging in Admin!", error);
+    throw error; // Optional: rethrow to handle in component
+  }
+};
+
+// API call for Student Login
+export const logStudent = async (credentials) => {
+  try {
+    return await axios.post(`${URL}/student/login`, credentials, {
+      timeout: 2000,
+    });
+  } catch (error) {
+    console.log("Error while logging in Student!", error);
+    throw error; // Optional: rethrow to handle in component
+  }
+};

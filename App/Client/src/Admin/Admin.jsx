@@ -60,12 +60,12 @@ const TypingIntro = () => {
 const Admin = () => {
 
   const location = useLocation();
-  const hideHeader = ['/Dashboard', '/Admission', '/StudentTable', '/Users', '/AddAdmin', '/AdminTable', '/AddFaculty', '/FacultyTable'].includes(location.pathname);
+  const hideHeader = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
   
 useEffect(() => {
-  const show = ['/Dashboard', '/Admission', '/StudentTable', '/Users', '/AddAdmin', '/AdminTable', '/AddFaculty', '/FacultyTable'].includes(location.pathname);
+  const show = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
   setShowDashboard(show);
 }, [location.pathname]);
 
@@ -87,132 +87,124 @@ useEffect(() => {
         <hr className="bg-yellow-600 h-0.5 mb-4"/>
         <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
           <NavLink
-            to={location.pathname === '/Dashboard' ? '/' : '/Dashboard'}
+            to={location.pathname === '/Admin/Dashboard' ? '/Admin' : '/Admin/Dashboard'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/Dashboard' ? '/' : '/Dashboard';
+              const targetPath = location.pathname === '/Admin/Dashboard' ? '/Admin' : '/Admin/Dashboard';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard');
+              setShowDashboard(targetPath === '/Admin/Dashboard');
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/Dashboard' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/Dashboard' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
             <i className="fas fa-chart-line mr-3"></i>Dashboard
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/Admission' ? '/' : '/Admission'}
+            to={location.pathname === '/Admin/Admission' ? '/Admin' : '/Admin/Admission'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/Admission' ? '/' : '/Admission';
+              const targetPath = location.pathname === '/Admin/Admission' ? '/Admin' : '/Admin/Admission';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/Admission' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/Admission' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-users mr-3"></i>Admission
+            <i className="fa-solid fa-users mr-3"></i>Admission
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/StudentTable' ? '/' : '/StudentTable'}
+            to={location.pathname === '/Admin/StudentTable' ? '/Admin' : '/Admin/StudentTable'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/StudentTable' ? '/' : '/StudentTable';
+              const targetPath = location.pathname === '/Admin/StudentTable' ? '/Admin' : '/Admin/StudentTable';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/StudentTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/StudentTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-eye mr-3"></i>View Students
+            <i className="fa-solid fa-eye mr-3"></i>View Students
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/Users' ? '/' : '/Users'}
+            to={location.pathname === '/Admin/Users' ? '/Admin' : '/Admin/Users'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/Users' ? '/' : '/Users';
+              const targetPath = location.pathname === '/Admin/Users' ? '/Admin' : '/Admin/Users';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/Users' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/Users' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-users mr-3"></i>Users
+            <i className="fa-solid fa-users mr-3"></i>Users
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/AddAdmin' ? '/' : '/AddAdmin'}
+            to={location.pathname === '/Admin/AddAdmin' ? '/Admin' : '/Admin/AddAdmin'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/AddAdmin' ? '/' : '/AddAdmin';
+              const targetPath = location.pathname === '/Admin/AddAdmin' ? '/Admin' : '/Admin/AddAdmin';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/AddAdmin' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/AddAdmin' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-user-plus mr-3"></i>Add Admin
+            <i className="fa-solid fa-user-plus mr-3"></i>Add Admin
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/AdminTable' ? '/' : '/AdminTable'}
+            to={location.pathname === '/Admin/AdminTable' ? '/Admin' : '/Admin/AdminTable'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/AdminTable' ? '/' : '/AdminTable';
+              const targetPath = location.pathname === '/Admin/AdminTable' ? '/Admin' : '/Admin/AdminTable';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/AdminTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/AdminTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-eye mr-3"></i>View Admin
+            <i className="fa-solid fa-eye mr-3"></i>View Admin
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/AddFaculty' ? '/' : '/AddFaculty'}
+            to={location.pathname === '/Admin/AddFaculty' ? '/Admin' : '/Admin/AddFaculty'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/AddFaculty' ? '/' : '/AddFaculty';
+              const targetPath = location.pathname === '/Admin/AddFaculty' ? '/Admin' : '/Admin/AddFaculty';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/AddFaculty' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/AddFaculty' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-user-plus mr-3"></i>Add Faculty
+            <i className="fa-solid fa-user-plus mr-3"></i>Add Faculty
           </NavLink>
 
           <NavLink
-            to={location.pathname === '/FacultyTable' ? '/' : '/FacultyTable'}
+            to={location.pathname === '/Admin/FacultyTable' ? '/Admin' : '/Admin/FacultyTable'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
-              const targetPath = location.pathname === '/FacultyTable' ? '/' : '/FacultyTable';
+              const targetPath = location.pathname === '/Admin/FacultyTable' ? '/Admin' : '/Admin/FacultyTable';
               navigate(targetPath);
-              setShowDashboard(targetPath === '/Dashboard'); // keep dashboard logic intact
+              setShowDashboard(targetPath === '/Admin/Dashboard'); // keep dashboard logic intact
             }}
             className={`block px-5 py-2 rounded transition-colors ${
-              location.pathname === '/FacultyTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+              location.pathname === '/Admin/FacultyTable' ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
             }`}
           >
-            <i class="fa-solid fa-eye mr-3"></i>View Faculty
+            <i className="fa-solid fa-eye mr-3"></i>View Faculty
           </NavLink>
-
-          {/* Future links - disabled for now */}
-          <span className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
-            <i className="fa-solid fa-sliders mr-3"></i>Settings
-          </span>
-          <span className="block px-5 py-2 rounded text-gray-400 cursor-not-allowed">
-            <i className="fa-solid fa-file-lines mr-3"></i>Reports
-          </span>
         </nav>
       </aside>
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import collegeLogo from "../assets/logo.png";
 
 
-const Dashboard = () => {
+const StudentDashboard = () => {
   return (
     <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md h-full p-6">
     {/* Header Card */}
@@ -85,4 +85,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default StudentDashboard;

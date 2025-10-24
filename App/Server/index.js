@@ -27,7 +27,7 @@ app.use(bodyParser.json({ extended : true }));
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use('/student', StudentRoutes);
 app.use('/faculty', FacultyRoutes);
-app.use('/admin', AdminRoutes)
+app.use('/admin', AdminRoutes);
 app.use('/Uploads', express.static('Uploads'));
 const PORT = process.env.PORT || 8000;
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Admission() {
+function Admission1() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
 
@@ -204,4 +204,4 @@ function Admission() {
   );
 }
 
-export default Admission;
+export default Admission1;

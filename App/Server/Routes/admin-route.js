@@ -1,9 +1,7 @@
 const express = require('express');
 const Admin = require('../Model/admin-model.js');
 const multer = require('multer');
-const { getAdmin } = require('../Controller/controller.js');
-
-
+const { getAdmin, loginAdmin } = require('../Controller/admin-controller.js');
 
 const router = express.Router();
 
@@ -46,5 +44,8 @@ router.post('/add', upload.single('image'), async (req, res) => {
 
 // Getting all Admin data
 router.get('/all', getAdmin);
+
+// Admin Login
+router.post('/login', loginAdmin);
 
 module.exports = router;
