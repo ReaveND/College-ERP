@@ -2,6 +2,7 @@ import React from 'react';
 import { Doughnut, Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
+  Filler,
   ArcElement,
   LineElement,
   PointElement,
@@ -17,6 +18,7 @@ ChartJS.register(
   PointElement,
   CategoryScale,
   LinearScale,
+  Filler,
   Tooltip,
   Legend
 );

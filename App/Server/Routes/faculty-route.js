@@ -1,7 +1,7 @@
 const express = require('express');
 const Faculty = require('../Model/faculty-model.js');
 const multer = require('multer');
-const { getFaculty } = require('../Controller/controller.js');
+const { getFaculty } = require('../Controller/faculty-controller.js');
 
 const router = express.Router();
 

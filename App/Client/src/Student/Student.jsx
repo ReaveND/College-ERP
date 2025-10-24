@@ -57,12 +57,12 @@ const TypingIntro = () => {
 
 const Student = () => {
     const location = useLocation();
-    const hideHeader = ['/Dashboard', '/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard', '/StudyMaterials', '/Library', '/AttendancePage'].includes(location.pathname);
+    const hideHeader = ['/Student/Dashboard', '/Student/StudentProfile', '/Student/ExamForm', '/Student/ResultCard', '/Student/AssignmentPage', '/Student/SemExamFeesClearance', '/Student/AdmitCard', '/Student/StudyMaterials', '/Student/Library', '/Student/AttendancePage'].includes(location.pathname);
     const [,setShowProfile] = useState(false);
     const navigate = useNavigate();
     
     useEffect(() => {
-    const show = ['/Dashboard', '/StudentProfile', '/ExamForm', '/ResultCard', '/AssignmentPage', '/SemExamFeesClearance', '/AdmitCard', '/StudyMaterials', '/Library', '/AttendancePage'].includes(location.pathname);
+    const show = ['/Student/Dashboard', '/Student/StudentProfile', '/Student/ExamForm', '/Student/ResultCard', '/Student/AssignmentPage', '/Student/SemExamFeesClearance', '/Student/AdmitCard', '/Student/StudyMaterials', '/Student/Library', '/Student/AttendancePage'].includes(location.pathname);
     setShowProfile(show);
     }, [location.pathname]);
 
@@ -84,14 +84,14 @@ const Student = () => {
                 <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
 
                 <NavLink
-                to="/Dashboard"
+                to="/Student/Dashboard"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Dashboard');
+                    navigate('/Student/Dashboard');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/Dashboard'
+                    location.pathname === '/Student/Dashboard'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -100,14 +100,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/StudentProfile"
+                to="/Student/StudentProfile"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/StudentProfile');
+                    navigate('/Student/StudentProfile');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/StudentProfile'
+                    location.pathname === '/Student/StudentProfile'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -116,14 +116,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink 
-                to="/StudyMaterials"
+                to="/Student/StudyMaterials"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/StudyMaterials');
+                    navigate('/Student/StudyMaterials');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/StudyMaterials'
+                    location.pathname === '/Student/StudyMaterials'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -132,14 +132,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Library"
+                to="/Student/Library"
                 onClick={(e) => {
                     e.preventDefault(); 
-                    navigate('/Library');
+                    navigate('/Student/Library');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/Library'
+                    location.pathname === '/Student/Library'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -148,14 +148,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink 
-                to="/AttendancePage"
+                to="/Student/AttendancePage"
                 onClick={(e) => {
                     e.preventDefault(); 
-                    navigate('/AttendancePage');
+                    navigate('/Student/AttendancePage');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/AttendancePage'
+                    location.pathname === '/Student/AttendancePage'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}                >
@@ -163,14 +163,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/AssignmentPage"
+                to="/Student/AssignmentPage"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/AssignmentPage');
+                    navigate('/Student/AssignmentPage');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/AssignmentPage'
+                    location.pathname === '/Student/AssignmentPage'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -179,14 +179,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/ExamForm"
+                to="/Student/ExamForm"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/ExamForm');
+                    navigate('/Student/ExamForm');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/ExamForm'
+                    location.pathname === '/Student/ExamForm'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -195,14 +195,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/AdmitCard"
+                to="/Student/AdmitCard"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/AdmitCard');
+                    navigate('/Student/AdmitCard');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/AdmitCard'
+                    location.pathname === '/Student/AdmitCard'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -215,14 +215,14 @@ const Student = () => {
                 </NavLink> future scope */} 
 
                 <NavLink
-                to="/ResultCard"
+                to="/Student/ResultCard"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/ResultCard');
+                    navigate('/Student/ResultCard');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/ResultCard'
+                    location.pathname === '/Student/ResultCard'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -231,14 +231,14 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/SemExamFeesClearance"
+                to="/Student/SemExamFeesClearance"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/SemExamFeesClearance');
+                    navigate('/Student/SemExamFeesClearance');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/SemExamFeesClearance'
+                    location.pathname === '/Student/SemExamFeesClearance'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
