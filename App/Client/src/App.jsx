@@ -46,15 +46,16 @@ import AttendancePage from './Student/AttendancePage';
 import StudentProtectedRoute from './Student/StudentProtectedRoute.jsx';
 
 
-// import Faculty from './Faculty/Faculty';
-// import Dashboard from './Faculty/Dashboard';
-// import FacultyProfile from './Faculty/FacultyProfile';
-// import FacultyTimeTable from './Faculty/FacultyTimeTable';
-// import Attendance from './Faculty/Attendance';
-// import FacultyStudyMaterial from './Faculty/StudyMaterial';
-// import MarksUpload from './Faculty/MarksUpload';
-// import Assignment from './Faculty/Assignment';
-// import LeaveRequest from './Faculty/LeaveRequest';
+import Faculty from './Faculty/Faculty';
+import FacultyDashboard from './Faculty/Dashboard';
+import FacultyProfile from './Faculty/FacultyProfile';
+import FacultyTimeTable from './Faculty/FacultyTimeTable';
+import Attendance from './Faculty/Attendance';
+import FacultyStudyMaterial from './Faculty/StudyMaterial';
+import MarksUpload from './Faculty/MarksUpload';
+import Assignment from './Faculty/Assignment';
+import LeaveRequest from './Faculty/LeaveRequest';
+import FacultyProtectedRoute from './Faculty/FacultyProtectedRoute.jsx';
 
 
 function App() {
@@ -123,16 +124,23 @@ function App() {
           </Route>
 
           {/* Faculty Panel */}
-          {/* <Route path='/' element={<Faculty />}> 
-            <Route path='/Dashboard' element={<Dashboard />} />
-            <Route path='/FacultyProfile' element={<FacultyProfile />} />
-            <Route path='/FacultyTimeTable' element={<FacultyTimeTable />} />
-            <Route path='/Attendance' element={<Attendance />} />
-            <Route path='/FacultyStudyMaterial' element={<FacultyStudyMaterial />} />
-            <Route path='/MarksUpload' element={<MarksUpload />} />
-            <Route path='/Assignment' element={<Assignment />} />
-            <Route path='/LeaveRequest' element={<LeaveRequest />} />
-          </Route> */}
+          <Route
+            path="/Faculty"
+            element={
+              <FacultyProtectedRoute>
+                <Faculty />
+              </FacultyProtectedRoute>
+            }
+          > 
+            <Route path='Dashboard' element={<FacultyDashboard />} />
+            <Route path='FacultyProfile' element={<FacultyProfile />} />
+            <Route path='FacultyTimeTable' element={<FacultyTimeTable />} />
+            <Route path='Attendance' element={<Attendance />} />
+            <Route path='FacultyStudyMaterial' element={<FacultyStudyMaterial />} />
+            <Route path='MarksUpload' element={<MarksUpload />} />
+            <Route path='Assignment' element={<Assignment />} />
+            <Route path='LeaveRequest' element={<LeaveRequest />} />
+          </Route>
 
           
         </Routes>

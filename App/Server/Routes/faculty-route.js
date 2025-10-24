@@ -1,7 +1,7 @@
 const express = require('express');
 const Faculty = require('../Model/faculty-model.js');
 const multer = require('multer');
-const { getFaculty } = require('../Controller/faculty-controller.js');
+const { getFaculty, loginFaculty} = require('../Controller/faculty-controller.js');
 
 const router = express.Router();
 
@@ -51,7 +51,9 @@ router.post('/add', upload.single('image'), async(req, res) =>{
 });
 
 // Getting Faculty data
-
 router.get('/all', getFaculty);
+
+// Faculty Login
+router.post('/login', loginFaculty);
 
 module.exports = router;

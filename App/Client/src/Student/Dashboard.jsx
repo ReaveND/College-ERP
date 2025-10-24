@@ -56,25 +56,25 @@ const StudentDashboard = () => {
         <h2 className="text-xl font-bold text-blue-950 mb-4">Quick Links</h2>
         <div className="flex flex-wrap gap-4">
           <Link
-            to="/StudyMaterials"
+            to="/Student/StudyMaterials"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             View Study Materials
           </Link>
           <Link
-            to="/AttendancePage"
+            to="/Student/AttendancePage"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Check Attendance
           </Link>
           <Link
-            to="/AssignmentPage"
+            to="/Student/AssignmentPage"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Review Assignments
           </Link>
           <Link
-            to="/ResultCard"
+            to="/Student/ResultCard"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Check Result

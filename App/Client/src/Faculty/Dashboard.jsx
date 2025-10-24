@@ -56,25 +56,25 @@ const Dashboard = () => {
         <h2 className="text-xl font-bold text-blue-950 mb-4">Quick Links</h2>
         <div className="flex flex-wrap gap-4">
           <Link
-            to="/FacultyTimeTable"
+            to="/Faculty/FacultyTimeTable"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             View Timetable
           </Link>
           <Link
-            to="/Attendance"
+            to="/Faculty/Attendance"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Mark Attendance
           </Link>
           <Link
-            to="/Assignment"
+            to="/Faculty/Assignment"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Manage Assignments
           </Link>
           <Link
-            to="/MarksUpload"
+            to="/Faculty/MarksUpload"
             className="px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 hover:text-black transition"
           >
             Upload Marks
