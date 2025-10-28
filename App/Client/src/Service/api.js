@@ -85,3 +85,15 @@ export const logStudent = async (credentials) => {
     throw error; // Optional: rethrow to handle in component
   }
 };
+
+// API call for Faculty Login
+export const logFaculty = async (credentials) => {
+  try {
+    return await axios.post(`${URL}/faculty/login`, credentials, {
+      timeout: 2000,
+    });
+  } catch (error) {
+    console.log("Error while logging in Faculty!", error);
+    throw error; // Optional: rethrow to handle in component
+  }
+};

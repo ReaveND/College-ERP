@@ -56,12 +56,12 @@ const TypingIntro = () => {
 
 const Faculty = () => {
   const location = useLocation();
-  const hideHeader = ['/Dashboard', '/FacultyProfile', '/FacultyTimeTable', '/Attendance', '/FacultyStudyMaterial', '/MarksUpload', '/Assignment', '/LeaveRequest'].includes(location.pathname);
+  const hideHeader = ['/Faculty/Dashboard', '/Faculty/FacultyProfile', '/Faculty/FacultyTimeTable', '/Faculty/Attendance', '/Faculty/FacultyStudyMaterial', '/Faculty/MarksUpload', '/Faculty/Assignment', '/Faculty/LeaveRequest'].includes(location.pathname);
   const [,setShowProfile] = useState(false);
   const navigate = useNavigate();
         
   useEffect(() => {
-    const show = ['/Dashboard', '/FacultyProfile', '/FacultyTimeTable', '/Attendance', '/FacultyStudyMaterial', '/MarksUpload', '/Assignment', '/LeaveRequest'].includes(location.pathname);
+    const show = ['/Faculty/Dashboard', '/Faculty/FacultyProfile', '/Faculty/FacultyTimeTable', '/Faculty/Attendance', '/Faculty/FacultyStudyMaterial', '/Faculty/MarksUpload', '/Faculty/Assignment', '/Faculty/LeaveRequest'].includes(location.pathname);
     setShowProfile(show);
     }, [location.pathname]);
 
@@ -83,14 +83,14 @@ const Faculty = () => {
         <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
 
           <NavLink
-            to="/Dashboard"
+            to="/Faculty/Dashboard"
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Dashboard');
+                    navigate('/Faculty/Dashboard');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/Dashboard'
+                    location.pathname === '/Faculty/Dashboard'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -98,14 +98,14 @@ const Faculty = () => {
             <i className="fa-solid fa-gauge-high mr-3"></i> Dashboard
           </NavLink>
           <NavLink
-            to="/FacultyProfile"
+            to="/Faculty/FacultyProfile"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/FacultyProfile');
+                    navigate('/Faculty/FacultyProfile');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/FacultyProfile'
+                    location.pathname === '/Faculty/FacultyProfile'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -113,14 +113,14 @@ const Faculty = () => {
             <i className="fa-regular fa-user mr-3"></i> Personal Profile
           </NavLink>
           <NavLink
-            to="/FacultyTimeTable"
+            to="/Faculty/FacultyTimeTable"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/FacultyTimeTable');
+                    navigate('/Faculty/FacultyTimeTable');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/FacultyTimeTable'
+                    location.pathname === '/Faculty/FacultyTimeTable'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -128,14 +128,14 @@ const Faculty = () => {
             <i className="fa-regular fa-calendar-days mr-3"></i> Time Table
           </NavLink>
           <NavLink
-            to="/Attendance"
+            to="/Faculty/Attendance"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Attendance');
+                    navigate('/Faculty/Attendance');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/Attendance'
+                    location.pathname === '/Faculty/Attendance'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -143,14 +143,14 @@ const Faculty = () => {
             <i className="fa-solid fa-person-chalkboard mr-3"></i> Attendance
           </NavLink>
           <NavLink
-            to="/FacultyStudyMaterial"
+            to="/Faculty/FacultyStudyMaterial"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/FacultyStudyMaterial');
+                    navigate('/Faculty/FacultyStudyMaterial');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/FacultyStudyMaterial'
+                    location.pathname === '/Faculty/FacultyStudyMaterial'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -158,14 +158,14 @@ const Faculty = () => {
             <i className="fa-solid fa-upload mr-3"></i> Upload Study Materials
           </NavLink>
           <NavLink
-            to="/MarksUpload"
+            to="/Faculty/MarksUpload"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/MarksUpload');
+                    navigate('/Faculty/MarksUpload');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/MarksUpload'
+                    location.pathname === '/Faculty/MarksUpload'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -173,14 +173,14 @@ const Faculty = () => {
             <i className="fa-solid fa-pen-to-square mr-3"></i> Marks Upload
           </NavLink>
           <NavLink
-            to="/Assignment"
+            to="/Faculty/Assignment"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Assignment');
+                    navigate('/Faculty/Assignment');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/Assignment'
+                    location.pathname === '/Faculty/Assignment'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
@@ -188,14 +188,14 @@ const Faculty = () => {
             <i className="fa-solid fa-file-circle-check mr-3"></i> Assignment
           </NavLink>
           <NavLink
-            to="/LeaveRequest"
+            to="/Faculty/LeaveRequest"
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/LeaveRequest');
+                    navigate('/Faculty/LeaveRequest');
                     setShowProfile(true);
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
-                    location.pathname === '/LeaveRequest'
+                    location.pathname === '/Faculty/LeaveRequest'
                     ? 'bg-blue-950 text-white font-bold'
                     : 'hover:bg-gray-200'
                 }`}
