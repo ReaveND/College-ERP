@@ -56,6 +56,7 @@ const StudentLogin = () => {
   
       // setMessage(data.message);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('studentName', data.name);
       navigate('/Student');
     } catch (error) {
       toast.error(

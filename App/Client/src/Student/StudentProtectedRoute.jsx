@@ -4,14 +4,14 @@ import { Navigate } from 'react-router-dom';
 
 const StudentProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
-  if (!token) return <Navigate to="/student-login" />;
+  if (!token) return <Navigate to="/StudentLogin" />;
 
   try {
     const user = jwtDecode(token);
     return user.role === 'student' ? children : <Navigate to="/unauthorized" />;
   } catch (err) {
     console.error('Invalid token:', err);
-    return <Navigate to="/student-login" />;
+    return <Navigate to="/StudentLogin" />;
   }
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { toast } from "react-toastify";
 import "../assets/css/std.css";
 import Logo from "../assets/logo.png";
 
@@ -65,6 +66,27 @@ const Student = () => {
     const show = ['/Student/Dashboard', '/Student/StudentProfile', '/Student/ExamForm', '/Student/ResultCard', '/Student/AssignmentPage', '/Student/SemExamFeesClearance', '/Student/AdmitCard', '/Student/StudyMaterials', '/Student/Library', '/Student/AttendancePage'].includes(location.pathname);
     setShowProfile(show);
     }, [location.pathname]);
+
+    const handleLogout = () => {
+        const name = localStorage.getItem('studentName');
+    
+        localStorage.removeItem('token');
+        localStorage.removeItem('studentName');
+        toast.info(`See you soon, ${name || 'Student'} 👋`, {
+            position: 'top-right',
+            autoClose: 3000,
+            style: {
+              background: '#f44336',
+              color: '#fff',
+              fontWeight: 'bold',
+              borderRadius: '8px',
+            },
+          });
+    
+        setTimeout(() => {
+            navigate('/');
+        }, 1000);
+    };
 
     return(
         <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
@@ -267,8 +289,8 @@ const Student = () => {
                         <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
                             <a href="tel:+91-9064285877">Contact Us</a>
                         </button>
-                        <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
-                            <a href="/">Logout</a>
+                        <button onClick={ handleLogout } className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105 mr-1">
+                            Logout
                         </button>
                         </div>
                         <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-gray-200 shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">

@@ -60,6 +60,7 @@ const AdminLogin = () => {
 
       // setMessage(data.message);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('adminName', data.name);
       navigate('/Admin');
     } catch (error) {
       toast.error(
