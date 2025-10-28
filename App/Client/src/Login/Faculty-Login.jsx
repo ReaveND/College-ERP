@@ -50,6 +50,7 @@ const FacultyLogin = () => {
       });
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('facultyName', data.name);
       navigate('/Faculty');
     } catch (error) {
       toast.error(

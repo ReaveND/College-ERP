@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import "../assets/css/admin.css";
 import Logo from "../assets/logo.png";
 
@@ -63,12 +64,32 @@ const Admin = () => {
   const hideHeader = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
-  
-useEffect(() => {
-  const show = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
-  setShowDashboard(show);
-}, [location.pathname]);
+    
+  useEffect(() => {
+    const show = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
+    setShowDashboard(show);
+  }, [location.pathname]);
 
+  const handleLogout = () => {
+    const name = localStorage.getItem('adminName');
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminName');
+    toast.info(`See you soon, ${name || 'Admin'} 👋`, {
+        position: 'top-right',
+        autoClose: 3000,
+        style: {
+          background: '#f44336',
+          color: '#fff',
+          fontWeight: 'bold',
+          borderRadius: '8px',
+        },
+      });
+
+    setTimeout(() => {
+        navigate('/');
+      }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
@@ -226,6 +247,9 @@ useEffect(() => {
               </h2>
               <button className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105">
                 <a href="tel:+91-9433558306">Contact Us</a>
+              </button>
+              <button onClick={ handleLogout } className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105 mr-1">
+                Logout
               </button>
             </div>
             <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-transparent shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">

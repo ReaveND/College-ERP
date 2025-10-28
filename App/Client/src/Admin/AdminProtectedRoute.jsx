@@ -4,14 +4,14 @@ import { Navigate } from 'react-router-dom';
 
 const AdminProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
-  if (!token) return <Navigate to="/admin-login" />;
+  if (!token) return <Navigate to="/AdminLogin" />;
 
   try {
     const user = jwtDecode(token);
     return user.role === 'admin' ? children : <Navigate to="/unauthorized" />;
   } catch (err) {
     console.error('Invalid token:', err);
-    return <Navigate to="/admin-login" />;
+    return <Navigate to="/AdminLogin" />;
   }
 };
 
