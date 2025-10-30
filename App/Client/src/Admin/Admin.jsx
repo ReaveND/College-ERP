@@ -7,7 +7,7 @@ import Logo from "../assets/logo.png";
 
 // TypingIntro Component
 const TypingIntro = () => {
-  const lines = ["Welcome", "to", "Admin Portal"];
+  const lines = ["Welcome", "to", "Admin Panel"];
   const typingSpeed = 80;
   const pauseAfterLine = 1000;
   const pauseAfterSet = 2000;
@@ -61,14 +61,14 @@ const TypingIntro = () => {
 const Admin = () => {
 
   const location = useLocation();
-  const hideHeader = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
+  const hideHeader = /^\/Admin\/(Dashboard|Admission|StudentTable|AddAdmin|AdminTable|AddFaculty|FacultyTable|EditAdmin\/[^/]+|EditStudent\/[^/]+|EditFaculty\/[^/]+)$/.test(location.pathname);
   const [,setShowDashboard] = useState(false);
   const navigate = useNavigate();
     
   useEffect(() => {
-    const show = ['/Admin/Dashboard', '/Admin/Admission', '/Admin/StudentTable', '/Admin/Users', '/Admin/AddAdmin', '/Admin/AdminTable', '/Admin/AddFaculty', '/Admin/FacultyTable'].includes(location.pathname);
-    setShowDashboard(show);
-  }, [location.pathname]);
+  const show = /^\/Admin\/(Dashboard|Admission|StudentTable|AddAdmin|AdminTable|AddFaculty|FacultyTable|EditAdmin\/[^/]+|EditStudent\/[^/]+|EditFaculty\/[^/]+)$/.test(location.pathname);
+  setShowDashboard(show);
+}, [location.pathname]);
 
   const handleLogout = () => {
     const name = localStorage.getItem('adminName');
@@ -152,7 +152,7 @@ const Admin = () => {
             <i className="fa-solid fa-eye mr-3"></i>View Students
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to={location.pathname === '/Admin/Users' ? '/Admin' : '/Admin/Users'}
             onClick={(e) => {
               e.preventDefault(); // prevent default NavLink behavior
@@ -165,7 +165,7 @@ const Admin = () => {
             }`}
           >
             <i className="fa-solid fa-users mr-3"></i>Users
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             to={location.pathname === '/Admin/AddAdmin' ? '/Admin' : '/Admin/AddAdmin'}

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Logo from "../assets/logo.png";
 import { FaEdit, FaTrash, FaUserShield } from 'react-icons/fa';
-import { getFacultys } from '../Service/api.js';
+import { getFacultys, deleteFaculty } from '../Service/api.js';
 import dayjs from 'dayjs';
 
 
@@ -15,6 +17,7 @@ const FacultyTable = () => {
   const [faculty, getFaculty] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 8;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getFacultysData();
@@ -35,6 +38,18 @@ const FacultyTable = () => {
   };
 
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this faculty member?")) {
+      try {
+        await deleteFaculty(id);
+        toast.success("Faculty deleted successfully");
+        getFacultysData(); // refresh table
+      } catch {
+        toast.error("Failed to delete faculty");
+      }
+    }
+  };
 
   return (
     <>
@@ -146,9 +161,22 @@ const FacultyTable = () => {
                       </td>
 
                       <td className="px-4 py-2 flex gap-2 text-gray-500">
-                          <button title="Edit" className="hover:text-blue-600"><FaEdit /></button>
-                          <button title="Delete" className="hover:text-red-600"><FaTrash /></button>
-                          <button title="Promote" className="hover:text-green-600"><FaUserShield /></button>
+                        <button
+                          title="Edit"
+                          className="hover:text-blue-600"
+                          onClick={() => navigate(`/Admin/EditFaculty/${data._id}`)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          title="Delete"
+                          className="hover:text-red-600"
+                          onClick={() => handleDelete(data._id)}
+                        >
+                          <FaTrash />
+                        </button>
+
+                        {/* <button title="Promote" className="hover:text-green-600"><FaUserShield /></button> */}
                       </td>
                   </tr>
                 ))}

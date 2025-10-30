@@ -97,3 +97,66 @@ export const logFaculty = async (credentials) => {
     throw error; // Optional: rethrow to handle in component
   }
 };
+
+// API call to Update Admin
+export const updateAdmin = async (id, data) => {
+  try {
+    return await axios.put(`${URL}/admin/update/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 2000
+    });
+  } catch (error) {
+    console.log("Error while updating Admin data!", error);
+  }
+};
+
+// API call to Delete Admin
+export const deleteAdmin = async (id) => {
+  try {
+    return await axios.delete(`${URL}/admin/delete/${id}`);
+  } catch (error) {
+    console.log("Error while deleting admin!", error);
+  }
+};
+
+// API call to Update Student
+export const updateStudent = async (id, data) => {
+  try {
+    return await axios.put(`${URL}/student/update/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 2000
+    });
+  } catch (error) {
+    console.log("Error while updating student!", error);
+  }
+};
+
+// API call to Delete Student
+export const deleteStudent = async (id) => {
+  try {
+    return await axios.delete(`${URL}/student/delete/${id}`);
+  } catch (error) {
+    console.log("Error while deleting student!", error);
+  }
+};
+
+// API call to Update Faculty
+export const updateFaculty = async (id, data) => {
+  try {
+    return await axios.put(`${URL}/faculty/update/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 2000
+    });
+  } catch (error) {
+    console.log("Error while updating faculty!", error);
+  }
+};
+
+// API call to Delete Faculty
+export const deleteFaculty = async (id) => {
+  try {
+    return await axios.delete(`${URL}/faculty/delete/${id}`);
+  } catch (error) {
+    console.log("Error while deleting faculty!", error);
+  }
+};

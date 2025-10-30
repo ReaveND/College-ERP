@@ -22,13 +22,15 @@ import AcademicCalendar from "./Homepage/AcademicCalender.jsx";
 import Admin from './Admin/Admin.jsx';
 import Dashboard from './Admin/Dashboard.jsx';
 import AdmissionPanel from './Admin/Admission.jsx';
-import Users from './Admin/Users.jsx';
 import StudentTable from './Admin/StudentTable.jsx';
 import AddAdmin from './Admin/AddAdmin.jsx';
 import AdminTable from './Admin/AdminTable.jsx';
 import AddFaculty from './Admin/AddFaculty.jsx';
 import FacultyTable from './Admin/FacultyTable.jsx';
 import AdminProtectedRoute from './Admin/AdminProtectedRoute.jsx';
+import EditAdmin from './Admin/EditAdmin.jsx';
+import EditStudent from './Admin/EditStudent.jsx';
+import EditFaculty from './Admin/EditFaculty.jsx';
 
 
 import Student from './Student/Student';
@@ -56,6 +58,7 @@ import MarksUpload from './Faculty/MarksUpload';
 import Assignment from './Faculty/Assignment';
 import LeaveRequest from './Faculty/LeaveRequest';
 import FacultyProtectedRoute from './Faculty/FacultyProtectedRoute.jsx';
+
 
 
 function App() {
@@ -93,12 +96,14 @@ function App() {
           >
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="Admission" element={<AdmissionPanel />} />
-            <Route path="Users" element={<Users />} />
             <Route path="StudentTable" element={<StudentTable />} />
             <Route path="AddAdmin" element={<AddAdmin />} />
             <Route path="AdminTable" element={<AdminTable />} />
             <Route path="AddFaculty" element={<AddFaculty />} />
             <Route path="FacultyTable" element={<FacultyTable />} />
+            <Route path="EditAdmin/:id" element={<EditAdmin />} />
+            <Route path="EditStudent/:id" element={<EditStudent />} />
+            <Route path="EditFaculty/:id" element={<EditFaculty />} />
           </Route>
 
           
