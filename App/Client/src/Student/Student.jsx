@@ -7,7 +7,7 @@ import Logo from "../assets/logo.png";
 
 // TypingIntro Component
 const TypingIntro = () => {
-  const lines = ["Welcome", "to", "Student Portal"];
+  const lines = ["Welcome", "to", "Student Panel"];
   const typingSpeed = 80;
   const pauseAfterLine = 1000;
   const pauseAfterSet = 2000;

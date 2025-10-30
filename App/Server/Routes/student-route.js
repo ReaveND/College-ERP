@@ -56,4 +56,34 @@ router.get('/all', getStudent);
 // Student Login
 router.post('/login', loginStudent);
 
+// Student Update
+router.put('/update/:id', upload.single('image'), async (req, res) => {
+  try {
+    const updateData = { ...req.body };
+    if (req.file) updateData.image = req.file.filename;
+
+    const updatedStudent = await Student.findByIdAndUpdate(req.params.id, updateData, {
+      new: true,
+      runValidators: true
+    });
+
+    if (!updatedStudent) return res.status(404).json({ message: 'Student not found' });
+    res.json(updatedStudent);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Delete Student
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const deletedStudent = await Student.findByIdAndDelete(req.params.id);
+    if (!deletedStudent) return res.status(404).json({ message: 'Student not found' });
+    res.json({ message: 'Student deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 module.exports = router;

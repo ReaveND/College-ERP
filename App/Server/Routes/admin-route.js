@@ -48,4 +48,32 @@ router.get('/all', getAdmin);
 // Admin Login
 router.post('/login', loginAdmin);
 
+// Admin Update
+// router.put('/update/:id', updateAdmin);
+
+router.put('/update/:id', upload.single('image'), async (req, res) => {
+  const updateData = { ...req.body };
+  if (req.file) updateData.image = req.file.filename;
+
+  const updatedAdmin = await Admin.findByIdAndUpdate(req.params.id, updateData, {
+    new: true,
+    runValidators: true
+  });
+
+  if (!updatedAdmin) return res.status(404).json({ message: 'Admin not found' });
+  res.json(updatedAdmin);
+});
+
+// Admin Delete
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const deletedAdmin = await Admin.findByIdAndDelete(req.params.id);
+    if (!deletedAdmin) return res.status(404).json({ message: 'Admin not found' });
+    res.json({ message: 'Admin deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
