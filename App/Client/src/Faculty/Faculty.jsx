@@ -105,11 +105,12 @@ const Faculty = () => {
         <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
 
           <NavLink
-            to="/Faculty/Dashboard"
+            to={location.pathname === '/Faculty/Dashboard' ? '/Faculty' : '/Faculty/Dashboard'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Faculty/Dashboard');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/Dashboard' ? '/Faculty' : '/Faculty/Dashboard';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/Dashboard');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/Dashboard'
@@ -120,11 +121,12 @@ const Faculty = () => {
             <i className="fa-solid fa-gauge-high mr-3"></i> Dashboard
           </NavLink>
           <NavLink
-            to="/Faculty/FacultyProfile"
+            to={location.pathname === '/Faculty/FacultyProfile' ? '/Faculty' : '/Faculty/FacultyProfile'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/FacultyProfile');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/FacultyProfile' ? '/Faculty' : '/Faculty/FacultyProfile';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/FacultyProfile');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/FacultyProfile'
@@ -135,11 +137,12 @@ const Faculty = () => {
             <i className="fa-regular fa-user mr-3"></i> Personal Profile
           </NavLink>
           <NavLink
-            to="/Faculty/FacultyTimeTable"
+            to={location.pathname === '/Faculty/FacultyTimeTable' ? '/Faculty' : '/Faculty/FacultyTimeTable'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/FacultyTimeTable');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/FacultyTimeTable' ? '/Faculty' : '/Faculty/FacultyTimeTable';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/FacultyTimeTable');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/FacultyTimeTable'
@@ -150,11 +153,12 @@ const Faculty = () => {
             <i className="fa-regular fa-calendar-days mr-3"></i> Time Table
           </NavLink>
           <NavLink
-            to="/Faculty/Attendance"
+            to={location.pathname === '/Faculty/Attendance' ? '/Faculty' : '/Faculty/Attendance'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/Attendance');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/Attendance' ? '/Faculty' : '/Faculty/Attendance';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/Attendance');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/Attendance'
@@ -165,11 +169,12 @@ const Faculty = () => {
             <i className="fa-solid fa-person-chalkboard mr-3"></i> Attendance
           </NavLink>
           <NavLink
-            to="/Faculty/FacultyStudyMaterial"
+            to={location.pathname === '/Faculty/FacultyStudyMaterial' ? '/Faculty' : '/Faculty/FacultyStudyMaterial'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/FacultyStudyMaterial');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/FacultyStudyMaterial' ? '/Faculty' : '/Faculty/FacultyStudyMaterial';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/FacultyStudyMaterial');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/FacultyStudyMaterial'
@@ -180,11 +185,12 @@ const Faculty = () => {
             <i className="fa-solid fa-upload mr-3"></i> Upload Study Materials
           </NavLink>
           <NavLink
-            to="/Faculty/MarksUpload"
+            to={location.pathname === '/Faculty/MarksUpload' ? '/Faculty' : '/Faculty/MarksUpload'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/MarksUpload');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/MarksUpload' ? '/Faculty' : '/Faculty/MarksUpload';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/MarksUpload');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/MarksUpload'
@@ -195,11 +201,12 @@ const Faculty = () => {
             <i className="fa-solid fa-pen-to-square mr-3"></i> Marks Upload
           </NavLink>
           <NavLink
-            to="/Faculty/Assignment"
+            to={location.pathname === '/Faculty/Assignment' ? '/Faculty' : '/Faculty/Assignment'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/Assignment');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/Assignment' ? '/Faculty' : '/Faculty/Assignment';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/Assignment');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/Assignment'
@@ -210,11 +217,12 @@ const Faculty = () => {
             <i className="fa-solid fa-file-circle-check mr-3"></i> Assignment
           </NavLink>
           <NavLink
-            to="/Faculty/LeaveRequest"
+            to={location.pathname === '/Faculty/LeaveRequest' ? '/Faculty' : '/Faculty/LeaveRequest'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Faculty/LeaveRequest');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Faculty/LeaveRequest' ? '/Faculty' : '/Faculty/LeaveRequest';
+                    navigate(targetPath);
+                    setShowProfile('/Faculty/LeaveRequest');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Faculty/LeaveRequest'
