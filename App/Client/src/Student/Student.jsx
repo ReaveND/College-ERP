@@ -106,11 +106,12 @@ const Student = () => {
                 <nav className="space-y-2 font-sans text-sm font-semibold text-gray-700">
 
                 <NavLink
-                to="/Student/Dashboard"
+                to={location.pathname === '/Student/Dashboard' ? '/Student' : '/Student/Dashboard'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Student/Dashboard');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/Dashboard' ? '/Student' : '/Student/Dashboard';
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/Dashboard');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/Dashboard'
@@ -122,11 +123,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Student/StudentProfile"
+                to={location.pathname === '/Student/StudentProfile' ? '/Student' : '/Student/StudentProfile'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Student/StudentProfile');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/StudentProfile' ? '/Student' : '/Student/StudentProfile';
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/StudentProfile');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/StudentProfile'
@@ -138,11 +140,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink 
-                to="/Student/StudyMaterials"
+                to={location.pathname === '/Student/StudyMaterials' ? '/Student' : '/Student/StudyMaterials'}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate('/Student/StudyMaterials');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/StudyMaterials' ? '/Student' : '/Student/StudyMaterials';
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/StudyMaterials');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/StudyMaterials'
@@ -154,11 +157,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Student/Library"
+                to={location.pathname === '/Student/Library' ? '/Student' : '/Student/Library'}
                 onClick={(e) => {
-                    e.preventDefault(); 
-                    navigate('/Student/Library');
-                    setShowProfile(true);
+                    e.preventDefault();
+                    const targetPath = location.pathname === '/Student/Library' ? '/Student' : '/Student/Library' 
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/Library');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/Library'
@@ -170,11 +174,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink 
-                to="/Student/AttendancePage"
+                to={location.pathname === '/Student/AttendancePage' ? '/Student' : '/Student/AttendancePage'}
                 onClick={(e) => {
                     e.preventDefault(); 
-                    navigate('/Student/AttendancePage');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/AttendancePage' ? '/Student' : '/Student/AttendancePage'
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/AttendancePage');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/AttendancePage'
@@ -185,11 +190,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Student/AssignmentPage"
+                to={location.pathname === '/Student/AssignmentPage' ? '/Student' : '/Student/AssignmentPage'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Student/AssignmentPage');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/AssignmentPage' ? '/Student' : '/Student/AssignmentPage'
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/AssignmentPage');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/AssignmentPage'
@@ -201,11 +207,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Student/ExamForm"
+                to={location.pathname === '/Student/ExamForm' ? '/Student' : '/Student/ExamForm'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Student/ExamForm');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/ExamForm' ? '/Student' : '/Student/ExamForm'
+                    navigate(targetPath);
+                    setShowProfile(targetPath === '/Student/ExamForm');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/ExamForm'
@@ -217,11 +224,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Student/AdmitCard"
+                to={location.pathname === '/Student/AdmitCard' ? '/Student' : '/Student/AdmitCard'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Student/AdmitCard');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/AdmitCard' ? '/Student' : '/Student/AdmitCard'
+                    navigate(targetPath);
+                    setShowProfile('/Student/AdmitCard');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/AdmitCard'
@@ -237,11 +245,12 @@ const Student = () => {
                 </NavLink> future scope */} 
 
                 <NavLink
-                to="/Student/ResultCard"
+                to={location.pathname === '/Student/ResultCard' ? '/Student' : '/Student/ResultCard'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Student/ResultCard');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/ResultCard' ? '/Student' : '/Student/ResultCard'
+                    navigate(targetPath);
+                    setShowProfile('/Student/ResultCard');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/ResultCard'
@@ -253,11 +262,12 @@ const Student = () => {
                 </NavLink>
 
                 <NavLink
-                to="/Student/SemExamFeesClearance"
+                to={location.pathname === '/Student/SemExamFeesClearance' ? '/Student' : '/Student/SemExamFeesClearance'}
                 onClick={(e) => {
                     e.preventDefault(); // prevent default NavLink behavior
-                    navigate('/Student/SemExamFeesClearance');
-                    setShowProfile(true);
+                    const targetPath = location.pathname === '/Student/SemExamFeesClearance' ? '/Student' : '/Student/SemExamFeesClearance'
+                    navigate(targetPath);
+                    setShowProfile('/Student/SemExamFeesClearance');
                 }}
                 className={`block px-5 py-2 rounded transition-colors ${
                     location.pathname === '/Student/SemExamFeesClearance'
