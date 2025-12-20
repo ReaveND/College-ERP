@@ -4,10 +4,19 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer
 } from "recharts";
 
+import Google from '../assets/HomeIMG/Google.png';
+import Microsoft from '../assets/HomeIMG/Microsoft.png';
+import Amazon from '../assets/HomeIMG/Amazon.png';
 import adobeLogo from "../assets/HomeIMG/adobe.jpg";
 import TCS from "../assets/HomeIMG/tcs.png";
 import Accenture from "../assets/HomeIMG/accenture.jpg";
 import Infosys from "../assets/HomeIMG/infosys.png";
+
+import Std1 from '../assets/HomeIMG/g.jpg';
+import Std2 from '../assets/HomeIMG/m.jpg';
+import Std3 from '../assets/HomeIMG/a.jpg';
+
+
 
 // Sample Data
 const placementDomainData = [
@@ -28,9 +37,9 @@ const yearlyPlacementData = [
 const COLORS = ["#facc15", "#3b82f6", "#fbbf24", "#1e3a8a", "#fde68a"];
 
 const recruiters = [
-  { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+  { name: "Google", logo: Google },
+  { name: "Microsoft", logo: Microsoft },
+  { name: "Amazon", logo: Amazon },
   { name: "Adobe", logo: adobeLogo }, 
   { name: "Infosys", logo: Infosys },
   { name: "TCS", logo: TCS },
@@ -44,9 +53,9 @@ const blogs = [
 ];
 
 const alumni = [
-  { name: "Rohit Sharma", role: "Software Engineer at Google", img: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { name: "Ananya Gupta", role: "Data Scientist at Microsoft", img: "https://randomuser.me/api/portraits/women/44.jpg" },
-  { name: "Karan Patel", role: "Product Manager at Amazon", img: "https://randomuser.me/api/portraits/men/65.jpg" },
+  { name: "Rohit Sharma", role: "Software Engineer at Google", img: Std1 },
+  { name: "Ananya Gupta", role: "Data Scientist at Microsoft", img: Std2 },
+  { name: "Karan Patel", role: "Product Manager at Amazon", img: Std3 },
 ];
 
 const highlights = [

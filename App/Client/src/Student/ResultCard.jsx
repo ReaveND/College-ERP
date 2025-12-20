@@ -1,7 +1,33 @@
 import React from "react";
 import collegeLogo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const ResultCard = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    const name = localStorage.getItem('studentName');
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('studentName');
+    toast.info(`See you soon, ${name || 'Student'} 👋`, {
+      position: 'top-right',
+      autoClose: 3000,
+      style: {
+        background: '#f44336',
+        color: '#fff',
+        fontWeight: 'bold',
+        borderRadius: '8px',
+      },
+    });
+
+    setTimeout(() => {
+      navigate('/');
+    }, 1000);
+  };
 
   const handleDownload = () => window.print();
 
@@ -16,13 +42,13 @@ const ResultCard = () => {
         </div>
         <div className="flex gap-4">
           <a
-            href="/Dashboard"
+            href="/Student/Dashboard"
             className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             Back to Dashboard
           </a>
           <a
-            href="/logout"
+            onClick={handleLogout}
             className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
           >
             Logout

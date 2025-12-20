@@ -1,9 +1,33 @@
 import React from "react";
 import collegeLogo from "../assets/logo.png";
 import studentPhoto from "../assets/pfp.jpg";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AdmitCard = () => {
   const handleDownload = () => window.print();
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    const name = localStorage.getItem('studentName');
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('studentName');
+    toast.info(`See you soon, ${name || 'Student'} 👋`, {
+      position: 'top-right',
+      autoClose: 3000,
+      style: {
+        background: '#f44336',
+        color: '#fff',
+        fontWeight: 'bold',
+        borderRadius: '8px',
+      },
+    });
+
+    setTimeout(() => {
+      navigate('/');
+    }, 1000);
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md h-full p-6 space-y-6">
@@ -16,10 +40,10 @@ const AdmitCard = () => {
           </h1>
         </div>
         <div className="flex space-x-4">
-          <a href="/Dashboard" className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+          <a href="/Student/Dashboard" className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
             Back to Dashboard
           </a>
-          <a href="/logout" className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+          <a onClick={handleLogout} className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
             Logout
           </a>
         </div>
