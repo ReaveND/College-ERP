@@ -8,7 +8,7 @@ import eventimg from '../assets/HomeIMG/event.jpg';
 import AutoSlider from "./photosilde.jsx";
 import CourseCard from "./coursecard.jsx"
 import Header from './Header.jsx';
-import Modal from '../Modal.jsx';
+import Modal from '../Modal.jsx'; 
 
 
 const Web = () => {
@@ -17,15 +17,15 @@ const Web = () => {
     return(
         <>
           <div className="bg-gray-100 shadow-md p-4">
-  {/* Grayish container for header */}
-  <div className="bg-gray-200 px-10 py-5 rounded-lg flex items-center">
-  <div className="flex items-center space-x-4">
-  {/* College Logo */}
-  <img
-    src={LogoImg}
-    alt="College Logo"
-    className="h-20 w-20 md:h-24 md:w-24 ml-2 object-cover rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
-  />
+            {/* Grayish container for header */}
+            <div className="bg-gray-200 px-10 py-5 rounded-lg flex items-center">
+              <div className="flex items-center space-x-4">
+                {/* College Logo */}
+                <img
+                  src={LogoImg}
+                  alt="College Logo"
+                  className="h-20 w-20 md:h-24 md:w-24 ml-2 object-cover rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+                />
 
   {/* College Name + Featured Statement */}
   <div className="flex flex-col justify-center">
@@ -124,50 +124,46 @@ const Web = () => {
 </div>
 
 
-            <div className="w-full bg-blue-950 overflow-hidden py-2">
-                <div
-                  style={{
-                    display: 'inline-block',
-                    whiteSpace: 'nowrap',
-                    animation: 'marquee 20s linear infinite',
-                  }}
-                >
-                  <span className="mx-8 text-white">🎓 Admissions Open 2025!</span>
-                  <span className="mx-8 text-white">📢 Annual Tech Fest Coming Soon!</span>
-                  <span className="mx-8 text-white">💡 Scholarship Applications Accepted!</span>
-                </div>
-
-                <style>
-                  {`
-                    @keyframes marquee {
-                      0% { transform: translateX(100%); }
-                      100% { transform: translateX(-100%); }
-                    }
-                  `}
-                </style>
-              </div>
-
-
-            
-            <div className='relative w-full overflow-hidden'> 
-            <AutoSlider />
-                <div className="absolute inset-0 flex flex-col justify-center items-start ml-[10%] py-[20%]">
-  {/* Text box */}
-  <div className="bg-black/45 p-10 rounded-xl max-w-[85%] absolute bottom-30 left-1">
-    <h1 className="text-white text-[35px] font-extrabold drop-shadow-lg leading-tight mb-4">
-      Simplifying Education with Technology.
-    </h1>
-    <p className="text-gray-200 text-lg font-medium leading-relaxed">
-      Unlock your potential with <span className="text-white font-semibold">world-class education</span>, innovative research, and a vibrant community.
-      At Uneza University, we inspire leaders, foster innovation, and prepare you for success in a rapidly evolving world.
-      Join us and shape your future today!
-    </p>
+<div className="w-full bg-blue-950 overflow-hidden py-2">
+  <div
+    style={{
+      display: 'inline-block',
+      whiteSpace: 'nowrap',
+      animation: 'marquee 20s linear infinite',
+    }}
+  >
+    <span className="mx-8 text-white">🎓 Admissions Open 2025!</span>
+    <span className="mx-8 text-white">📢 Annual Tech Fest Coming Soon!</span>
+    <span className="mx-8 text-white">💡 Scholarship Applications Accepted!</span>
   </div>
+  <style>
+    {`
+      @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+    `}
+  </style>
 </div>
 
-            </div>
+<div className='relative w-full overflow-hidden'> 
+<AutoSlider />
+  <div className="absolute inset-0 flex flex-col justify-center items-start ml-[10%] py-[20%]">
+  {/* Text box */}
+    <div className="bg-black/45 p-10 rounded-xl max-w-[85%] absolute bottom-30 left-1">
+      <h1 className="text-white text-[35px] font-extrabold drop-shadow-lg leading-tight mb-4">
+        Simplifying Education with Technology.
+      </h1>
+      <p className="text-gray-200 text-lg font-medium leading-relaxed">
+        Unlock your potential with <span className="text-white font-semibold">world-class education</span>, innovative research, and a vibrant community.
+        At Uneza University, we inspire leaders, foster innovation, and prepare you for success in a rapidly evolving world.
+        Join us and shape your future today!
+      </p>
+    </div>
+  </div>
+</div>
             
-            {/* Campus View */}
+{/* Campus View */}
 <div className="campus max-w-7xl mx-auto px-6 py-12 border-b-2 border-gray-300">
   <h1 className="text-4xl md:text-5xl font-extrabold text-blue-950 mb-8 text-center md:text-left">
     Campus View
@@ -198,11 +194,10 @@ const Web = () => {
       </p>
       <NavLink
         to="/campusView"
-  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md w-max transition-all duration-300"
+        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md w-max transition-all duration-300"
       >
         Know More
       </NavLink>
-
     </div>
   </div>
 </div>
@@ -228,7 +223,7 @@ const Web = () => {
       </p>
       <NavLink
         to="/EventLife"
-  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md w-max transition-all duration-300"
+        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md w-max transition-all duration-300"
       >
         Explore
       </NavLink>
@@ -251,55 +246,54 @@ const Web = () => {
   <CourseCard/>
   <NavLink
         to="/AcademicPage"
-  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5  rounded-lg shadow-md w-max transition-all duration-300"
-      >
-        Know More
-      </NavLink>
-  
+        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5  rounded-lg shadow-md w-max transition-all duration-300"
+  >
+    Know More
+  </NavLink>
 </div>
 
   
 
-    <footer className="bg-blue-950 text-gray-300 mt-16">
-      {/* Top Section */}
-      <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
-        
-        {/* College Info */}
-        <div>
-          <h2 className="text-xl font-bold text-white mb-3">Your College Name</h2>
-          <p className="text-gray-400">
-            Excellence in Education, Innovation, and Research.  
-            Empowering students with knowledge, skills, and values to lead in a dynamic world.
-          </p>
-        </div>
+<footer className="bg-blue-950 text-gray-300 mt-16">
+  {/* Top Section */}
+  <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
+    
+    {/* College Info */}
+    <div>
+      <h2 className="text-xl font-bold text-white mb-3">Your College Name</h2>
+      <p className="text-gray-400">
+        Excellence in Education, Innovation, and Research.  
+        Empowering students with knowledge, skills, and values to lead in a dynamic world.
+      </p>
+    </div>
 
-        {/* Quick Links */}
-        <div>
-          <h2 className="text-xl font-bold text-white mb-3">Quick Links</h2>
-          <ul className="space-y-2">
-            <li><a href="/" className="hover:text-blue-300 transition">Home</a></li>
-            <li><a href="/AboutUs" className="hover:text-blue-300 transition">About Us</a></li>
-            <li><a href="/Admission" className="hover:text-blue-300 transition">Admissions</a></li>
-            <li><a href="/ContactUs" className="hover:text-blue-300 transition">Contact</a></li>
-          </ul>
-        </div>
+    {/* Quick Links */}
+    <div>
+      <h2 className="text-xl font-bold text-white mb-3">Quick Links</h2>
+      <ul className="space-y-2">
+        <li><a href="/" className="hover:text-blue-300 transition">Home</a></li>
+        <li><a href="/AboutUs" className="hover:text-blue-300 transition">About Us</a></li>
+        <li><a href="/Admission" className="hover:text-blue-300 transition">Admissions</a></li>
+        <li><a href="/ContactUs" className="hover:text-blue-300 transition">Contact</a></li>
+      </ul>
+    </div>
 
-        {/* Contact Info */}
-        <div>
-          <h2 className="text-xl font-bold text-white mb-3">Contact Us</h2>
-          <p>📍 123 College Road, City, State, India</p>
-          <p>📧 info@yourcollege.edu</p>
-          <p>📞 +91 98765 43210</p>
-        </div>
-      </div>
+    {/* Contact Info */}
+    <div>
+      <h2 className="text-xl font-bold text-white mb-3">Contact Us</h2>
+      <p>📍 123 College Road, City, State, India</p>
+      <p>📧 info@yourcollege.edu</p>
+      <p>📞 +91 98765 43210</p>
+    </div>
+  </div>
 
-      {/* Bottom Bar */}
-      <div className="bg-blue-950 py-4 text-center text-gray-400 text-sm border-t border-blue-800">
-        &copy; {new Date().getFullYear()} Your College Name. All Rights Reserved.
-      </div>
-    </footer>
-        </>
-    )
+  {/* Bottom Bar */}
+  <div className="bg-blue-950 py-4 text-center text-gray-400 text-sm border-t border-blue-800">
+    &copy; {new Date().getFullYear()} Your College Name. All Rights Reserved.
+  </div>
+</footer>
+    </>
+  )
 
 }
 export default Web;

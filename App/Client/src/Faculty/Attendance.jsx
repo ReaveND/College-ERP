@@ -1,8 +1,32 @@
 import React, { useState } from "react";
 import collegeLogo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const Attendance = () => {
+
+const navigate = useNavigate();
+const handleLogout = () => {
+    const name = localStorage.getItem('facultyName');
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('facultyName');
+    toast.info(`See you soon, ${name || 'Faculty'} 👋`, {
+        position: 'top-right',
+        autoClose: 3000,
+        style: {
+          background: '#f44336',
+          color: '#fff',
+          fontWeight: 'bold',
+          borderRadius: '8px',
+        },
+      });
+
+    setTimeout(() => {
+        navigate('/');
+      }, 1000);
+  };
   
   const students = [
     { id: 1, name: "Srirupa Hati", roll: "CSE101" },
@@ -44,13 +68,13 @@ const Attendance = () => {
         </div>
         <div className="flex gap-4">
           <a
-            href="/Dashboard"
+            href="/Faculty/Dashboard"
             className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             Back to Dashboard
           </a>
           <a
-            href="/logout"
+            onClick={handleLogout}
             className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
           >
             Logout

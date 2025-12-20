@@ -1,7 +1,31 @@
 import React, { useState } from "react";
 import collegeLogo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MarksUpload = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+      const name = localStorage.getItem('facultyName');
+  
+      localStorage.removeItem('token');
+      localStorage.removeItem('facultyName');
+      toast.info(`See you soon, ${name || 'Faculty'} 👋`, {
+          position: 'top-right',
+          autoClose: 3000,
+          style: {
+            background: '#f44336',
+            color: '#fff',
+            fontWeight: 'bold',
+            borderRadius: '8px',
+          },
+        });
+  
+      setTimeout(() => {
+          navigate('/');
+        }, 1000);
+    };
+
   const [studentId, setStudentId] = useState("");
   const [studentName, setStudentName] = useState("");
   const [stream, setStream] = useState("");
@@ -53,13 +77,13 @@ const MarksUpload = () => {
         </div>
         <div className="flex gap-4">
           <a
-            href="/dashboard"
+            href="/Faculty/Dashboard"
             className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             Back to Dashboard
           </a>
           <a
-            href="/logout"
+            onClick={handleLogout}
             className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
           >
             Logout

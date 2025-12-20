@@ -92,9 +92,7 @@ export default function CourseCards() {
             </div>
           </div>
         ))}
-      </div>
-      
-      
+      </div>   
     </div>
   );
 }

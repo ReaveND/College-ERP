@@ -1,4 +1,7 @@
 import React from 'react';
+import collegeLogo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Doughnut, Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -150,12 +153,50 @@ const DashboardCharts = () => (
 
 // Dashboard Component
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+      const name = localStorage.getItem('facultyName');
+  
+      localStorage.removeItem('token');
+      localStorage.removeItem('facultyName');
+      toast.info(`See you soon, ${name || 'Faculty'} 👋`, {
+          position: 'top-right',
+          autoClose: 3000,
+          style: {
+            background: '#f44336',
+            color: '#fff',
+            fontWeight: 'bold',
+            borderRadius: '8px',
+          },
+        });
+  
+      setTimeout(() => {
+          navigate('/');
+        }, 1000);
+    };
+  
   return (
     <div className="p-6 space-y-10">
+      {/* Header Card */}
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-6xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img src={collegeLogo} alt="College Logo" className="w-20 h-20 rounded-full" />
+          <h1 className="text-3xl font-bold text-blue-950">Faculty Dashboard</h1>
+        </div>
+        <div className="flex gap-4">
+          <a
+            onClick={ handleLogout }
+            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Students */}
-        <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
+        <div className="flex items-center bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 p-4 rounded-md h-auto">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#FF6384] shadow-md">
             <i className="fa-solid fa-user-group text-white"></i>
           </div>
@@ -166,7 +207,7 @@ const Dashboard = () => {
         </div>
 
         {/* Courses */}
-        <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
+        <div className="flex items-center bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 p-4 rounded-md h-auto">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#D91818] shadow-md">
             <i className="fa-solid fa-book-open text-white"></i>
           </div>
@@ -177,7 +218,7 @@ const Dashboard = () => {
         </div>
 
         {/* Teachers */}
-        <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
+        <div className="flex items-center bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 p-4 rounded-md h-auto">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#FFCE56] shadow-md">
             <i className="fa-solid fa-graduation-cap text-white"></i>
           </div>
@@ -188,7 +229,7 @@ const Dashboard = () => {
         </div>
 
         {/* Subjects */}
-        <div className="flex items-center bg-[#e9e9e9] p-4 rounded-md h-auto">
+        <div className="flex items-center bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 p-4 rounded-md h-auto">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#4BC0C0] shadow-md">
             <i className="fa-solid fa-address-book text-white"></i>
           </div>
