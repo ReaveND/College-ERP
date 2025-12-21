@@ -28,3 +28,18 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #fbbf24; /* Tailwind's yellow-300 */
 }
+
+/* ===== 3D Flip Card Support ===== */
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* End of 3D Flip Card Support */
