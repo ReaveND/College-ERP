@@ -155,11 +155,11 @@ const DashboardCharts = () => (
 const Dashboard = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-      const name = localStorage.getItem('facultyName');
+      const name = localStorage.getItem('adminName');
   
       localStorage.removeItem('token');
-      localStorage.removeItem('facultyName');
-      toast.info(`See you soon, ${name || 'Faculty'} 👋`, {
+      localStorage.removeItem('adminName');
+      toast.info(`See you soon, ${name || 'Admin'} 👋`, {
           position: 'top-right',
           autoClose: 3000,
           style: {
@@ -186,7 +186,7 @@ const Dashboard = () => {
         <div className="flex gap-4">
           <a
             onClick={ handleLogout }
-            className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+            className="bg-yellow-600 text-white px-4 py-2 cursor-pointer rounded-lg hover:bg-red-700 transition"
           >
             Logout
           </a>
