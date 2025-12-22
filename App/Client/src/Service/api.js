@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://localhost:8000';
+const URL = 'https://college-erp-5cd2.onrender.com';
 
 // API call to add Admin
 export const addAdmin = async(data) => {
