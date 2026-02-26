@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast, Toaster } from 'sonner';
 import { addAdmin } from '@/lib/adminApi';
 
 const inputClass =
@@ -22,7 +22,7 @@ export default function AddAdminPage() {
     setAdmin({ ...admin, image: e.target.files?.[0] ?? null });
   };
 
-  const submitData = async (e: React.MouseEvent) => {
+  const submitData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!admin.name) { alert('Please enter Name!'); return; }
     if (!admin.mobile) { alert('Please enter Mobile Number!'); return; }
@@ -46,22 +46,27 @@ export default function AddAdminPage() {
 
     try {
       const res = await addAdmin(formData);
-      if (res.status === 201) {
+      if (res && res.status === 201) {
         toast.success('Admin added successfully!');
+        // reset form
+        setAdmin({ name: '', mobile: '', email: '', dob: '', address: '', district: '', state: '', username: '', password: '', image: null });
       } else {
-        toast.error('Something went wrong. Please try again!');
+        toast.error(res?.data || 'Something went wrong. Please try again!');
       }
     } catch (error: any) {
-      if (error?.code === 11000 && error?.keyPattern?.email) {
+      const msg = error?.response?.data || error?.message || 'Something went wrong while adding Admin!';
+      if (error?.response?.status === 409 || (error?.code === 11000 && error?.keyPattern?.email)) {
         toast.error('Email already exists. Please use a different one.');
       } else {
-        toast.error('Something went wrong while adding Admin!');
+        toast.error(String(msg));
       }
+      console.error('Add admin error:', error);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden">
+      <Toaster position="bottom-right" />
       {/* Header */}
       <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
         <div className="flex items-center gap-4">
@@ -79,7 +84,7 @@ export default function AddAdminPage() {
       </section>
 
       <section className="px-4 sm:px-6 lg:px-10 my-6">
-        <form className="w-full">
+        <form className="w-full" onSubmit={submitData}>
           <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full rounded-xl shadow-2xl p-6 space-y-6">
             <h3 className="text-2xl sm:text-3xl text-center mb-2">Add New Admin</h3>
             <hr className="bg-white mb-4" />
@@ -116,7 +121,7 @@ export default function AddAdminPage() {
           </div>
 
           <div className="flex justify-start my-6">
-            <button type="submit" onClick={submitData} className="ml-3 bg-transparent text-green-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-green-600 hover:text-white outline outline-2 outline-green-500">Submit</button>
+            <button type="submit" className="ml-3 bg-transparent text-green-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-green-600 hover:text-white outline outline-2 outline-green-500">Submit</button>
             <button type="reset" className="mx-3 bg-transparent text-red-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-red-600 hover:text-white outline outline-2 outline-red-500">Reset</button>
           </div>
         </form>

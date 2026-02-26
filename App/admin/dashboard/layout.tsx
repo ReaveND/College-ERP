@@ -128,7 +128,6 @@ export default function AdminDashboardLayout({
     localStorage.removeItem('token');
     localStorage.removeItem('adminName');
     localStorage.removeItem('adminEmail');
-    localStorage.removeItem('adminImage');
     localStorage.removeItem('adminId');
     toast.success(`See you soon, ${name || 'Admin'} 👋`);
     setTimeout(() => router.push('/admin/login'), 1000);

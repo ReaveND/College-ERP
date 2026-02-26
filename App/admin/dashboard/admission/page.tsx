@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast, Toaster } from 'sonner';
 import { addStudent } from '@/lib/adminApi';
 
 const inputClass =
@@ -25,7 +25,7 @@ export default function AdmissionPage() {
     setStudent({ ...student, image: e.target.files?.[0] ?? null });
   };
 
-  const submitData = async (e: React.MouseEvent) => {
+  const submitData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const currentYear = new Date().getFullYear();
     const yop = parseInt(student.yop, 10);
@@ -61,22 +61,27 @@ export default function AdmissionPage() {
 
     try {
       const res = await addStudent(formData);
-      if (res.status === 201) {
+      if (res && res.status === 201) {
         toast.success('Student added successfully!');
+        // reset form
+        setStudent({ name: '', fname: '', mname: '', mobile: '', email: '', dob: '', gender: '', address: '', district: '', state: '', course: '', image: null, SCName: '', marks: '', yop: '', HSCName: '', HSmarks: '', HSyop: '' });
       } else {
-        toast.error('Something went wrong. Please try again!');
+        toast.error(res?.data || 'Something went wrong. Please try again!');
       }
     } catch (error: any) {
-      if (error?.code === 11000 && error?.keyPattern?.email) {
+      const msg = error?.response?.data || error?.message || 'Something went wrong while adding student!';
+      if (error?.response?.status === 409 || (error?.code === 11000 && error?.keyPattern?.email)) {
         toast.error('Email already exists. Please use a different one.');
       } else {
-        toast.error('Something went wrong while adding student!');
+        toast.error(String(msg));
       }
+      console.error('Add student error:', error);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden">
+      <Toaster position="bottom-right" />
       {/* Header */}
       <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
         <div className="flex items-center gap-4">
@@ -96,7 +101,7 @@ export default function AdmissionPage() {
 
       {/* Form */}
       <section className="px-4 sm:px-6 lg:px-10 my-6">
-        <form className="w-full">
+        <form className="w-full" onSubmit={submitData}>
           {/* Personal Details */}
           <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full rounded-xl shadow-2xl p-6 space-y-6">
             <h3 className="text-2xl sm:text-3xl text-center mb-2">Personal Details</h3>
@@ -122,7 +127,7 @@ export default function AdmissionPage() {
               {/* Gender */}
               <div className="flex flex-col w-full">
                 <label className="mb-1">Gender <span className="text-white">*</span></label>
-                <select name="gender" onChange={onValueChange} required className={selectClass}>
+                <select name="gender" value={student.gender} onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Gender--</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -133,7 +138,7 @@ export default function AdmissionPage() {
               {/* Course */}
               <div className="flex flex-col w-full">
                 <label className="mb-1">Course <span className="text-white">*</span></label>
-                <select name="course" onChange={onValueChange} required className={selectClass}>
+                <select name="course" value={student.course} onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Course--</option>
                   <option value="BCA">BCA</option>
                   <option value="BTech">BTech</option>
@@ -183,7 +188,6 @@ export default function AdmissionPage() {
           <div className="flex justify-start my-6">
             <button
               type="submit"
-              onClick={submitData}
               className="ml-3 bg-transparent text-green-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-green-600 hover:text-white outline outline-2 outline-green-500"
             >
               Submit

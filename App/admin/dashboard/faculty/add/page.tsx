@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast, Toaster } from 'sonner';
 import { addFaculty } from '@/lib/adminApi';
 
 const inputClass =
@@ -24,7 +24,7 @@ export default function AddFacultyPage() {
     setFaculty({ ...faculty, image: e.target.files?.[0] ?? null });
   };
 
-  const submitData = async (e: React.MouseEvent) => {
+  const submitData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!faculty.name) { alert('Please enter Name!'); return; }
     if (!faculty.mobile) { alert('Please enter Mobile Number!'); return; }
@@ -56,22 +56,26 @@ export default function AddFacultyPage() {
 
     try {
       const res = await addFaculty(formData);
-      if (res.status === 201) {
+      if (res && res.status === 201) {
         toast.success('Faculty Member added successfully!');
+        setFaculty({ name: '', mobile: '', email: '', dob: '', gender: '', address: '', district: '', state: '', image: null, qualification: '', specialization: '', department: '', designation: '', username: '', password: '', experience: '', publication: '', doj: '' });
       } else {
-        toast.error('Something went wrong. Please try again!');
+        toast.error(res?.data || 'Something went wrong. Please try again!');
       }
     } catch (error: any) {
-      if (error?.code === 11000 && error?.keyPattern?.email) {
+      const msg = error?.response?.data || error?.message || 'Something went wrong while adding Faculty!';
+      if (error?.response?.status === 409 || (error?.code === 11000 && error?.keyPattern?.email)) {
         toast.error('Email already exists. Please use a different one.');
       } else {
-        toast.error('Something went wrong while adding Faculty!');
+        toast.error(String(msg));
       }
+      console.error('Add faculty error:', error);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden">
+      <Toaster position="bottom-right" />
       {/* Header */}
       <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
         <div className="flex items-center gap-4">
@@ -89,7 +93,7 @@ export default function AddFacultyPage() {
       </section>
 
       <section className="px-4 sm:px-6 lg:px-10 my-6">
-        <form className="w-full">
+        <form className="w-full" onSubmit={submitData}>
           {/* Personal Details */}
           <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full rounded-xl shadow-2xl p-6 space-y-6">
             <h3 className="text-2xl sm:text-3xl text-center mb-2">Personal Details</h3>
@@ -112,7 +116,7 @@ export default function AddFacultyPage() {
               {/* Gender */}
               <div className="flex flex-col w-full">
                 <label className="mb-1">Gender <span className="text-white">*</span></label>
-                <select name="gender" onChange={onValueChange} required className={selectClass}>
+                <select name="gender" value={faculty.gender} onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Gender--</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -153,7 +157,7 @@ export default function AddFacultyPage() {
               {/* Department */}
               <div className="flex flex-col w-full">
                 <label className="mb-1">Department <span className="text-white">*</span></label>
-                <select name="department" onChange={onValueChange} required className={selectClass}>
+                <select name="department" value={faculty.department} onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Department--</option>
                   <option value="BCA">BCA</option>
                   <option value="B.Tech">B.Tech</option>
@@ -165,7 +169,7 @@ export default function AddFacultyPage() {
               {/* Designation */}
               <div className="flex flex-col w-full">
                 <label className="mb-1">Designation <span className="text-white">*</span></label>
-                <select name="designation" onChange={onValueChange} required className={selectClass}>
+                <select name="designation" value={faculty.designation} onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Designation--</option>
                   <option value="Professor">Professor</option>
                   <option value="Assistant Professor">Assistant Professor</option>
@@ -194,7 +198,7 @@ export default function AddFacultyPage() {
           </div>
 
           <div className="flex justify-start my-6">
-            <button type="submit" onClick={submitData} className="ml-3 bg-transparent text-green-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-green-600 hover:text-white outline outline-2 outline-green-500">Submit</button>
+            <button type="submit" className="ml-3 bg-transparent text-green-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-green-600 hover:text-white outline outline-2 outline-green-500">Submit</button>
             <button type="reset" className="mx-3 bg-transparent text-red-600 font-medium px-6 py-2 rounded-md hover:scale-105 transition-all hover:bg-red-600 hover:text-white outline outline-2 outline-red-500">Reset</button>
           </div>
         </form>
