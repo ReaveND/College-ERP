@@ -88,6 +88,15 @@ export default function FacultyLogin() {
         .form-field input::placeholder {
           color: #666;
         }
+        /* Remove browser autofill background and preserve text color */
+        input:-webkit-autofill,
+        textarea:-webkit-autofill,
+        select:-webkit-autofill {
+          -webkit-text-fill-color: #1a1a2e !important;
+          -webkit-box-shadow: 0 0 0px 1000px #d9dde8 inset !important;
+          box-shadow: 0 0 0px 1000px #d9dde8 inset !important;
+          transition: background-color 5000s ease-in-out 0s !important;
+        }
       `}</style>
 
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 font-[Poppins]">
@@ -110,7 +119,11 @@ export default function FacultyLogin() {
           </div>
 
           {/* Form */}
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
+            <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+              <input type="text" name="prevent_autofill_username" autoComplete="username" tabIndex={-1} />
+              <input type="password" name="prevent_autofill_password" autoComplete="current-password" tabIndex={-1} />
+            </div>
             <div className="form-field">
               <div className="field-icon">
                 <i className="fa-solid fa-user fa-beat-fade text-white text-sm" />

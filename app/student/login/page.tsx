@@ -85,6 +85,15 @@ export default function StudentLogin() {
           font-family: 'Poppins', sans-serif;
         }
         .form-field input::placeholder { color: #6b7280; }
+        /* Remove browser autofill background and preserve text color */
+        input:-webkit-autofill,
+        textarea:-webkit-autofill,
+        select:-webkit-autofill {
+          -webkit-text-fill-color: #1a1a2e !important;
+          -webkit-box-shadow: 0 0 0px 1000px #d9dde8 inset !important;
+          box-shadow: 0 0 0px 1000px #d9dde8 inset !important;
+          transition: background-color 5000s ease-in-out 0s !important;
+        }
       `}</style>
 
       <div
@@ -128,11 +137,15 @@ export default function StudentLogin() {
           </p>
 
           {/* Form */}
-          <form style={{ display: "flex", flexDirection: "column", gap: "20px" }} onSubmit={handleSubmit}>
+          <form style={{ display: "flex", flexDirection: "column", gap: "20px" }} onSubmit={handleSubmit} autoComplete="off">
+            <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+              <input type="text" name="prevent_autofill_username" autoComplete="username" tabIndex={-1} />
+              <input type="password" name="prevent_autofill_password" autoComplete="current-password" tabIndex={-1} />
+            </div>
             {/* Email */}
             <div className="form-field">
               <span className="field-icon">
-                <i className="fa-solid fa-user" style={{ color: "#fff", fontSize: "1rem" }} />
+                <i className="fa-solid fa-user fa-beat-fade" style={{ color: "#fff", fontSize: "1rem" }} />
               </span>
               <input
                 type="text"
@@ -148,7 +161,7 @@ export default function StudentLogin() {
             {/* Password / mobile */}
             <div className="form-field">
               <span className="field-icon">
-                <i className="fa-solid fa-key" style={{ color: "#fff", fontSize: "1rem" }} />
+                <i className="fa-solid fa-key fa-beat-fade" style={{ color: "#fff", fontSize: "1rem" }} />
               </span>
               <input
                 type="password"
