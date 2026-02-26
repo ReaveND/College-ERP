@@ -32,7 +32,7 @@ export default function StudentLogin() {
       if (!res.ok) { toast.error(data.error || "Invalid credentials"); setLoading(false); return; }
       localStorage.setItem("studentName", data.user?.name ?? "");
       sessionStorage.setItem("loginToast", `Welcome back, ${data.user?.name || 'Student'} 👋`);
-      router.push("/student/dashboard/welcome");
+      router.push("/student/dashboard");
     } catch {
       toast.error("Something went wrong. Please try again.");
       setLoading(false);
