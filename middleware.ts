@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Public routes that don't require authentication
-  const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login'];
+  const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login', '/academics', '/our-faculty', '/placements', '/admission'];
 
   // Protected routes by role
   const protectedRoutes = {
@@ -25,13 +25,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Get session
+  // Get session (iron-session v8 Edge/middleware API: pass request + response)
+  const response = NextResponse.next();
   let session: Session | null = null;
   try {
-    session = await getIronSession<Session>(
-      { cookies: request.cookies },
-      SESSION_CONFIG
-    );
+    session = await getIronSession<Session>(request, response, SESSION_CONFIG);
   } catch (error) {
     console.error('Error getting session:', error);
   }
@@ -62,11 +60,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|images/|fonts/|icons/|.*\\.(?:jpg|jpeg|png|gif|svg|webp|ico|css|js|woff|woff2|ttf|otf)).*)',
   ],
 };
