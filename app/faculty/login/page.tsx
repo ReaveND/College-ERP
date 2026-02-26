@@ -1,109 +1,166 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function FacultyLogin() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const validateForm = () => {
+    if (!username.trim()) { setMessage("Username is required"); return false; }
+    if (!password.trim()) { setMessage("Password is required"); return false; }
+    return true;
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setMessage("");
+    if (!validateForm()) return;
     setLoading(true);
-
     try {
-      const response = await fetch('/api/faculty/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      const res = await fetch("/api/faculty/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error || 'Login failed');
+      const data = await res.json();
+      if (!res.ok) {
+        setMessage(data.error || "Invalid credentials");
         setLoading(false);
         return;
       }
-
-      router.push('/faculty/dashboard');
-    } catch (err) {
-      setError('An error occurred. Please try again.');
+      localStorage.setItem("facultyName", data.user?.name ?? "");
+      router.push("/faculty/dashboard");
+    } catch {
+      setMessage("Something went wrong. Please try again.");
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6">Faculty Login</h1>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            {error}
-          </div>
-        )}
+        @keyframes growDown {
+          0%   { transform: scaleY(0); }
+          80%  { transform: scaleY(1.1); }
+          100% { transform: scaleY(1); }
+        }
+        .grow-down {
+          animation: growDown 0.5s ease-in-out forwards;
+          transform-origin: top center;
+        }
+        .form-field {
+          display: flex;
+          align-items: center;
+          background: #d9dde8;
+          border-radius: 9999px;
+          overflow: hidden;
+          padding: 4px;
+        }
+        .form-field .field-icon {
+          background: #0d2137;
+          border-radius: 9999px;
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          margin-right: 10px;
+        }
+        .form-field input {
+          width: 100%;
+          border: none;
+          outline: none;
+          background: transparent;
+          font-size: 0.95rem;
+          color: #1a1a2e;
+          font-family: 'Poppins', sans-serif;
+        }
+        .form-field input::placeholder {
+          color: #666;
+        }
+      `}</style>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder="Enter your username"
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 font-[Poppins]">
+        <div className="grow-down max-w-sm w-full bg-[#0A243A] rounded-[15px] shadow-[8px_8px_8px_#cbced1,-8px_-8px_8px_#fff] p-8">
+
+          {/* Logo */}
+          <div className="mb-1 flex justify-center">
+            <Image
+              src="/images/logo.png"
+              alt="College Logo"
+              width={224}
+              height={200}
+              className="object-cover"
             />
           </div>
 
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder="Enter your password"
-            />
+          {/* Title */}
+          <div className="text-center text-white text-xl font-semibold tracking-wider mb-5">
+            Faculty Login
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50"
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
+          {/* Form */}
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div className="form-field">
+              <div className="field-icon">
+                <i className="fa-solid fa-user fa-beat-fade text-white text-sm" />
+              </div>
+              <input
+                type="text"
+                placeholder="Username"
+                autoComplete="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
 
-        <div className="text-center mt-4">
-          <Link href="/" className="text-blue-600 hover:underline">
-            Back to Home
-          </Link>
+            <div className="form-field">
+              <div className="field-icon">
+                <i className="fa-solid fa-key fa-beat-fade text-white text-sm" />
+              </div>
+              <input
+                type="password"
+                placeholder="Password"
+                autoComplete="off"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-10 bg-yellow-600 text-white font-bold text-lg rounded-full shadow-[3px_3px_3px_#b1b1b1,-3px_-3px_3px_#fff] tracking-wider hover:bg-[#039BE5] cursor-pointer duration-500 disabled:opacity-60"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+
+          {message && (
+            <p className="text-center mt-3 text-red-400 text-sm">{message}</p>
+          )}
+
+          {/* Links */}
+          <div className="text-center text-md mt-4 text-white">
+            <a href="#" className="text-yellow-400 [text-shadow:2px_2px_4px_rgba(0,0,0,2)] hover:text-[#039BE5]">
+              Forget password?
+            </a>
+            <span className="mx-2">or</span>
+            <a href="#" className="text-yellow-400 hover:text-[#039BE5]">
+              Sign up
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

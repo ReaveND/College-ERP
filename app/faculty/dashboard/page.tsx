@@ -1,66 +1,107 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export default function FacultyDashboard() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
+// Typing animation – mirrors TypingIntro from Faculty.jsx
+function TypingIntro() {
+  const lines = ['Welcome', 'to', 'Faculty Panel'];
+  const typingSpeed = 80;
+  const pauseAfterLine = 1000;
+  const pauseAfterSet = 2000;
+
+  const [displayLines, setDisplayLines] = useState(['', '', '']);
 
   useEffect(() => {
-    // Verify faculty is logged in
-    // This will be handled by middleware
-    setLoading(false);
+    let lineIndex = 0;
+    let charIndex = 0;
+    let buffer = ['', '', ''];
+    let cancelled = false;
+
+    const typeNextChar = () => {
+      if (cancelled) return;
+
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          buffer = ['', '', ''];
+          setDisplayLines(['', '', '']);
+          lineIndex = 0;
+          charIndex = 0;
+          typeNextChar();
+        }, pauseAfterSet);
+        return;
+      }
+
+      const currentLine = lines[lineIndex];
+      if (charIndex < currentLine.length) {
+        buffer[lineIndex] += currentLine.charAt(charIndex);
+        setDisplayLines([...buffer]);
+        charIndex++;
+        setTimeout(typeNextChar, typingSpeed);
+      } else {
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeNextChar, pauseAfterLine);
+      }
+    };
+
+    typeNextChar();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
-  }
+  return (
+    <div className="text-yellow-600 [text-shadow:_0px_0px_6px_#e0b159] font-mono flex flex-col items-center justify-center space-y-2 text-3xl sm:text-4xl md:text-5xl font-extrabold w-full max-w-[90vw] sm:max-w-xl text-center">
+      <span>{displayLines[0]}</span>
+      <span>{displayLines[1]}</span>
+      <span>{displayLines[2]}</span>
+    </div>
+  );
+}
+
+export default function FacultyWelcome() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try { await fetch('/api/auth/logout', { method: 'POST' }); } catch (_) {}
+    localStorage.removeItem('facultyName');
+    router.push('/faculty/login');
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Faculty Dashboard</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">My Classes</h2>
-            <p className="text-gray-600">View and manage your assigned classes</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Attendance</h2>
-            <p className="text-gray-600">Mark and manage student attendance</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Marks Upload</h2>
-            <p className="text-gray-600">Upload student grades and marks</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Assignments</h2>
-            <p className="text-gray-600">Create and manage course assignments</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Study Materials</h2>
-            <p className="text-gray-600">Upload course materials and resources</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Time Table</h2>
-            <p className="text-gray-600">View your teaching schedule</p>
-          </div>
-        </div>
-
-        <button
-          onClick={() => router.push('/')}
-          className="mt-8 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+    <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
+      {/* College Header Banner */}
+      <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
+        <Image
+          src="/images/logo.png"
+          alt="Logo"
+          width={96}
+          height={96}
+          className="w-24 h-24 object-cover rounded-full border-4 border-[#e9e9e9]"
+        />
+        <h2 className="lg:text-4xl text-white sm:text-2xl font-bold text-center sm:text-left flex-1 sm:ml-0 lg:ml-5">
+          Vedanta Institute of Technology
+        </h2>
+        <a
+          href="tel:+91-9064285877"
+          className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105 flex items-center"
         >
-          Back to Home
+          Contact Us
+        </a>
+        <button
+          onClick={handleLogout}
+          className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105 mr-1"
+        >
+          Logout
         </button>
+      </div>
+
+      {/* Typing Welcome Card */}
+      <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-gray-200 shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
+        <TypingIntro />
       </div>
     </div>
   );
 }
+
