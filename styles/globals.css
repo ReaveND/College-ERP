@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 255 255 255;
+  --foreground: 0 0 0;
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 107 114 128;
+  --secondary-foreground: 255 255 255;
+  --accent: 239 68 68;
+  --muted: 229 231 235;
+  --muted-foreground: 75 85 99;
+  --border: 229 231 235;
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 17 24 39;
+    --foreground: 243 244 246;
+    --primary: 96 165 250;
+    --primary-foreground: 17 24 39;
+    --secondary: 156 163 175;
+    --secondary-foreground: 17 24 39;
+    --accent: 248 113 113;
+    --muted: 55 65 81;
+    --muted-foreground: 209 213 219;
+    --border: 55 65 81;
+  }
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+input[type="file"]::file-selector-button {
+  @apply px-4 py-2 bg-primary text-primary-foreground rounded cursor-pointer hover:opacity-90;
+}
