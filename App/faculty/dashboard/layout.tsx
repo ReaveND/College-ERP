@@ -97,8 +97,10 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 px-4 sm:px-6 py-4">
-        {children}
+      <main className="flex-1 md:ml-64 px-4 sm:px-6 lg:px-6 py-4 overflow-x-hidden">
+        <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 min-h-full">
+          {children}
+        </div>
       </main>
     </div>
   );

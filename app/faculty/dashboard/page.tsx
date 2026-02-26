@@ -70,7 +70,7 @@ export default function FacultyWelcome() {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
+    <>
       {/* College Header Banner */}
       <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
         <Image
@@ -101,7 +101,7 @@ export default function FacultyWelcome() {
       <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-gray-200 shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center [text-shadow:_1px_1px_2px_gray] border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
         <TypingIntro />
       </div>
-    </div>
+    </>
   );
 }
 

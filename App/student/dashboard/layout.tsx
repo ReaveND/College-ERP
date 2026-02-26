@@ -124,8 +124,10 @@ export default function StudentDashboardLayout({ children }: { children: React.R
       )}
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 pt-16 md:pt-0 min-h-screen">
-        {children}
+      <main className="flex-1 md:ml-64 px-4 sm:px-6 lg:px-6 py-4 overflow-x-hidden">
+        <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 min-h-full">
+          {children}
+        </div>
       </main>
     </div>
   );

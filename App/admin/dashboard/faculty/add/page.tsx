@@ -122,8 +122,8 @@ export default function AddFacultyPage() {
               {/* Profile Picture */}
               <div className="flex flex-col w-full">
                 <label className="mb-1">Profile Picture <span className="text-white">*</span></label>
-                <label className="flex items-center w-full border border-gray-300 rounded-md overflow-hidden cursor-pointer bg-white">
-                  <span className="bg-blue-950 text-white text-sm font-medium px-3 py-2 flex-shrink-0 hover:bg-blue-900 transition-colors">
+                <label className="flex items-center w-full border border-gray-300 rounded-md cursor-pointer bg-white p-1 gap-2">
+                  <span className="bg-blue-950 text-white text-sm font-medium px-3 py-1.5 flex-shrink-0 hover:bg-blue-900 transition-colors rounded-md">
                     Choose file
                   </span>
                   <span className="px-3 text-gray-500 text-sm truncate">

@@ -73,8 +73,7 @@ export default function StudentWelcome() {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto bg-white shadow-md rounded-md p-6 h-full">
-      {/* Header */}
+    <>
       <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
         <Image
           src="/images/logo.png"
@@ -104,6 +103,6 @@ export default function StudentWelcome() {
       <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-gray-200 shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
         <TypingIntro />
       </div>
-    </div>
+    </>
   );
 }
