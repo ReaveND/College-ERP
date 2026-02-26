@@ -106,8 +106,8 @@ export default function Home() {
             { label: 'Faculty',   href: '/our-faculty' },
             { label: 'Placement', href: '/placements' },
             { label: 'Admission', href: '/admission' },
-            { label: 'Contact',   href: '#contact' },
-            { label: 'About',     href: '#about' },
+            { label: 'Contact',   href: '/contact' },
+            { label: 'About',     href: '/about' },
           ].map(({ label, href }) => (
             <li key={label}>
               <a href={href} className="rounded hover:bg-yellow-600 hover:text-white px-4 py-2 transition block">
@@ -206,12 +206,12 @@ export default function Home() {
               Institute of Technology prepares students to excel academically, professionally, and
               personally.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/campus-view"
               className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md w-max transition-all duration-300"
             >
               Know More
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -337,9 +337,9 @@ export default function Home() {
             <h2 className="text-xl font-bold text-white mb-3">Quick Links</h2>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:text-blue-300 transition">Home</a></li>
-              <li><a href="#about" className="hover:text-blue-300 transition">About Us</a></li>
+              <li><a href="/about" className="hover:text-blue-300 transition">About Us</a></li>
               <li><a href="/admission" className="hover:text-blue-300 transition">Admissions</a></li>
-              <li><a href="#contact" className="hover:text-blue-300 transition">Contact</a></li>
+              <li><a href="/contact" className="hover:text-blue-300 transition">Contact</a></li>
             </ul>
           </div>
           <div>
