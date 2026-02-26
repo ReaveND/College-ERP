@@ -374,19 +374,19 @@ export default function Home() {
             </button>
             <h2 className="text-xl font-semibold mb-4 text-center text-white">Login to Dashboard</h2>
             <p className="mb-6 text-white text-center">Welcome to VIT. Please choose your Login method!</p>
-            <div className="flex justify-between gap-3">
+            <div className="flex justify-between gap-2">
               <Link href="/student/login" onClick={() => setModalOpen(false)}>
-                <button className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hover:scale-105 transition duration-300 cursor-pointer font-semibold">
+                <button className="px-3 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hover:scale-105 transition duration-300 cursor-pointer font-semibold">
                   Student Login
                 </button>
               </Link>
               <Link href="/faculty/login" onClick={() => setModalOpen(false)}>
-                <button className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hover:scale-105 transition duration-300 cursor-pointer font-semibold">
+                <button className="px-3 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hover:scale-105 transition duration-300 cursor-pointer font-semibold">
                   Faculty Login
                 </button>
               </Link>
               <Link href="/admin/login" onClick={() => setModalOpen(false)}>
-                <button className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hover:scale-105 transition duration-300 cursor-pointer font-semibold">
+                <button className="px-3 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hover:scale-105 transition duration-300 cursor-pointer font-semibold">
                   Admin Login
                 </button>
               </Link>

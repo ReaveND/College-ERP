@@ -3,8 +3,11 @@ import { ReactNode } from 'react';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'College ERP System',
+  title: 'Vedanta Institute of Technology',
   description: 'A comprehensive College ERP management system',
+  icons: {
+    icon: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({
