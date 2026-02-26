@@ -1,0 +1,72 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getIronSession } from 'iron-session';
+import { Session } from '@/types';
+
+const SESSION_CONFIG = {
+  password: process.env.SESSION_SECRET || 'college-erp-session-secret-key',
+  cookieName: 'college-erp-session',
+};
+
+export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Public routes that don't require authentication
+  const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login'];
+
+  // Protected routes by role
+  const protectedRoutes = {
+    admin: ['/admin/dashboard', '/admin'],
+    student: ['/student/dashboard', '/student'],
+    faculty: ['/faculty/dashboard', '/faculty'],
+  };
+
+  // If it's a public route, allow access
+  if (publicRoutes.includes(pathname)) {
+    return NextResponse.next();
+  }
+
+  // Get session
+  let session: Session | null = null;
+  try {
+    session = await getIronSession<Session>(
+      { cookies: request.cookies },
+      SESSION_CONFIG
+    );
+  } catch (error) {
+    console.error('Error getting session:', error);
+  }
+
+  // Check if user is authenticated
+  if (!session?.user) {
+    // Redirect to appropriate login page based on pathname
+    if (pathname.startsWith('/admin')) {
+      return NextResponse.redirect(new URL('/admin/login', request.url));
+    } else if (pathname.startsWith('/student')) {
+      return NextResponse.redirect(new URL('/student/login', request.url));
+    } else if (pathname.startsWith('/faculty')) {
+      return NextResponse.redirect(new URL('/faculty/login', request.url));
+    }
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  // Check role-based access
+  const userRole = session.user.role;
+  
+  if (pathname.startsWith('/admin') && userRole !== 'admin') {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+  if (pathname.startsWith('/student') && userRole !== 'student') {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+  if (pathname.startsWith('/faculty') && userRole !== 'faculty') {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
+};
