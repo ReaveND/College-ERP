@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login', '/academics', '/our-faculty', '/placements', '/admission', '/contact', '/about', '/campus-view'];
 
   // Protected routes by role
-  const protectedRoutes = {
+  const _protectedRoutes = {
     admin: ['/admin/dashboard', '/admin'],
     student: ['/student/dashboard', '/student'],
     faculty: ['/faculty/dashboard', '/faculty'],
