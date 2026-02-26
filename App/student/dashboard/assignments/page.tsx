@@ -1,0 +1,148 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+
+const allAssignments = [
+  { id: 1, subject: 'Data Structures', title: 'Implement Stack using Array', dueDate: '2025-09-25', status: 'Pending' },
+  { id: 2, subject: 'Operating System', title: 'CPU Scheduling Algorithms Report', dueDate: '2025-09-28', status: 'Submitted' },
+  { id: 3, subject: 'Computer Networks', title: 'Case Study on TCP/IP', dueDate: '2025-10-02', status: 'Pending' },
+  { id: 4, subject: 'Java OOP', title: 'Polymorphism Assignment', dueDate: '2025-10-05', status: 'Submitted' },
+];
+
+type Assignment = typeof allAssignments[0];
+
+export default function AssignmentsPage() {
+  const router = useRouter();
+  const [filter, setFilter] = useState('All');
+  const [selectedAssignment, setSelectedAssignment] = useState<Assignment | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    localStorage.removeItem('studentName');
+    localStorage.removeItem('token');
+    router.push('/student/login');
+  };
+
+  const assignments = filter === 'All' ? allAssignments : allAssignments.filter((a) => a.status === filter);
+
+  return (
+    <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md p-6 h-full space-y-6">
+      <style>{`
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .animate-marquee { display: inline-block; animation: marquee 25s linear infinite; }
+      `}</style>
+
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 rounded-2xl shadow-lg p-6 flex items-center justify-between mb-8 flex-wrap gap-4">
+          <div className="flex items-center">
+            <Image src="/images/logo.png" alt="Logo" width={80} height={80} className="mr-4" />
+            <h1 className="text-3xl font-extrabold text-blue-950 drop-shadow-sm">Student Assignments</h1>
+          </div>
+          <div className="flex space-x-4">
+            <Link href="/student/dashboard" className="bg-blue-950 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              Back to Dashboard
+            </Link>
+            <button onClick={handleLogout} className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        {/* Marquee */}
+        <div className="overflow-hidden bg-yellow-200 text-black rounded-lg py-3 relative mb-4">
+          <div className="animate-marquee whitespace-nowrap">
+            🔔 Reminder: Submit any pending assignments before the end of this month to avoid penalties!
+          </div>
+        </div>
+
+        {/* Filter Buttons */}
+        <div className="flex justify-center gap-4 mb-8">
+          {['All', 'Pending', 'Submitted'].map((btn) => (
+            <button
+              key={btn}
+              onClick={() => setFilter(btn)}
+              className={`px-5 py-2 rounded-lg font-medium shadow-md transition ${
+                filter === btn ? 'bg-blue-950 text-white scale-105' : 'bg-yellow-600 text-white hover:bg-yellow-500'
+              }`}
+            >
+              {btn}
+            </button>
+          ))}
+        </div>
+
+        {/* Assignment Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {assignments.map((assignment) => (
+            <div key={assignment.id} className="bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl hover:-translate-y-1 transition transform">
+              <h2 className="text-xl font-bold text-blue-950">{assignment.subject}</h2>
+              <p className="text-gray-700 mt-2">{assignment.title}</p>
+              <p className="text-sm text-gray-500 mt-2">Due: {assignment.dueDate}</p>
+              <span
+                className={`inline-block mt-3 px-3 py-1 rounded-full text-sm font-medium ${
+                  assignment.status === 'Submitted' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'
+                }`}
+              >
+                {assignment.status}
+              </span>
+              <button
+                onClick={() => setSelectedAssignment(assignment)}
+                className="w-full mt-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-yellow-600 transition"
+              >
+                View / Submit
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Modal */}
+        {selectedAssignment && (
+          <div className="fixed inset-0 bg-gradient-to-br from-blue-200/60 via-yellow-100/70 to-blue-300/60 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white w-96 p-6 rounded-2xl shadow-xl relative">
+              <h2 className="text-xl font-bold text-blue-950">{selectedAssignment.subject}</h2>
+              <p className="text-gray-700 mt-2">{selectedAssignment.title}</p>
+              <p className="text-sm text-gray-500 mt-2">Due: {selectedAssignment.dueDate}</p>
+              {selectedAssignment.status === 'Pending' ? (
+                <div className="mt-4">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Upload File</label>
+                  <input
+                    type="file"
+                    onChange={(e) => setSelectedFile(e.target.files?.[0] ?? null)}
+                    className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                  />
+                  {selectedFile && <p className="mt-2 text-sm text-green-600">Selected: {selectedFile.name}</p>}
+                </div>
+              ) : (
+                <p className="mt-6 text-green-700 font-medium">✅ This assignment has already been submitted.</p>
+              )}
+              <div className="flex justify-end gap-3 mt-6">
+                <button
+                  onClick={() => { setSelectedAssignment(null); setSelectedFile(null); }}
+                  className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400"
+                >
+                  Close
+                </button>
+                {selectedAssignment.status === 'Pending' && (
+                  <button
+                    onClick={() => { alert(`Submitted: ${selectedFile ? selectedFile.name : 'No file'}`); setSelectedAssignment(null); setSelectedFile(null); }}
+                    className="px-4 py-2 rounded-lg bg-yellow-600 text-white hover:bg-yellow-500"
+                  >
+                    Submit
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-12 text-center text-sm text-gray-600">
+          Vedanta Institute of Technology<br />Anandapur Rd, Uchhepota, Kolkata, West Bengal 700150
+        </div>
+      </div>
+    </div>
+  );
+}
