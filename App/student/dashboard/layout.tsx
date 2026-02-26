@@ -6,7 +6,6 @@ import { useState } from 'react';
 
 const navItems = [
   { href: '/student/dashboard', label: 'Dashboard', icon: 'fa-solid fa-gauge-high' },
-  { href: '/student/dashboard/profile', label: 'My Profile', icon: 'fa-regular fa-user' },
   { href: '/student/dashboard/study-materials', label: 'Study Materials', icon: 'fa-regular fa-note-sticky' },
   { href: '/student/dashboard/library', label: 'Library', icon: 'fa-solid fa-book' },
   { href: '/student/dashboard/attendance', label: 'Attendance', icon: 'fa-solid fa-person-chalkboard' },
@@ -36,9 +35,9 @@ export default function StudentDashboardLayout({ children }: { children: React.R
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       {/* Logo + Title */}
-      <div className="flex flex-col items-center pt-4 pb-2">
-        <Image src="/images/logo.png" alt="Logo" width={64} height={64} className="rounded-full object-cover" />
-        <h3 className="text-xl text-blue-950 font-bold text-center mt-2 mb-1 px-2">Student Panel</h3>
+      <div className="flex flex-row items-center gap-2 px-4 pt-4 pb-2">
+        <Image src="/images/logo.png" alt="Logo" width={56} height={56} className="rounded-full object-cover shrink-0" />
+        <h3 className="text-2xl text-blue-950 font-bold leading-tight">Student Panel</h3>
       </div>
       <hr className="bg-yellow-600 h-0.5 mb-4 mx-2" />
 
@@ -64,13 +63,26 @@ export default function StudentDashboardLayout({ children }: { children: React.R
         })}
       </nav>
 
-      {/* Logout button at bottom */}
-      <div className="p-4">
+      {/* Profile + Logout buttons at bottom */}
+      <div className="p-4 flex gap-2">
+        <button
+          onClick={() => {
+            setSidebarOpen(false);
+            router.push(pathname === '/student/dashboard/profile' ? '/student/dashboard/welcome' : '/student/dashboard/profile');
+          }}
+          className={`flex-1 py-2 rounded-lg transition font-semibold text-sm flex items-center justify-center gap-1 ${
+            pathname === '/student/dashboard/profile'
+              ? 'bg-blue-950 text-white hover:bg-blue-900'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          <i className="fa-regular fa-user"></i> Profile
+        </button>
         <button
           onClick={handleLogout}
-          className="w-full py-2 bg-yellow-600 text-white rounded-lg hover:bg-red-600 transition font-semibold text-sm"
+          className="flex-1 py-2 bg-yellow-600 text-white rounded-lg hover:bg-red-600 transition font-semibold text-sm flex items-center justify-center gap-1"
         >
-          <i className="fa-solid fa-right-from-bracket mr-2"></i>Logout
+          <i className="fa-solid fa-right-from-bracket"></i> Logout
         </button>
       </div>
     </div>
