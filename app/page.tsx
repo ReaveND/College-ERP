@@ -155,7 +155,7 @@ export default function Home() {
 
         {/* overlay text */}
         <div className="absolute inset-0 flex flex-col justify-end pb-12 px-8 md:px-16">
-          <div className="bg-black/45 p-10 rounded-xl max-w-2xl">
+          <div className="bg-black/45 p-10 rounded-xl max-w-6xl mx-auto">
             <h1 className="text-white text-4xl font-extrabold drop-shadow-lg leading-tight mb-4">
               Simplifying Education with Technology.
             </h1>
