@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { toast, Toaster } from 'sonner';
 
 const navItems = [
-  { href: '/student/dashboard', label: 'Dashboard', icon: 'fa-solid fa-gauge-high' },
+  { href: '/student/dashboard/overview', label: 'Dashboard', icon: 'fa-solid fa-gauge-high' },
   { href: '/student/dashboard/study-materials', label: 'Study Materials', icon: 'fa-regular fa-note-sticky' },
   { href: '/student/dashboard/library', label: 'Library', icon: 'fa-solid fa-book' },
   { href: '/student/dashboard/attendance', label: 'Attendance', icon: 'fa-solid fa-person-chalkboard' },
@@ -16,6 +16,8 @@ const navItems = [
   { href: '/student/dashboard/result', label: 'Result', icon: 'fa-solid fa-square-poll-horizontal' },
   { href: '/student/dashboard/fees-clearance', label: 'Sem/Exam Fees Clearance', icon: 'fa-solid fa-money-check-dollar' },
 ];
+
+const WELCOME_PATH = '/student/dashboard';
 
 export default function StudentDashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -61,7 +63,7 @@ export default function StudentDashboardLayout({ children }: { children: React.R
               key={item.href}
               onClick={() => {
                 setSidebarOpen(false);
-                router.push(isActive ? '/student/dashboard/welcome' : item.href);
+                router.push(isActive ? WELCOME_PATH : item.href);
               }}
               className={`flex items-center w-full text-left px-5 py-2 rounded transition-colors ${isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
                 }`}
@@ -78,7 +80,7 @@ export default function StudentDashboardLayout({ children }: { children: React.R
         <button
           onClick={() => {
             setSidebarOpen(false);
-            router.push(pathname === '/student/dashboard/profile' ? '/student/dashboard/welcome' : '/student/dashboard/profile');
+            router.push(pathname === '/student/dashboard/profile' ? '/student/dashboard/overview' : '/student/dashboard/profile');
           }}
           className={`flex-1 py-2 rounded-lg transition font-semibold text-sm flex items-center justify-center gap-1 ${pathname === '/student/dashboard/profile'
             ? 'bg-blue-950 text-white hover:bg-blue-900'

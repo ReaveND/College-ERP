@@ -98,6 +98,18 @@ export default function AdminDashboardLayout({
   const [dataEntryOpen, setDataEntryOpen] = useState(false);
   const [dataViewOpen, setDataViewOpen] = useState(false);
 
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line no-console
+      console.log('AdminDashboardLayout mounted', {
+        adminName: localStorage.getItem('adminName'),
+        adminEmail: localStorage.getItem('adminEmail'),
+        adminImage: localStorage.getItem('adminImage'),
+        pathname,
+      });
+    } catch (e) {}
+  }, [pathname]);
+
   const dataEntryPaths = [
     '/admin/dashboard/admission',
     '/admin/dashboard/admins/add',
