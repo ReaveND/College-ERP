@@ -2,25 +2,24 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast, Toaster } from "sonner";
 
 export default function StudentLogin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
-    if (!email.trim()) { setMessage("Email is required"); return false; }
+    if (!email.trim()) { toast.error("Email is required"); return false; }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) { setMessage("Please enter a valid email address"); return false; }
-    if (!mobile.trim()) { setMessage("Password is required"); return false; }
+    if (!emailRegex.test(email)) { toast.error("Please enter a valid email address"); return false; }
+    if (!mobile.trim()) { toast.error("Password is required"); return false; }
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage("");
     if (!validateForm()) return;
     setLoading(true);
     try {
@@ -30,17 +29,19 @@ export default function StudentLogin() {
         body: JSON.stringify({ email, mobile }),
       });
       const data = await res.json();
-      if (!res.ok) { setMessage(data.error || "Invalid credentials"); setLoading(false); return; }
+      if (!res.ok) { toast.error(data.error || "Invalid credentials"); setLoading(false); return; }
       localStorage.setItem("studentName", data.user?.name ?? "");
+      toast.success(`Welcome back, ${data.user?.name || 'Student'} 👋`);
       router.push("/student/dashboard/welcome");
     } catch {
-      setMessage("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
       setLoading(false);
     }
   };
 
   return (
     <>
+      <Toaster position="bottom-right" toastOptions={{ duration: 6000 }} />
       {/* Poppins font + custom animations / neumorphic styles */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -184,13 +185,6 @@ export default function StudentLogin() {
               {loading ? "Logging in…" : "Login"}
             </button>
           </form>
-
-          {/* Inline error */}
-          {message && (
-            <p style={{ color: "#f87171", textAlign: "center", marginTop: "12px", fontSize: "0.9rem" }}>
-              {message}
-            </p>
-          )}
 
           {/* Links */}
           <div style={{ textAlign: "center", marginTop: "16px", color: "#fff", fontSize: "0.95rem" }}>

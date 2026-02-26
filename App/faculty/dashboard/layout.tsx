@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import { toast, Toaster } from 'sonner';
 import { FaTachometerAlt, FaRegUser, FaRegCalendarAlt, FaUpload, FaPenSquare, FaFileAlt, FaEnvelopeOpen, FaSignOutAlt, FaChalkboardTeacher } from 'react-icons/fa';
 
 const navItems = [
@@ -25,8 +26,10 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
     } catch (_) { /* ignore */ }
+    const name = localStorage.getItem('facultyName');
     localStorage.removeItem('facultyName');
-    router.push('/faculty/login');
+    toast.success(`See you soon, ${name || 'Faculty'} 👋`);
+    setTimeout(() => router.push('/faculty/login'), 1000);
   };
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
@@ -37,6 +40,7 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+      <Toaster position="bottom-right" />
       {/* Sidebar */}
       <aside className="fixed top-0 left-0 h-screen w-64 bg-white shadow-lg z-20 p-4 pt-3 hidden md:flex flex-col">
         <div className="flex items-center gap-2 mb-2">

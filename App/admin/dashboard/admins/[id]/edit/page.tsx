@@ -55,6 +55,12 @@ export default function EditAdminPage() {
 
     try {
       const res = await updateAdmin(id!, payload);
+      // If editing own profile, keep localStorage in sync so sidebar reflects changes
+      if (id === localStorage.getItem('adminId')) {
+        localStorage.setItem('adminName', res.data.name ?? '');
+        localStorage.setItem('adminEmail', res.data.email ?? '');
+        localStorage.setItem('adminImage', res.data.image ?? '');
+      }
       toast.success(`Updated ${res.data.name} successfully`);
       router.push('/admin/dashboard/admins');
     } catch { toast.error('Update failed'); }

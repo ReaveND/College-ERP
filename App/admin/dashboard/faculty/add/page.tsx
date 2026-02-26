@@ -73,9 +73,13 @@ export default function AddFacultyPage() {
   return (
     <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden">
       {/* Header */}
-      <header className="bg-blue-950 flex items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
-        <img src="/images/logo.png" alt="Logo" className="w-24 h-24 mx-auto object-cover rounded-full border-4 border-white" />
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center ml-3">Vedanta Institute of Technology</h2>
+      <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
+        <div className="flex items-center gap-4">
+          <img src="/images/logo.png" alt="Logo" className="w-24 h-24 mx-auto object-cover rounded-full border-4 border-white" />
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center ml-3">
+            Vedanta Institute of Technology
+          </h2>
+        </div>
       </header>
 
       <section className="px-4 text-center">

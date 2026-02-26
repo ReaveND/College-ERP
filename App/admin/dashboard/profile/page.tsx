@@ -12,6 +12,7 @@ export default function AdminProfilePage() {
   const router = useRouter();
   const [admin, setAdmin] = useState<Admin | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const adminId = localStorage.getItem('adminId');
@@ -69,6 +70,28 @@ export default function AdminProfilePage() {
 
   return (
     <div>
+      {/* Image popup modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={`${API_URL}/Uploads/${selectedImage}`}
+              alt="Enlarged"
+              className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white"
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-1 right-2 text-white text-4xl font-bold cursor-pointer"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Page header */}
       <div className="flex items-center justify-between mb-6">
         <div>
@@ -90,10 +113,14 @@ export default function AdminProfilePage() {
       <div className="bg-gradient-to-r from-blue-950 to-blue-800 rounded-2xl p-6 mb-6">
         <div className="flex flex-col sm:flex-row items-center gap-5">
           {/* Avatar */}
-          <div className="w-28 h-28 rounded-full border-4 border-yellow-500 overflow-hidden flex-shrink-0 bg-blue-700 flex items-center justify-center shadow-lg">
+          <div
+            className="w-28 h-28 rounded-full border-4 border-yellow-500 overflow-hidden flex-shrink-0 bg-blue-700 flex items-center justify-center shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
+            onClick={() => admin.image && setSelectedImage(admin.image)}
+            title={admin.image ? 'Click to enlarge' : undefined}
+          >
             {admin.image ? (
               <img
-                src={`${API_URL}/${admin.image}`}
+                src={`${API_URL}/Uploads/${admin.image}`}
                 alt={admin.name}
                 className="w-full h-full object-cover"
                 onError={(e) => {

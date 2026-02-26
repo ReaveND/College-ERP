@@ -3,27 +3,26 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { toast, Toaster } from "sonner";
 
 export default function AdminLogin() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
-    if (!username.trim()) { setMessage("Username is required"); return false; }
-    if (!email.trim()) { setMessage("Email is required"); return false; }
+    if (!username.trim()) { toast.error("Username is required"); return false; }
+    if (!email.trim()) { toast.error("Email is required"); return false; }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) { setMessage("Please enter a valid email address"); return false; }
-    if (!password.trim()) { setMessage("Password is required"); return false; }
+    if (!emailRegex.test(email)) { toast.error("Please enter a valid email address"); return false; }
+    if (!password.trim()) { toast.error("Password is required"); return false; }
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage("");
     if (!validateForm()) return;
     setLoading(true);
     try {
@@ -34,7 +33,7 @@ export default function AdminLogin() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setMessage(data.error || "Invalid credentials");
+        toast.error(data.error || "Invalid credentials");
         setLoading(false);
         return;
       }
@@ -42,15 +41,17 @@ export default function AdminLogin() {
       localStorage.setItem("adminEmail", data.user?.email ?? "");
       localStorage.setItem("adminImage", data.user?.image ?? "");
       localStorage.setItem("adminId", data.user?._id ?? "");
+      toast.success(`Welcome back, ${data.user?.name || 'Admin'} 👋`);
       router.push("/admin/dashboard");
     } catch {
-      setMessage("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
       setLoading(false);
     }
   };
 
   return (
     <>
+      <Toaster position="bottom-right" toastOptions={{ duration: 6000 }} />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -164,10 +165,6 @@ export default function AdminLogin() {
               {loading ? "Logging in..." : "Login"}
             </button>
           </form>
-
-          {message && (
-            <p className="text-center mt-3 text-red-400 text-sm">{message}</p>
-          )}
 
           {/* Links */}
           <div className="text-center text-md mt-4 text-white">

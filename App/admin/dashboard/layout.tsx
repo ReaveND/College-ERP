@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, Toaster } from 'sonner';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 // ── Nav link helper ────────────────────────────────────────────────────
@@ -58,7 +58,7 @@ export default function AdminDashboardLayout({
     setAdminName(localStorage.getItem('adminName') || 'Admin');
     setAdminEmail(localStorage.getItem('adminEmail') || '');
     setAdminImage(localStorage.getItem('adminImage') || '');
-  }, []);
+  }, [pathname]);
 
   const handleLogout = () => {
     const name = localStorage.getItem('adminName');
@@ -67,22 +67,13 @@ export default function AdminDashboardLayout({
     localStorage.removeItem('adminEmail');
     localStorage.removeItem('adminImage');
     localStorage.removeItem('adminId');
-    toast.info(`See you soon, ${name || 'Admin'} 👋`, {
-      position: 'top-right',
-      autoClose: 3000,
-      style: {
-        background: '#f44336',
-        color: '#fff',
-        fontWeight: 'bold',
-        borderRadius: '8px',
-      },
-    });
+    toast.success(`See you soon, ${name || 'Admin'} 👋`);
     setTimeout(() => router.push('/admin/login'), 1000);
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
-      {/* Sidebar */}
+      <Toaster position="bottom-right" />
       <aside className="fixed top-0 left-0 h-screen w-64 bg-white shadow-lg z-20 p-4 pt-1 hidden md:flex md:flex-col overflow-y-auto">
         <div className="flex justify-center items-center py-2">
           <img
@@ -104,7 +95,7 @@ export default function AdminDashboardLayout({
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-yellow-500 flex-shrink-0 bg-blue-700 flex items-center justify-center">
             {adminImage ? (
               <img
-                src={`https://college-erp-5cd2.onrender.com/${adminImage}`}
+                src={`https://college-erp-5cd2.onrender.com/Uploads/${adminImage}`}
                 alt={adminName}
                 className="w-full h-full object-cover"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
@@ -148,7 +139,6 @@ export default function AdminDashboardLayout({
         </div>
       </main>
 
-      <ToastContainer />
     </div>
   );
 }

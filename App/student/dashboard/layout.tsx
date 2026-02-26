@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
+import { toast, Toaster } from 'sonner';
 
 const navItems = [
   { href: '/student/dashboard', label: 'Dashboard', icon: 'fa-solid fa-gauge-high' },
@@ -26,10 +27,12 @@ export default function StudentDashboardLayout({ children }: { children: React.R
       await fetch('/api/auth/logout', { method: 'POST' });
     } catch {}
     if (typeof window !== 'undefined') {
+      const name = localStorage.getItem('studentName');
       localStorage.removeItem('studentName');
       localStorage.removeItem('token');
+      toast.success(`See you soon, ${name || 'Student'} 👋`);
     }
-    router.push('/student/login');
+    setTimeout(() => router.push('/student/login'), 1000);
   };
 
   const SidebarContent = () => (
@@ -90,6 +93,7 @@ export default function StudentDashboardLayout({ children }: { children: React.R
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+      <Toaster position="bottom-right" />
       {/* Desktop Sidebar */}
       <aside className="fixed top-0 left-0 h-screen w-64 bg-white shadow-lg z-20 hidden md:flex flex-col">
         <SidebarContent />
