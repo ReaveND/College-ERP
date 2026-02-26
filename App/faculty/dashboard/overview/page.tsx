@@ -16,7 +16,7 @@ export default function FacultyDashboardOverview() {
   return (
     <div className="max-w-screen-xl mx-auto bg-gray-100 shadow-md rounded-md p-6 h-full">
       {/* Header Card */}
-      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-6xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between flex-wrap gap-4">
+      <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 w-full max-w-7xl p-6 rounded-xl shadow-lg mb-6 flex items-center justify-between flex-wrap gap-4">
         <div className="flex items-center gap-4">
           <Image src="/images/logo.png" alt="College Logo" width={80} height={80} className="rounded-full" />
           <h1 className="text-3xl font-bold text-blue-950">Faculty Dashboard</h1>

@@ -1,51 +1,81 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-export default function AdminDashboard() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
+// ── Typing intro ────────────────────────────────────────────────────────
+const TypingIntro = () => {
+  const lines = ['Welcome', 'to', 'Admin Panel'];
+  const typingSpeed = 80;
+  const pauseAfterLine = 1000;
+  const pauseAfterSet = 2000;
+  const [displayLines, setDisplayLines] = useState(['', '', '']);
 
   useEffect(() => {
-    // Verify admin is logged in
-    // This will be handled by middleware
-    setLoading(false);
+    let lineIndex = 0;
+    let charIndex = 0;
+    let buffer = ['', '', ''];
+
+    const typeNextChar = () => {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          buffer = ['', '', ''];
+          setDisplayLines(['', '', '']);
+          lineIndex = 0;
+          charIndex = 0;
+          typeNextChar();
+        }, pauseAfterSet);
+        return;
+      }
+      const currentLine = lines[lineIndex];
+      if (charIndex < currentLine.length) {
+        buffer[lineIndex] += currentLine.charAt(charIndex);
+        setDisplayLines([...buffer]);
+        charIndex++;
+        setTimeout(typeNextChar, typingSpeed);
+      } else {
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeNextChar, pauseAfterLine);
+      }
+    };
+    typeNextChar();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
-  }
-
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Admin Dashboard</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Manage Admins</h2>
-            <p className="text-gray-600">Add, edit, or delete admin accounts</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Manage Students</h2>
-            <p className="text-gray-600">View and manage student records</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-2">Manage Faculty</h2>
-            <p className="text-gray-600">View and manage faculty members</p>
-          </div>
-        </div>
-
-        <button
-          onClick={() => router.push('/')}
-          className="mt-8 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-        >
-          Back to Home
-        </button>
-      </div>
+    <div className="text-yellow-600 [text-shadow:_0px_0px_6px_#e0b159] font-mono flex flex-col items-center justify-center space-y-2 text-3xl sm:text-4xl md:text-5xl font-extrabold w-full max-w-[90vw] sm:max-w-xl text-center">
+      <span>{displayLines[0]}</span>
+      <span>{displayLines[1]}</span>
+      <span>{displayLines[2]}</span>
     </div>
+  );
+};
+
+export default function AdminWelcome() {
+  return (
+    <>
+      {/* College header banner */}
+      <div className="bg-blue-950 flex flex-col sm:flex-row items-center justify-between px-4 py-4 rounded-md mb-6 gap-4">
+        <img
+          src="/images/logo.png"
+          alt="Logo"
+          className="w-24 h-24 object-cover rounded-full border-4 border-[#e9e9e9]"
+        />
+        <h2 className="sm:text-2xl lg:text-4xl font-bold text-center text-white sm:text-left flex-1 sm:ml-0 lg:ml-5">
+          Vedanta Institute of Technology
+        </h2>
+        <a
+          href="tel:+91-9433558306"
+          className="h-11 px-6 bg-yellow-600 text-white text-lg rounded-md duration-700 hover:rounded-3xl whitespace-nowrap cursor-pointer transition-all hover:scale-105 flex items-center"
+        >
+          Contact Us
+        </a>
+      </div>
+
+      {/* Typing animation */}
+      <div className="w-full max-w-[90vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl bg-transparent shadow mx-auto px-4 sm:px-6 py-6 mt-10 sm:mt-20 flex flex-col sm:flex-row justify-center items-center border-r-0 sm:border-r-4 border-r-blue-950 border-b-4 border-b-blue-950 rounded-2xl">
+        <TypingIntro />
+      </div>
+    </>
   );
 }

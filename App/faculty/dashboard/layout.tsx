@@ -7,7 +7,6 @@ import { FaTachometerAlt, FaRegUser, FaRegCalendarAlt, FaUpload, FaPenSquare, Fa
 
 const navItems = [
   { label: 'Dashboard',              href: '/faculty/dashboard/overview',       icon: FaTachometerAlt },
-  { label: 'Personal Profile',       href: '/faculty/dashboard/profile',        icon: FaRegUser },
   { label: 'Time Table',             href: '/faculty/dashboard/timetable',      icon: FaRegCalendarAlt },
   { label: 'Attendance',             href: '/faculty/dashboard/attendance',     icon: FaChalkboardTeacher },
   { label: 'Upload Study Materials', href: '/faculty/dashboard/study-materials', icon: FaUpload },
@@ -70,13 +69,27 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
           ))}
         </nav>
 
-        <button
-          onClick={handleLogout}
-          className="mt-4 flex items-center gap-3 px-4 py-2 rounded transition-colors hover:bg-red-100 text-red-600 font-bold w-full"
-        >
-          <FaSignOutAlt className="w-4 h-4" />
-          Logout
-        </button>
+        <div className="mt-4 flex flex-row gap-1">
+          <Link
+            href={pathname === '/faculty/dashboard/profile' ? WELCOME_PATH : '/faculty/dashboard/profile'}
+            onClick={(e) => handleNavClick(e, '/faculty/dashboard/profile')}
+            className={`flex items-center justify-center gap-2 px-3 py-2 rounded transition-colors font-bold flex-1 ${
+              pathname === '/faculty/dashboard/profile'
+                ? 'bg-blue-950 text-white'
+                : 'hover:bg-gray-200 text-gray-700'
+            }`}
+          >
+            <FaRegUser className="w-4 h-4 flex-shrink-0" />
+            Profile
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-center gap-2 px-3 py-2 rounded transition-colors hover:bg-red-100 text-red-600 font-bold flex-1"
+          >
+            <FaSignOutAlt className="w-4 h-4 flex-shrink-0" />
+            Logout
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}
