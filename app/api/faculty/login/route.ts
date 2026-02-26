@@ -43,7 +43,11 @@ export async function POST(request: NextRequest) {
       role: 'faculty',
     });
 
-    return NextResponse.json(
+    // debug log
+    // eslint-disable-next-line no-console
+    console.log('Faculty login: session set for', faculty.email);
+
+    const res = NextResponse.json(
       {
         message: 'Login successful',
         user: {
@@ -55,6 +59,8 @@ export async function POST(request: NextRequest) {
       },
       { status: 200 }
     );
+    res.headers.set('x-session-set', '1');
+    return res;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(

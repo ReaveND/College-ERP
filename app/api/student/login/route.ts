@@ -30,7 +30,11 @@ export async function POST(request: NextRequest) {
       role: 'student',
     });
 
-    return NextResponse.json({
+    // Log and include debug header to help verify session/cookie behavior on Vercel
+    // eslint-disable-next-line no-console
+    console.log('Student login: session set for', student.email);
+
+    const res = NextResponse.json({
       message: 'Login successful',
       user: {
         _id: student._id,
@@ -39,6 +43,8 @@ export async function POST(request: NextRequest) {
         role: 'student',
       },
     });
+    res.headers.set('x-session-set', '1');
+    return res;
   } catch (error) {
     console.error('Student login error:', error);
     return NextResponse.json({ error: 'Server error', detail: String(error) }, { status: 500 });
