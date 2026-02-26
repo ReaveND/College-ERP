@@ -1,0 +1,13 @@
+{
+  "name": "college-erp",
+  "version": "1.0.0",
+  "description": "College ERP - run frontend and backend from root",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix App/Client\" \"npm run dev --prefix App/Server\" --names \"client,server\" --prefix-colors \"cyan,yellow\"",
+    "start": "concurrently \"npm run dev --prefix App/Client\" \"npm start --prefix App/Server\" --names \"client,server\" --prefix-colors \"cyan,yellow\"",
+    "install:all": "npm install --prefix App/Client && npm install --prefix App/Server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
