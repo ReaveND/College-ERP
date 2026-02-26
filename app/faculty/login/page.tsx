@@ -34,7 +34,7 @@ export default function FacultyLogin() {
         return;
       }
       localStorage.setItem("facultyName", data.user?.name ?? "");
-      toast.success(`Welcome back, ${data.user?.name || 'Faculty'} 👋`);
+      sessionStorage.setItem("loginToast", `Welcome back, ${data.user?.name || 'Faculty'} 👋`);
       router.push("/faculty/dashboard");
     } catch {
       toast.error("Something went wrong. Please try again.");

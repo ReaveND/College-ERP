@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast, Toaster } from 'sonner';
 
 const navItems = [
@@ -22,17 +22,25 @@ export default function StudentDashboardLayout({ children }: { children: React.R
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  useEffect(() => {
+    const msg = sessionStorage.getItem('loginToast');
+    if (msg) {
+      toast.success(msg);
+      sessionStorage.removeItem('loginToast');
+    }
+  }, []);
+
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
-    } catch {}
+    } catch { }
     if (typeof window !== 'undefined') {
       const name = localStorage.getItem('studentName');
       localStorage.removeItem('studentName');
       localStorage.removeItem('token');
-      toast.success(`See you soon, ${name || 'Student'} 👋`);
+      sessionStorage.setItem('logoutToast', `See you soon, ${name || 'Student'} 👋`);
     }
-    setTimeout(() => router.push('/student/login'), 1000);
+    router.push('/');
   };
 
   const SidebarContent = () => (
@@ -55,9 +63,8 @@ export default function StudentDashboardLayout({ children }: { children: React.R
                 setSidebarOpen(false);
                 router.push(isActive ? '/student/dashboard/welcome' : item.href);
               }}
-              className={`flex items-center w-full text-left px-5 py-2 rounded transition-colors ${
-                isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
-              }`}
+              className={`flex items-center w-full text-left px-5 py-2 rounded transition-colors ${isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+                }`}
             >
               <i className={`${item.icon} mr-3 w-5 text-center`}></i>
               {item.label}
@@ -73,11 +80,10 @@ export default function StudentDashboardLayout({ children }: { children: React.R
             setSidebarOpen(false);
             router.push(pathname === '/student/dashboard/profile' ? '/student/dashboard/welcome' : '/student/dashboard/profile');
           }}
-          className={`flex-1 py-2 rounded-lg transition font-semibold text-sm flex items-center justify-center gap-1 ${
-            pathname === '/student/dashboard/profile'
-              ? 'bg-blue-950 text-white hover:bg-blue-900'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
+          className={`flex-1 py-2 rounded-lg transition font-semibold text-sm flex items-center justify-center gap-1 ${pathname === '/student/dashboard/profile'
+            ? 'bg-blue-950 text-white hover:bg-blue-900'
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
         >
           <i className="fa-regular fa-user"></i> Profile
         </button>

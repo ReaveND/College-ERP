@@ -32,11 +32,9 @@ const SideNavLink = ({
     <a
       href={href}
       onClick={handleClick}
-      className={`block ${
-        indent ? 'pl-8 pr-3' : 'px-5'
-      } py-2 rounded transition-colors cursor-pointer ${
-        isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
-      }`}
+      className={`block ${indent ? 'pl-8 pr-3' : 'px-5'
+        } py-2 rounded transition-colors cursor-pointer ${isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
+        }`}
     >
       <i className={`${icon} mr-3`}></i>
       {label}
@@ -72,9 +70,8 @@ const NavDropdown = ({
       />
     </button>
     <div
-      className={`grid transition-all duration-300 ease-in-out ${
-        isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-      }`}
+      className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
     >
       <div className="overflow-hidden">
         <div className="mt-1 space-y-1">
@@ -117,10 +114,16 @@ export default function AdminDashboardLayout({
     setAdminEmail(localStorage.getItem('adminEmail') || '');
     const img = localStorage.getItem('adminImage') || '';
     setAdminImage(img);
-    setAdminImageError(false); // reset error whenever image changes
+    setAdminImageError(false);
     // Auto-open the group that contains the active route
     if (dataEntryPaths.includes(pathname)) setDataEntryOpen(true);
     if (dataViewPaths.includes(pathname)) setDataViewOpen(true);
+    // Show login welcome toast if coming straight from login
+    const msg = sessionStorage.getItem('loginToast');
+    if (msg) {
+      toast.success(msg);
+      sessionStorage.removeItem('loginToast');
+    }
   }, [pathname]);
 
   const handleLogout = () => {
@@ -129,8 +132,8 @@ export default function AdminDashboardLayout({
     localStorage.removeItem('adminName');
     localStorage.removeItem('adminEmail');
     localStorage.removeItem('adminId');
-    toast.success(`See you soon, ${name || 'Admin'} 👋`);
-    setTimeout(() => router.push('/admin/login'), 1000);
+    sessionStorage.setItem('logoutToast', `See you soon, ${name || 'Admin'} 👋`);
+    router.push('/');
   };
 
   return (

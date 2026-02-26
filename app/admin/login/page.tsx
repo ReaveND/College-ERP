@@ -41,7 +41,7 @@ export default function AdminLogin() {
       localStorage.setItem("adminEmail", data.user?.email ?? "");
       localStorage.setItem("adminImage", data.user?.image ?? "");
       localStorage.setItem("adminId", data.user?._id ?? "");
-      toast.success(`Welcome back, ${data.user?.name || 'Admin'} 👋`);
+      sessionStorage.setItem("loginToast", `Welcome back, ${data.user?.name || 'Admin'} 👋`);
       router.push("/admin/dashboard");
     } catch {
       toast.error("Something went wrong. Please try again.");

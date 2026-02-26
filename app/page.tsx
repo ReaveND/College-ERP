@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast, Toaster } from 'sonner';
 
 /* ─── data ─────────────────────────────────────────────── */
 const sliderImages = [
@@ -46,10 +47,10 @@ const courseData = [
 
 /* ─── component ─────────────────────────────────────────── */
 export default function Home() {
-  const [slide, setSlide]           = useState(0);
-  const [tagline, setTagline]       = useState(0);
-  const [modalOpen, setModalOpen]   = useState(false);
-  const [flipped, setFlipped]       = useState<number | null>(null);
+  const [slide, setSlide] = useState(0);
+  const [tagline, setTagline] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [flipped, setFlipped] = useState<number | null>(null);
   const router = useRouter();
 
   /* auto-advance slider every 3 s */
@@ -64,8 +65,18 @@ export default function Home() {
     return () => clearInterval(t);
   }, []);
 
+  /* show logout toast if redirected after logout */
+  useEffect(() => {
+    const msg = sessionStorage.getItem('logoutToast');
+    if (msg) {
+      toast.success(msg);
+      sessionStorage.removeItem('logoutToast');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
+      <Toaster position="bottom-right" />
 
       {/* ────────────────── HEADER ────────────────── */}
       <div className="bg-gray-100 shadow-md p-4">
@@ -103,13 +114,13 @@ export default function Home() {
         {/* nav */}
         <ul className="flex flex-wrap justify-center mt-3 space-x-6 text-gray-800 font-medium">
           {[
-            { label: 'Home',      href: '#' },
+            { label: 'Home', href: '#' },
             { label: 'Academics', href: '/academics' },
-            { label: 'Faculty',   href: '/our-faculty' },
+            { label: 'Faculty', href: '/our-faculty' },
             { label: 'Placement', href: '/placements' },
             { label: 'Admission', href: '/admission' },
-            { label: 'Contact',   href: '/contact' },
-            { label: 'About',     href: '/about' },
+            { label: 'Contact', href: '/contact' },
+            { label: 'About', href: '/about' },
           ].map(({ label, href }) => (
             <li key={label}>
               <a href={href} className="rounded hover:bg-yellow-600 hover:text-white px-4 py-2 transition block">

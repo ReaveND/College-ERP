@@ -31,7 +31,7 @@ export default function StudentLogin() {
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || "Invalid credentials"); setLoading(false); return; }
       localStorage.setItem("studentName", data.user?.name ?? "");
-      toast.success(`Welcome back, ${data.user?.name || 'Student'} 👋`);
+      sessionStorage.setItem("loginToast", `Welcome back, ${data.user?.name || 'Student'} 👋`);
       router.push("/student/dashboard/welcome");
     } catch {
       toast.error("Something went wrong. Please try again.");

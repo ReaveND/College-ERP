@@ -3,17 +3,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { toast, Toaster } from 'sonner';
 import { FaTachometerAlt, FaRegUser, FaRegCalendarAlt, FaUpload, FaPenSquare, FaFileAlt, FaEnvelopeOpen, FaSignOutAlt, FaChalkboardTeacher } from 'react-icons/fa';
 
 const navItems = [
-  { label: 'Dashboard',              href: '/faculty/dashboard/overview',       icon: FaTachometerAlt },
-  { label: 'Time Table',             href: '/faculty/dashboard/timetable',      icon: FaRegCalendarAlt },
-  { label: 'Attendance',             href: '/faculty/dashboard/attendance',     icon: FaChalkboardTeacher },
+  { label: 'Dashboard', href: '/faculty/dashboard/overview', icon: FaTachometerAlt },
+  { label: 'Time Table', href: '/faculty/dashboard/timetable', icon: FaRegCalendarAlt },
+  { label: 'Attendance', href: '/faculty/dashboard/attendance', icon: FaChalkboardTeacher },
   { label: 'Upload Study Materials', href: '/faculty/dashboard/study-materials', icon: FaUpload },
-  { label: 'Marks Upload',           href: '/faculty/dashboard/marks-upload',   icon: FaPenSquare },
-  { label: 'Assignment',             href: '/faculty/dashboard/assignment',     icon: FaFileAlt },
-  { label: 'Leave Request',          href: '/faculty/dashboard/leave-request',  icon: FaEnvelopeOpen },
+  { label: 'Marks Upload', href: '/faculty/dashboard/marks-upload', icon: FaPenSquare },
+  { label: 'Assignment', href: '/faculty/dashboard/assignment', icon: FaFileAlt },
+  { label: 'Leave Request', href: '/faculty/dashboard/leave-request', icon: FaEnvelopeOpen },
 ];
 
 const WELCOME_PATH = '/faculty/dashboard';
@@ -22,14 +23,22 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
   const pathname = usePathname();
   const router = useRouter();
 
+  useEffect(() => {
+    const msg = sessionStorage.getItem('loginToast');
+    if (msg) {
+      toast.success(msg);
+      sessionStorage.removeItem('loginToast');
+    }
+  }, []);
+
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
     } catch (_) { /* ignore */ }
     const name = localStorage.getItem('facultyName');
     localStorage.removeItem('facultyName');
-    toast.success(`See you soon, ${name || 'Faculty'} 👋`);
-    setTimeout(() => router.push('/faculty/login'), 1000);
+    sessionStorage.setItem('logoutToast', `See you soon, ${name || 'Faculty'} 👋`);
+    router.push('/');
   };
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
@@ -61,11 +70,10 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
               key={href}
               href={pathname === href ? WELCOME_PATH : href}
               onClick={(e) => handleNavClick(e, href)}
-              className={`flex items-center gap-3 px-4 py-2 rounded transition-colors ${
-                pathname === href
-                  ? 'bg-blue-950 text-white font-bold'
-                  : 'hover:bg-gray-200 text-gray-700'
-              }`}
+              className={`flex items-center gap-3 px-4 py-2 rounded transition-colors ${pathname === href
+                ? 'bg-blue-950 text-white font-bold'
+                : 'hover:bg-gray-200 text-gray-700'
+                }`}
             >
               <Icon className="w-4 h-4 flex-shrink-0" />
               {label}
@@ -77,11 +85,10 @@ export default function FacultyDashboardLayout({ children }: { children: React.R
           <Link
             href={pathname === '/faculty/dashboard/profile' ? WELCOME_PATH : '/faculty/dashboard/profile'}
             onClick={(e) => handleNavClick(e, '/faculty/dashboard/profile')}
-            className={`flex items-center justify-center gap-2 px-3 py-2 rounded transition-colors font-bold flex-1 ${
-              pathname === '/faculty/dashboard/profile'
-                ? 'bg-blue-950 text-white'
-                : 'hover:bg-gray-200 text-gray-700'
-            }`}
+            className={`flex items-center justify-center gap-2 px-3 py-2 rounded transition-colors font-bold flex-1 ${pathname === '/faculty/dashboard/profile'
+              ? 'bg-blue-950 text-white'
+              : 'hover:bg-gray-200 text-gray-700'
+              }`}
           >
             <FaRegUser className="w-4 h-4 flex-shrink-0" />
             Profile
