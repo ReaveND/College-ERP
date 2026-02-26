@@ -1,7 +1,6 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -48,17 +47,19 @@ export default function StudentDashboardLayout({ children }: { children: React.R
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <Link
+            <button
               key={item.href}
-              href={item.href}
-              onClick={() => setSidebarOpen(false)}
-              className={`flex items-center px-5 py-2 rounded transition-colors ${
+              onClick={() => {
+                setSidebarOpen(false);
+                router.push(isActive ? '/student/dashboard/welcome' : item.href);
+              }}
+              className={`flex items-center w-full text-left px-5 py-2 rounded transition-colors ${
                 isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
               }`}
             >
               <i className={`${item.icon} mr-3 w-5 text-center`}></i>
               {item.label}
-            </Link>
+            </button>
           );
         })}
       </nav>

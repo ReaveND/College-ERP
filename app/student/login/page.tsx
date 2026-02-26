@@ -32,7 +32,7 @@ export default function StudentLogin() {
       const data = await res.json();
       if (!res.ok) { setMessage(data.error || "Invalid credentials"); setLoading(false); return; }
       localStorage.setItem("studentName", data.user?.name ?? "");
-      router.push("/student/dashboard");
+      router.push("/student/dashboard/welcome");
     } catch {
       setMessage("Something went wrong. Please try again.");
       setLoading(false);
