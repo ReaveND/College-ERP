@@ -13,6 +13,7 @@ export default function AdminProfilePage() {
   const [admin, setAdmin] = useState<Admin | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const adminId = localStorage.getItem('adminId');
@@ -115,17 +116,15 @@ export default function AdminProfilePage() {
           {/* Avatar */}
           <div
             className="w-28 h-28 rounded-full border-4 border-yellow-500 overflow-hidden flex-shrink-0 bg-blue-700 flex items-center justify-center shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
-            onClick={() => admin.image && setSelectedImage(admin.image)}
-            title={admin.image ? 'Click to enlarge' : undefined}
+            onClick={() => admin.image && !imgError && setSelectedImage(admin.image)}
+            title={admin.image && !imgError ? 'Click to enlarge' : undefined}
           >
-            {admin.image ? (
+            {admin.image && !imgError ? (
               <img
                 src={`${API_URL}/Uploads/${admin.image}`}
                 alt={admin.name}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = 'none';
-                }}
+                onError={() => setImgError(true)}
               />
             ) : (
               <span className="text-white text-4xl font-bold">

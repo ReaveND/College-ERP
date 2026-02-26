@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { addStudent } from '@/lib/adminApi';
 
 const inputClass =
-  'bg-white text-black border border-gray-300 rounded-md px-3 py-2 w-full max-w-xs placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 file:bg-blue-950 file:text-white file:px-2 file:rounded-sm file:cursor-pointer';
-const selectClass = inputClass;
+  'bg-white text-black border border-gray-300 rounded-md px-3 py-2 w-full placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 file:border-0 file:bg-blue-950 file:text-white file:text-sm file:font-medium file:px-3 file:py-2 file:-my-2 file:-ml-3 file:mr-3 file:rounded-l-md file:cursor-pointer';
+const selectClass = 'bg-white text-black border border-gray-300 rounded-md px-3 py-2 w-full placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500';
 
 export default function AdmissionPage() {
   const [student, setStudent] = useState({
@@ -95,13 +95,13 @@ export default function AdmissionPage() {
       </section>
 
       {/* Form */}
-      <section className="flex justify-center px-4 sm:px-6 lg:px-10 my-6">
-        <form>
+      <section className="px-4 sm:px-6 lg:px-10 my-6">
+        <form className="w-full">
           {/* Personal Details */}
-          <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full max-w-6xl rounded-xl shadow-2xl p-6 space-y-6">
+          <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full rounded-xl shadow-2xl p-6 space-y-6">
             <h3 className="text-2xl sm:text-3xl text-center mb-2">Personal Details</h3>
             <hr className="bg-white mb-4" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { label: "Name", name: "name", type: "text", placeholder: "Enter Your Name" },
                 { label: "Father's Name", name: "fname", type: "text", placeholder: "Enter Father's Name" },
@@ -113,15 +113,15 @@ export default function AdmissionPage() {
                 { label: "District", name: "district", type: "text", placeholder: "Enter District" },
                 { label: "State", name: "state", type: "text", placeholder: "Enter State" },
               ].map(({ label, name, type, placeholder }) => (
-                <div key={name} className="flex flex-col w-full max-w-xs">
-                  <label className="mb-1 self-start">{label} <span className="text-white">*</span></label>
+                <div key={name} className="flex flex-col w-full">
+                  <label className="mb-1">{label} <span className="text-white">*</span></label>
                   <input type={type} name={name} onChange={onValueChange} placeholder={placeholder} required className={inputClass} />
                 </div>
               ))}
 
               {/* Gender */}
-              <div className="flex flex-col w-full max-w-xs">
-                <label className="mb-1 self-start">Gender <span className="text-white">*</span></label>
+              <div className="flex flex-col w-full">
+                <label className="mb-1">Gender <span className="text-white">*</span></label>
                 <select name="gender" onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Gender--</option>
                   <option value="Male">Male</option>
@@ -131,8 +131,8 @@ export default function AdmissionPage() {
               </div>
 
               {/* Course */}
-              <div className="flex flex-col w-full max-w-xs">
-                <label className="mb-1 self-start">Course <span className="text-white">*</span></label>
+              <div className="flex flex-col w-full">
+                <label className="mb-1">Course <span className="text-white">*</span></label>
                 <select name="course" onChange={onValueChange} required className={selectClass}>
                   <option disabled value="">--Select Course--</option>
                   <option value="BCA">BCA</option>
@@ -143,18 +143,26 @@ export default function AdmissionPage() {
               </div>
 
               {/* Profile Picture */}
-              <div className="flex flex-col w-full max-w-xs">
-                <label className="mb-1 self-start">Profile Picture <span className="text-white">*</span></label>
-                <input type="file" name="image" onChange={fileData} required className={inputClass} />
+              <div className="flex flex-col w-full">
+                <label className="mb-1">Profile Picture <span className="text-white">*</span></label>
+                <label className="flex items-center w-full border border-gray-300 rounded-md overflow-hidden cursor-pointer bg-white">
+                  <span className="bg-blue-950 text-white text-sm font-medium px-3 py-2 flex-shrink-0 hover:bg-blue-900 transition-colors">
+                    Choose file
+                  </span>
+                  <span className="px-3 text-gray-500 text-sm truncate">
+                    {student.image ? student.image.name : 'No file chosen'}
+                  </span>
+                  <input type="file" name="image" onChange={fileData} required className="sr-only" />
+                </label>
               </div>
             </div>
           </div>
 
           {/* Academic Details */}
-          <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full max-w-6xl rounded-xl shadow-2xl p-6 space-y-6 mt-8">
+          <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full rounded-xl shadow-2xl p-6 space-y-6 mt-8">
             <h3 className="text-2xl sm:text-3xl text-center mb-2">Academic Details</h3>
             <hr className="bg-white mb-4" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { label: "School Name", name: "SCName", placeholder: "Enter School Name" },
                 { label: "Marks in Madhyamik (%)", name: "marks", placeholder: "Enter Madhyamik Marks" },
@@ -163,7 +171,7 @@ export default function AdmissionPage() {
                 { label: "Marks in H.S. (%)", name: "HSmarks", placeholder: "Enter H.S. Marks" },
                 { label: "H.S. Year of Passing", name: "HSyop", placeholder: "Enter H.S. Passing Year" },
               ].map(({ label, name, placeholder }) => (
-                <div key={name} className="flex flex-col w-full max-w-xs">
+                <div key={name} className="flex flex-col w-full">
                   <label className="mb-1 text-white">{label} <span className="text-white">*</span></label>
                   <input type="text" name={name} onChange={onValueChange} placeholder={placeholder} required className={inputClass} />
                 </div>

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { addAdmin } from '@/lib/adminApi';
 
 const inputClass =
-  'bg-white text-black border border-gray-300 rounded-md px-3 py-2 w-full max-w-xs placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 file:bg-blue-950 file:text-white file:px-2 file:rounded-sm file:cursor-pointer';
+  'bg-white text-black border border-gray-300 rounded-md px-3 py-2 w-full placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 file:border-0 file:bg-blue-950 file:text-white file:text-sm file:font-medium file:px-3 file:py-2 file:-my-2 file:-ml-3 file:mr-3 file:rounded-l-md file:cursor-pointer';
 
 export default function AddAdminPage() {
   const [admin, setAdmin] = useState({
@@ -78,12 +78,12 @@ export default function AddAdminPage() {
         <hr className="bg-black w-[60%] mx-auto" />
       </section>
 
-      <section className="flex justify-center px-4 sm:px-6 lg:px-10 my-6">
-        <form>
-          <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full max-w-6xl rounded-xl shadow-2xl p-6 space-y-6">
+      <section className="px-4 sm:px-6 lg:px-10 my-6">
+        <form className="w-full">
+          <div className="bg-gradient-to-r from-blue-950 to-blue-900 text-white w-full rounded-xl shadow-2xl p-6 space-y-6">
             <h3 className="text-2xl sm:text-3xl text-center mb-2">Add New Admin</h3>
             <hr className="bg-white mb-4" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 place-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
                 { label: 'Name', name: 'name', type: 'text', placeholder: 'Enter Your Name' },
                 { label: 'Mobile Number', name: 'mobile', type: 'text', placeholder: 'Enter Mobile Number' },
@@ -95,14 +95,22 @@ export default function AddAdminPage() {
                 { label: 'District', name: 'district', type: 'text', placeholder: 'Enter District' },
                 { label: 'State', name: 'state', type: 'text', placeholder: 'Enter State' },
               ].map(({ label, name, type, placeholder }) => (
-                <div key={name} className="flex flex-col w-full max-w-xs">
-                  <label className="mb-1 self-start">{label} <span className="text-white">*</span></label>
+                <div key={name} className="flex flex-col w-full">
+                  <label className="mb-1">{label} <span className="text-white">*</span></label>
                   <input type={type} name={name} onChange={onValueChange} placeholder={placeholder} required className={inputClass} />
                 </div>
               ))}
-              <div className="flex flex-col w-full max-w-xs">
-                <label className="mb-1 self-start">Profile Picture <span className="text-white">*</span></label>
-                <input type="file" name="image" onChange={fileData} required className={inputClass} />
+              <div className="flex flex-col w-full">
+                <label className="mb-1">Profile Picture <span className="text-white">*</span></label>
+                <label className="flex items-center w-full border border-gray-300 rounded-md overflow-hidden cursor-pointer bg-white">
+                  <span className="bg-blue-950 text-white text-sm font-medium px-3 py-2 flex-shrink-0 hover:bg-blue-900 transition-colors">
+                    Choose file
+                  </span>
+                  <span className="px-3 text-gray-500 text-sm truncate">
+                    {admin.image ? admin.image.name : 'No file chosen'}
+                  </span>
+                  <input type="file" name="image" onChange={fileData} required className="sr-only" />
+                </label>
               </div>
             </div>
           </div>

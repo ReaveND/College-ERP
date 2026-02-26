@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast, Toaster } from 'sonner';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
 
 // ── Nav link helper ────────────────────────────────────────────────────
 const SideNavLink = ({
@@ -12,18 +12,19 @@ const SideNavLink = ({
   label,
   currentPath,
   router,
+  indent = false,
 }: {
   href: string;
   icon: string;
   label: string;
   currentPath: string;
   router: ReturnType<typeof useRouter>;
+  indent?: boolean;
 }) => {
   const isActive = currentPath === href;
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    // If already on this page, toggle back to the welcome page
     router.push(isActive ? '/admin/dashboard' : href);
   };
 
@@ -31,7 +32,9 @@ const SideNavLink = ({
     <a
       href={href}
       onClick={handleClick}
-      className={`block px-5 py-2 rounded transition-colors cursor-pointer ${
+      className={`block ${
+        indent ? 'pl-8 pr-3' : 'px-5'
+      } py-2 rounded transition-colors cursor-pointer ${
         isActive ? 'bg-blue-950 text-white font-bold' : 'hover:bg-gray-200'
       }`}
     >
@@ -40,6 +43,47 @@ const SideNavLink = ({
     </a>
   );
 };
+
+// ── Dropdown group helper ──────────────────────────────────────────────
+const NavDropdown = ({
+  icon,
+  label,
+  children,
+  isOpen,
+  onToggle,
+}: {
+  icon: string;
+  label: string;
+  children: React.ReactNode;
+  isOpen: boolean;
+  onToggle: () => void;
+}) => (
+  <div>
+    <button
+      onClick={onToggle}
+      className="w-full flex items-center justify-between px-5 py-2 rounded transition-colors hover:bg-gray-200 cursor-pointer"
+    >
+      <span>
+        <i className={`${icon} mr-3`}></i>
+        {label}
+      </span>
+      <FaChevronDown
+        className={`w-3 h-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+      />
+    </button>
+    <div
+      className={`grid transition-all duration-300 ease-in-out ${
+        isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+      }`}
+    >
+      <div className="overflow-hidden">
+        <div className="mt-1 space-y-1">
+          {children}
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 // ── Layout ─────────────────────────────────────────────────────────────
 export default function AdminDashboardLayout({
@@ -53,11 +97,30 @@ export default function AdminDashboardLayout({
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
   const [adminImage, setAdminImage] = useState('');
+  const [adminImageError, setAdminImageError] = useState(false);
+  const [dataEntryOpen, setDataEntryOpen] = useState(false);
+  const [dataViewOpen, setDataViewOpen] = useState(false);
+
+  const dataEntryPaths = [
+    '/admin/dashboard/admission',
+    '/admin/dashboard/admins/add',
+    '/admin/dashboard/faculty/add',
+  ];
+  const dataViewPaths = [
+    '/admin/dashboard/students',
+    '/admin/dashboard/admins',
+    '/admin/dashboard/faculty',
+  ];
 
   useEffect(() => {
     setAdminName(localStorage.getItem('adminName') || 'Admin');
     setAdminEmail(localStorage.getItem('adminEmail') || '');
-    setAdminImage(localStorage.getItem('adminImage') || '');
+    const img = localStorage.getItem('adminImage') || '';
+    setAdminImage(img);
+    setAdminImageError(false); // reset error whenever image changes
+    // Auto-open the group that contains the active route
+    if (dataEntryPaths.includes(pathname)) setDataEntryOpen(true);
+    if (dataViewPaths.includes(pathname)) setDataViewOpen(true);
   }, [pathname]);
 
   const handleLogout = () => {
@@ -93,12 +156,12 @@ export default function AdminDashboardLayout({
           className="flex items-center gap-3 px-3 py-2.5 my-2 bg-gradient-to-r from-blue-950 to-blue-800 rounded-xl cursor-pointer hover:opacity-90 transition-opacity"
         >
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-yellow-500 flex-shrink-0 bg-blue-700 flex items-center justify-center">
-            {adminImage ? (
+            {adminImage && !adminImageError ? (
               <img
                 src={`https://college-erp-5cd2.onrender.com/Uploads/${adminImage}`}
                 alt={adminName}
                 className="w-full h-full object-cover"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                onError={() => setAdminImageError(true)}
               />
             ) : (
               <span className="text-white font-bold text-base">
@@ -113,14 +176,30 @@ export default function AdminDashboardLayout({
           <span className="text-[10px] bg-yellow-500 text-blue-950 px-1.5 py-0.5 rounded font-bold flex-shrink-0">Admin</span>
         </div>
 
-        <nav className="flex-1 space-y-2 font-sans text-sm font-semibold text-gray-700 overflow-y-auto">
+        <nav className="flex-1 space-y-1 font-sans text-sm font-semibold text-gray-700 overflow-y-auto">
           <SideNavLink href="/admin/dashboard/overview" icon="fas fa-chart-line" label="Dashboard" currentPath={pathname} router={router} />
-          <SideNavLink href="/admin/dashboard/admission" icon="fa-solid fa-users" label="Admission" currentPath={pathname} router={router} />
-          <SideNavLink href="/admin/dashboard/students" icon="fa-solid fa-eye" label="View Students" currentPath={pathname} router={router} />
-          <SideNavLink href="/admin/dashboard/admins/add" icon="fa-solid fa-user-plus" label="Add Admin" currentPath={pathname} router={router} />
-          <SideNavLink href="/admin/dashboard/admins" icon="fa-solid fa-eye" label="View Admin" currentPath={pathname} router={router} />
-          <SideNavLink href="/admin/dashboard/faculty/add" icon="fa-solid fa-user-plus" label="Add Faculty" currentPath={pathname} router={router} />
-          <SideNavLink href="/admin/dashboard/faculty" icon="fa-solid fa-eye" label="View Faculty" currentPath={pathname} router={router} />
+
+          <NavDropdown
+            icon="fa-solid fa-pen-to-square"
+            label="Data Entry"
+            isOpen={dataEntryOpen}
+            onToggle={() => setDataEntryOpen(o => !o)}
+          >
+            <SideNavLink indent href="/admin/dashboard/admission" icon="fa-solid fa-user-graduate" label="Admission" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/admins/add" icon="fa-solid fa-user-plus" label="Add Admin" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/faculty/add" icon="fa-solid fa-user-plus" label="Add Faculty" currentPath={pathname} router={router} />
+          </NavDropdown>
+
+          <NavDropdown
+            icon="fa-solid fa-table-list"
+            label="Data View"
+            isOpen={dataViewOpen}
+            onToggle={() => setDataViewOpen(o => !o)}
+          >
+            <SideNavLink indent href="/admin/dashboard/students" icon="fa-solid fa-eye" label="View Students" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/admins" icon="fa-solid fa-eye" label="View Admin" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/faculty" icon="fa-solid fa-eye" label="View Faculty" currentPath={pathname} router={router} />
+          </NavDropdown>
         </nav>
 
         <button
