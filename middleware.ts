@@ -9,6 +9,11 @@ const SESSION_CONFIG = {
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  // Debug logging for builds on Vercel to help trace 404s
+  try {
+    // eslint-disable-next-line no-console
+    console.log('middleware incoming request:', { pathname, url: request.url });
+  } catch (e) {}
 
   // Let all API routes pass through — they handle their own auth
   if (pathname.startsWith('/api/')) {
@@ -30,6 +35,8 @@ export async function middleware(request: NextRequest) {
   let session: Session | null = null;
   try {
     session = await getIronSession<Session>(request, response, SESSION_CONFIG);
+    // eslint-disable-next-line no-console
+    console.log('middleware session present:', Boolean(session?.user));
   } catch (error) {
     console.error('Error getting session:', error);
   }

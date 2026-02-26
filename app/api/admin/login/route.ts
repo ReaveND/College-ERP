@@ -58,8 +58,12 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Login error:', error);
+    const details = (error instanceof Error) ? error.message : String(error);
+    // In non-production show error details to help debugging
     return NextResponse.json(
-      { error: 'Server error' },
+      process.env.NODE_ENV !== 'production'
+        ? { error: 'Server error', details }
+        : { error: 'Server error' },
       { status: 500 }
     );
   }
