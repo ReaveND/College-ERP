@@ -10,6 +10,11 @@ const SESSION_CONFIG = {
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // Let all API routes pass through — they handle their own auth
+  if (pathname.startsWith('/api/')) {
+    return NextResponse.next();
+  }
+
   // Public routes that don't require authentication
   const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login', '/academics', '/our-faculty', '/placements', '/admission', '/contact', '/about', '/campus-view'];
 
