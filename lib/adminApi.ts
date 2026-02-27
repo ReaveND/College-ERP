@@ -77,6 +77,9 @@ export const addDepartment = (data: any) =>
 export const updateDepartment = (id: string, data: any) =>
   axios.put(`${BASE}/department/${id}`, data);
 
+export const getDepartmentById = (id: string) =>
+  axios.get(`${BASE}/department/${id}`);
+
 export const deleteDepartment = (id: string) =>
   axios.delete(`${BASE}/department/${id}`);
 
@@ -85,3 +88,12 @@ export const getPrograms = () => axios.get(`${BASE}/program`);
 
 export const addProgram = (data: any) =>
   axios.post(`${BASE}/program`, data);
+
+export const getProgramById = (id: string) =>
+  axios.get(`${BASE}/program/${id}`);
+
+export const updateProgram = (id: string, data: any) =>
+  axios.put(`${BASE}/program/${id}`, data);
+
+export const deleteProgram = (id: string) =>
+  axios.delete(`${BASE}/program/${id}`);

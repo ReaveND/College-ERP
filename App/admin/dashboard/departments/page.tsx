@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { getDepartments, deleteDepartment } from '@/lib/adminApi';
 import { FaEdit, FaTrash, FaPlus, FaBuilding } from 'react-icons/fa';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 export default function DepartmentsPage() {
     const router = useRouter();
@@ -44,7 +45,6 @@ export default function DepartmentsPage() {
 
     return (
         <div className="min-h-screen bg-white p-4">
-            <Toaster position="bottom-right" />
 
             <div className="flex justify-between items-center mb-8 bg-blue-950 p-6 rounded-2xl shadow-lg">
                 <div className="flex items-center gap-4 text-white">
@@ -112,8 +112,16 @@ export default function DepartmentsPage() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-2">
-                                            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-bold">
-                                                {dept.hod?.name?.charAt(0) || '?'}
+                                            <div className="w-8 h-8 rounded-full overflow-hidden bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-bold border border-gray-200">
+                                                {dept.hod?.image ? (
+                                                    <img
+                                                        src={resolveImageUrl(dept.hod.image)}
+                                                        alt={dept.hod.name}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                ) : (
+                                                    dept.hod?.name?.charAt(0) || '?'
+                                                )}
                                             </div>
                                             <span className="text-gray-700 font-medium">{dept.hod?.name || 'N/A'}</span>
                                         </div>

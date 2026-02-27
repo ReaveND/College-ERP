@@ -6,7 +6,7 @@ export async function GET() {
     try {
         await connectDB();
         const departments = await DepartmentModel.find({})
-            .populate('hod', 'name')
+            .populate('hod', 'name image')
             .populate('programs', 'name code')
             .populate('parentDepartment', 'name code');
         return NextResponse.json(departments, { status: 200 });
@@ -29,7 +29,30 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
-        const newDepartment = await DepartmentModel.create(body);
+        // Sanitize body to remove empty strings for optional fields
+        const sanitizedData = { ...body };
+        const optionalFields = [
+            'parentDepartment',
+            'hod',
+            'establishedYear',
+            'facultySanctioned',
+            'labsCount',
+            'type',
+            'shortName',
+            'description',
+            'email',
+            'phone',
+            'location',
+            'budgetCode',
+            'affiliatedUniversity'
+        ];
+        optionalFields.forEach((field: string) => {
+            if ((sanitizedData as any)[field] === '') {
+                delete (sanitizedData as any)[field];
+            }
+        });
+
+        const newDepartment = await DepartmentModel.create(sanitizedData);
         return NextResponse.json(
             { message: 'Department created successfully', department: newDepartment },
             { status: 201 }

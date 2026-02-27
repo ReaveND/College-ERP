@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import { toast } from 'sonner';
-import { addProgram } from '@/lib/adminApi';
+import { getProgramById, updateProgram } from '@/lib/adminApi';
 import { FaGraduationCap, FaArrowLeft, FaSave } from 'react-icons/fa';
 
 const inputClass =
@@ -11,9 +11,11 @@ const inputClass =
 const selectClass = 'bg-white text-black border border-gray-300 rounded-lg px-4 py-2.5 w-full placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all';
 const textareaClass = 'bg-white text-black border border-gray-300 rounded-lg px-4 py-2.5 w-full placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px] transition-all';
 
-export default function AddProgramPage() {
+export default function EditProgramPage() {
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
+    const { id } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
     const [program, setProgram] = useState({
         name: '',
         code: '',
@@ -22,16 +24,30 @@ export default function AddProgramPage() {
         level: ''
     });
 
+    useEffect(() => {
+        if (id) {
+            fetchProgram();
+        }
+    }, [id]);
+
+    const fetchProgram = async () => {
+        try {
+            setLoading(true);
+            const res = await getProgramById(id as string);
+            if (res && res.data) {
+                setProgram(res.data);
+            }
+        } catch (error) {
+            console.error('Error fetching program:', error);
+            toast.error('Failed to load program data');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const onValueChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-
-        if (name === 'name' && !program.code) {
-            // Auto-gen code: "Bachelor of Technology" -> "BTECH"
-            const autoCode = value.toUpperCase().replace(/[^A-Z0-0]/g, '').slice(0, 10);
-            setProgram(prev => ({ ...prev, name: value, code: autoCode }));
-        } else {
-            setProgram(prev => ({ ...prev, [name]: value }));
-        }
+        setProgram(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -43,19 +59,27 @@ export default function AddProgramPage() {
         }
 
         try {
-            setLoading(true);
-            const res = await addProgram(program);
-            if (res.status === 201 || res.status === 200) {
-                toast.success('Program created successfully!');
+            setSaving(true);
+            const res = await updateProgram(id as string, program);
+            if (res.status === 200) {
+                toast.success('Program updated successfully!');
                 setTimeout(() => router.push('/admin/dashboard/programs'), 1500);
             }
         } catch (error: any) {
-            const msg = error?.response?.data?.error || 'Failed to create program';
+            const msg = error?.response?.data?.error || 'Failed to update program';
             toast.error(msg);
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
@@ -70,18 +94,20 @@ export default function AddProgramPage() {
                         <FaArrowLeft />
                     </button>
                     <div>
-                        <h1 className="text-xl font-bold text-gray-900">Create Academic Program</h1>
-                        <p className="text-sm text-gray-500">Define a new degree or diploma course</p>
+                        <h1 className="text-xl font-bold text-gray-900">Edit Academic Program</h1>
+                        <p className="text-sm text-gray-500">Update details for {program.name}</p>
                     </div>
                 </div>
-                <button
-                    form="program-form"
-                    type="submit"
-                    disabled={loading}
-                    className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-md disabled:bg-blue-300"
-                >
-                    <FaSave /> {loading ? 'Creating...' : 'Save Program'}
-                </button>
+                <div className="flex gap-3">
+                    <button
+                        form="program-form"
+                        type="submit"
+                        disabled={saving}
+                        className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-md disabled:bg-blue-300"
+                    >
+                        <FaSave /> {saving ? 'Saving...' : 'Update Program'}
+                    </button>
+                </div>
             </div>
 
             <main className="max-w-4xl mx-auto mt-10 px-6">
@@ -90,7 +116,7 @@ export default function AddProgramPage() {
                         <FaGraduationCap className="text-8xl absolute right-8 top-1/2 -translate-y-1/2 opacity-10" />
                         <h2 className="text-3xl font-bold">Program Details</h2>
                         <p className="text-blue-100 mt-2 max-w-lg">
-                            Provide the core details for this academic offering. Programs will be used as templates for batches and students.
+                            Keep the information updated to ensure students and faculty have the correct data.
                         </p>
                     </div>
 
@@ -196,16 +222,10 @@ export default function AddProgramPage() {
                     </form>
                 </div>
 
-                {/* Info Card */}
-                <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6 flex gap-4">
-                    <div className="bg-blue-600 text-white p-3 rounded-lg h-fit">
-                        <FaGraduationCap size={20} />
-                    </div>
-                    <div>
-                        <h4 className="font-bold text-blue-900">Why are programs important?</h4>
-                        <p className="text-sm text-blue-800 mt-1 opacity-80 leading-relaxed">
-                            A Program acts as a template for all academic activities. Once created, you can link it to Departments, assign Courses to it, and enroll Students into specific Programs.
-                        </p>
+                {/* Important Section */}
+                <div className="mt-8 flex justify-between items-center text-sm">
+                    <div className="text-gray-400">
+                        Object ID: <span className="font-mono">{id}</span>
                     </div>
                 </div>
             </main>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { addCourse, getFacultys, getCourses } from '@/lib/adminApi';
 
 const inputClass =
@@ -117,7 +117,6 @@ export default function AddCoursePage() {
 
     return (
         <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden pb-12">
-            <Toaster position="bottom-right" />
             {/* Header */}
             <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
                 <div className="flex items-center gap-4">

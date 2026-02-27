@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { getStudents, updateStudent } from '@/lib/adminApi';
 import dayjs from 'dayjs';
 import { resolveImageUrl } from '@/lib/imageUrl';

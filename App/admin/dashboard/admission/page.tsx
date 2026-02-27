@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { addStudent } from '@/lib/adminApi';
 
 const inputClass =
@@ -56,7 +56,7 @@ export default function AdmissionPage() {
 
     const formData = new FormData();
     formData.append('image', student.image!, student.image!.name);
-    (['name','fname','mname','mobile','email','dob','gender','address','district','state','course','SCName','marks','yop','HSCName','HSmarks','HSyop'] as const)
+    (['name', 'fname', 'mname', 'mobile', 'email', 'dob', 'gender', 'address', 'district', 'state', 'course', 'SCName', 'marks', 'yop', 'HSCName', 'HSmarks', 'HSyop'] as const)
       .forEach(k => formData.append(k, student[k] as string));
 
     try {
@@ -81,7 +81,6 @@ export default function AdmissionPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 rounded-2xl overflow-hidden">
-      <Toaster position="bottom-right" />
       {/* Header */}
       <header className="bg-blue-950 flex flex-col sm:flex-row items-center justify-center px-4 py-4 mb-6 gap-4 shadow-md">
         <div className="flex items-center gap-4">

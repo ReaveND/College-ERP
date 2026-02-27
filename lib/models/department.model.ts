@@ -18,6 +18,7 @@ const departmentSchema = new mongoose.Schema(
         facultySanctioned: { type: Number },
         labsCount: { type: Number },
         budgetCode: { type: String },
+        affiliatedUniversity: { type: String },
     },
     { timestamps: true }
 );

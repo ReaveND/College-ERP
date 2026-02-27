@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { getAdmins, deleteAdmin } from '@/lib/adminApi';
 import dayjs from 'dayjs';
