@@ -51,3 +51,19 @@ export const updateFaculty = (id: string, data: FormData) =>
 
 export const deleteFaculty = (id: string) =>
   axios.delete(`${BASE}/faculty/${id}`);
+
+// ── Course ─────────────────────────────────────────
+export const getCourses = () => axios.get(`${BASE}/course`);
+
+export const addCourse = (data: FormData) =>
+  axios.post(`${BASE}/course`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+export const updateCourse = (id: string, data: FormData) =>
+  axios.put(`${BASE}/course/${id}`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+export const deleteCourse = (id: string) =>
+  axios.delete(`${BASE}/course/${id}`);

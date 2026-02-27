@@ -139,8 +139,8 @@ export default function AdminDashboardLayout({
       fetchAdmin();
     }
 
-    if (dataEntryPaths.includes(pathname)) setDataEntryOpen(true);
-    if (dataViewPaths.includes(pathname)) setDataViewOpen(true);
+    if (dataEntryPaths.includes(pathname) || pathname === '/admin/dashboard/courses/add') setDataEntryOpen(true);
+    if (dataViewPaths.includes(pathname) || pathname === '/admin/dashboard/courses') setDataViewOpen(true);
     const msg = sessionStorage.getItem('loginToast');
     if (msg) {
       toast.success(msg);
@@ -218,6 +218,7 @@ export default function AdminDashboardLayout({
             <SideNavLink indent href="/admin/dashboard/admission" icon="fa-solid fa-user-graduate" label="Admission" currentPath={pathname} router={router} />
             <SideNavLink indent href="/admin/dashboard/admins/add" icon="fa-solid fa-user-plus" label="Add Admin" currentPath={pathname} router={router} />
             <SideNavLink indent href="/admin/dashboard/faculty/add" icon="fa-solid fa-user-plus" label="Add Faculty" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/courses/add" icon="fa-solid fa-book" label="Add Course" currentPath={pathname} router={router} />
           </NavDropdown>
 
           <NavDropdown
@@ -229,6 +230,7 @@ export default function AdminDashboardLayout({
             <SideNavLink indent href="/admin/dashboard/students" icon="fa-solid fa-eye" label="View Students" currentPath={pathname} router={router} />
             <SideNavLink indent href="/admin/dashboard/admins" icon="fa-solid fa-eye" label="View Admin" currentPath={pathname} router={router} />
             <SideNavLink indent href="/admin/dashboard/faculty" icon="fa-solid fa-eye" label="View Faculty" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/courses" icon="fa-solid fa-eye" label="View Courses" currentPath={pathname} router={router} />
           </NavDropdown>
         </nav>
 
