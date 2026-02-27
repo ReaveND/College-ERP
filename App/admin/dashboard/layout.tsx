@@ -104,11 +104,15 @@ export default function AdminDashboardLayout({
     '/admin/dashboard/admission',
     '/admin/dashboard/admins/add',
     '/admin/dashboard/faculty/add',
+    '/admin/dashboard/courses/add',
+    '/admin/dashboard/departments/add',
+    '/admin/dashboard/programs/add',
   ];
   const dataViewPaths = [
     '/admin/dashboard/students',
     '/admin/dashboard/admins',
     '/admin/dashboard/faculty',
+    '/admin/dashboard/courses',
   ];
 
   // Fetch admin profile from DB on mount AND on pathname changes
@@ -139,8 +143,8 @@ export default function AdminDashboardLayout({
       fetchAdmin();
     }
 
-    if (dataEntryPaths.includes(pathname) || pathname === '/admin/dashboard/courses/add') setDataEntryOpen(true);
-    if (dataViewPaths.includes(pathname) || pathname === '/admin/dashboard/courses') setDataViewOpen(true);
+    if (dataEntryPaths.includes(pathname)) setDataEntryOpen(true);
+    if (dataViewPaths.includes(pathname)) setDataViewOpen(true);
     const msg = sessionStorage.getItem('loginToast');
     if (msg) {
       toast.success(msg);
@@ -208,6 +212,8 @@ export default function AdminDashboardLayout({
 
         <nav className="flex-1 space-y-1 font-sans text-sm font-semibold text-gray-700 overflow-y-auto">
           <SideNavLink href="/admin/dashboard/overview" icon="fas fa-chart-line" label="Dashboard" currentPath={pathname} router={router} />
+          <SideNavLink href="/admin/dashboard/programs" icon="fa-solid fa-graduation-cap" label="Programs" currentPath={pathname} router={router} />
+          <SideNavLink href="/admin/dashboard/departments" icon="fa-solid fa-building" label="Departments" currentPath={pathname} router={router} />
 
           <NavDropdown
             icon="fa-solid fa-pen-to-square"
@@ -219,6 +225,8 @@ export default function AdminDashboardLayout({
             <SideNavLink indent href="/admin/dashboard/admins/add" icon="fa-solid fa-user-plus" label="Add Admin" currentPath={pathname} router={router} />
             <SideNavLink indent href="/admin/dashboard/faculty/add" icon="fa-solid fa-user-plus" label="Add Faculty" currentPath={pathname} router={router} />
             <SideNavLink indent href="/admin/dashboard/courses/add" icon="fa-solid fa-book" label="Add Course" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/departments/add" icon="fa-solid fa-plus-square" label="Add Department" currentPath={pathname} router={router} />
+            <SideNavLink indent href="/admin/dashboard/programs/add" icon="fa-solid fa-plus" label="Add Program" currentPath={pathname} router={router} />
           </NavDropdown>
 
           <NavDropdown

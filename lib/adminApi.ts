@@ -67,3 +67,21 @@ export const updateCourse = (id: string, data: FormData) =>
 
 export const deleteCourse = (id: string) =>
   axios.delete(`${BASE}/course/${id}`);
+
+// ── Department ─────────────────────────────────────
+export const getDepartments = () => axios.get(`${BASE}/department`);
+
+export const addDepartment = (data: any) =>
+  axios.post(`${BASE}/department`, data);
+
+export const updateDepartment = (id: string, data: any) =>
+  axios.put(`${BASE}/department/${id}`, data);
+
+export const deleteDepartment = (id: string) =>
+  axios.delete(`${BASE}/department/${id}`);
+
+// ── Program ────────────────────────────────────────
+export const getPrograms = () => axios.get(`${BASE}/program`);
+
+export const addProgram = (data: any) =>
+  axios.post(`${BASE}/program`, data);
