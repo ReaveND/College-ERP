@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Public routes that don't require authentication
-  const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login', '/academics', '/our-faculty', '/placements', '/admission', '/contact', '/about', '/campus-view'];
+  const publicRoutes = ['/', '/admin/login', '/student/login', '/faculty/login', '/academics', '/our-faculty', '/placements', '/admission', '/contact', '/about', '/campus-view', '/event-life'];
 
   // Protected routes by role (handled inline below)
 

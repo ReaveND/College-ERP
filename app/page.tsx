@@ -245,12 +245,12 @@ export default function Home() {
               supportive environment. Experience a campus culture where learning, creativity, and
               fun come together to shape well-rounded individuals.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/event-life"
               className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md w-max transition-all duration-300"
             >
               Explore
-            </a>
+            </Link>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
