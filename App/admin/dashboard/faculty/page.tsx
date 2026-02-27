@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { getFacultys, deleteFaculty } from '@/lib/adminApi';
 import dayjs from 'dayjs';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 interface Faculty {
   _id: string;
@@ -60,7 +61,7 @@ export default function FacultyPage() {
       {selectedImage && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="relative">
-            <img src={`/Uploads/${selectedImage}`} alt="Enlarged" className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white" />
+            <img src={resolveImageUrl(selectedImage)} alt="Enlarged" className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white" />
             <button onClick={() => setSelectedImage(null)} className="absolute top-1 right-2 text-white text-4xl font-bold cursor-pointer">&times;</button>
           </div>
         </div>
@@ -103,7 +104,7 @@ export default function FacultyPage() {
                   <tr key={data._id} className="border-b font-bold text-center border-blue-800 even:bg-gray-300 odd:bg-gray-400 hover:bg-blue-200">
                     <td className="px-4 py-3">
                       {data.image ? (
-                        <img src={`/Uploads/${data.image}`} alt={data.name} onClick={() => setSelectedImage(data.image)} className="w-10 h-10 rounded-full object-cover cursor-pointer" />
+                        <img src={resolveImageUrl(data.image)} alt={data.name} onClick={() => setSelectedImage(data.image)} className="w-10 h-10 rounded-full object-cover cursor-pointer" />
                       ) : 'N/A'}
                     </td>
                     <td className="px-4 py-3 text-blue-900">{data.name}</td>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { AdminModel } from '@/lib/models/admin.model';
+import { uploadToCloudinary } from '@/lib/cloudinary';
 
 export async function GET() {
   try {
@@ -21,6 +22,14 @@ export async function POST(request: NextRequest) {
     await connectDB();
 
     const formData = await request.formData();
+
+    // Upload image to Cloudinary
+    const imageFile = formData.get('image') as File | null;
+    let imageUrl = '';
+    if (imageFile && imageFile.size > 0) {
+      imageUrl = await uploadToCloudinary(imageFile, 'college-erp/admins');
+    }
+
     const adminData = {
       name: formData.get('name'),
       mobile: Number(formData.get('mobile')),
@@ -29,17 +38,16 @@ export async function POST(request: NextRequest) {
       address: formData.get('address'),
       district: formData.get('district'),
       state: formData.get('state'),
-      image: formData.get('image') ? 'image-placeholder' : '',
+      image: imageUrl,
       username: formData.get('username'),
       password: formData.get('password'),
     };
 
-    // Validate required fields
     if (!adminData.name || !adminData.email || !adminData.username || !adminData.password) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+    if (!imageUrl) {
+      return NextResponse.json({ error: 'Profile picture is required' }, { status: 400 });
     }
 
     const newAdmin = await AdminModel.create(adminData);
@@ -49,12 +57,9 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     console.error('Error while adding Admin:', error);
-    const message = error.code === 11000 
+    const message = error.code === 11000
       ? 'Email or username already exists'
       : 'Error while adding Admin';
-    return NextResponse.json(
-      { error: message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

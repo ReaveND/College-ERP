@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getAdminMe } from '@/lib/adminApi';
 import { Admin } from '@/types';
 import dayjs from 'dayjs';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 
 export default function AdminProfilePage() {
@@ -75,7 +76,7 @@ export default function AdminProfilePage() {
         >
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <img
-              src={`/Uploads/${selectedImage}`}
+              src={resolveImageUrl(selectedImage)}
               alt="Enlarged"
               className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white"
             />
@@ -117,7 +118,7 @@ export default function AdminProfilePage() {
           >
             {admin.image && !imgError ? (
               <img
-                src={`/Uploads/${admin.image}`}
+                src={resolveImageUrl(admin.image)}
                 alt={admin.name}
                 className="w-full h-full object-cover"
                 onError={() => setImgError(true)}

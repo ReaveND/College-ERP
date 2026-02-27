@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { getFacultys, updateFaculty } from '@/lib/adminApi';
 import dayjs from 'dayjs';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 const InputField = ({ label, name, value, onChange, type = 'text' }: {
   label: string; name: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; type?: string;
@@ -33,8 +34,23 @@ export default function EditFacultyPage() {
       const f = res.data.find((x: any) => x._id === id);
       if (f) {
         setFormData({
-          ...f,
+          name: f.name ?? '',
+          mobile: String(f.mobile ?? ''),
+          email: f.email ?? '',
           dob: f.dob ? dayjs(f.dob).format('YYYY-MM-DD') : '',
+          gender: f.gender ?? '',
+          address: f.address ?? '',
+          district: f.district ?? '',
+          state: f.state ?? '',
+          image: f.image ?? '',
+          qualification: f.qualification ?? '',
+          specialization: f.specialization ?? '',
+          department: f.department ?? '',
+          designation: f.designation ?? '',
+          username: f.username ?? '',
+          password: f.password ?? '',
+          experience: String(f.experience ?? ''),
+          publication: f.publication ?? '',
           doj: f.doj ? dayjs(f.doj).format('YYYY-MM-DD') : '',
           file: null,
         });
@@ -55,7 +71,8 @@ export default function EditFacultyPage() {
     e.preventDefault();
     const payload = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'file' && value !== null) payload.append(key, value as string);
+      // Skip 'file' (handled below) and 'image' (only send if a new file was chosen)
+      if (key !== 'file' && key !== 'image' && value !== null) payload.append(key, value as string);
     });
     if (formData.file) payload.append('image', formData.file);
 
@@ -90,7 +107,7 @@ export default function EditFacultyPage() {
       {formData.image && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Current Profile Image</label>
-          <img src={`/Uploads/${formData.image}`} alt="Faculty" className="w-20 h-20 rounded-full object-cover mt-2 border" />
+          <img src={resolveImageUrl(formData.image)} alt="Faculty" className="w-20 h-20 rounded-full object-cover mt-2 border" />
         </div>
       )}
       <div className="mb-4">

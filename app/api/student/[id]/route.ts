@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { StudentModel } from '@/lib/models/student.model';
+import { uploadToCloudinary } from '@/lib/cloudinary';
 import mongoose from 'mongoose';
 
 export async function PUT(
@@ -9,12 +10,9 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json(
-        { error: 'Invalid student ID' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid student ID' }, { status: 400 });
     }
 
     await connectDB();
@@ -22,13 +20,20 @@ export async function PUT(
     const formData = await request.formData();
     const updateData: any = {};
 
-    // Collect form data
     for (const [key, value] of formData.entries()) {
-      if (key === 'mobile' || key === 'marks' || key === 'yop' || key === 'HSmarks' || key === 'HSyop') {
+      if (key === 'image') {
+        // handled separately below
+      } else if (['mobile', 'marks', 'yop', 'HSmarks', 'HSyop'].includes(key)) {
         updateData[key] = Number(value);
-      } else if (key !== 'image') { // Skip file upload for now
+      } else {
         updateData[key] = value;
       }
+    }
+
+    // If a new image file was provided, upload it to Cloudinary
+    const imageFile = formData.get('image') as File | null;
+    if (imageFile && imageFile.size > 0) {
+      updateData.image = await uploadToCloudinary(imageFile, 'college-erp/students');
     }
 
     const updatedStudent = await StudentModel.findByIdAndUpdate(
@@ -38,19 +43,13 @@ export async function PUT(
     );
 
     if (!updatedStudent) {
-      return NextResponse.json(
-        { error: 'Student not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Student not found' }, { status: 404 });
     }
 
     return NextResponse.json(updatedStudent, { status: 200 });
   } catch (error) {
     console.error('Error updating student:', error);
-    return NextResponse.json(
-      { error: 'Server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
 
@@ -60,12 +59,9 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json(
-        { error: 'Invalid student ID' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid student ID' }, { status: 400 });
     }
 
     await connectDB();
@@ -73,21 +69,12 @@ export async function DELETE(
     const deletedStudent = await StudentModel.findByIdAndDelete(id);
 
     if (!deletedStudent) {
-      return NextResponse.json(
-        { error: 'Student not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Student not found' }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { message: 'Student deleted successfully' },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'Student deleted successfully' }, { status: 200 });
   } catch (error) {
     console.error('Error deleting student:', error);
-    return NextResponse.json(
-      { error: 'Server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }

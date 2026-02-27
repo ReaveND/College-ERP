@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { StudentModel } from '@/lib/models/student.model';
+import { uploadToCloudinary } from '@/lib/cloudinary';
 
 export async function GET() {
   try {
@@ -21,6 +22,14 @@ export async function POST(request: NextRequest) {
     await connectDB();
 
     const formData = await request.formData();
+
+    // Upload image to Cloudinary
+    const imageFile = formData.get('image') as File | null;
+    let imageUrl = '';
+    if (imageFile && imageFile.size > 0) {
+      imageUrl = await uploadToCloudinary(imageFile, 'college-erp/students');
+    }
+
     const studentData = {
       name: formData.get('name'),
       fname: formData.get('fname'),
@@ -33,7 +42,7 @@ export async function POST(request: NextRequest) {
       district: formData.get('district'),
       state: formData.get('state'),
       course: formData.get('course'),
-      image: formData.get('image') ? 'image-placeholder' : '',
+      image: imageUrl,
       SCName: formData.get('SCName'),
       marks: Number(formData.get('marks')),
       yop: Number(formData.get('yop')),
@@ -42,12 +51,11 @@ export async function POST(request: NextRequest) {
       HSyop: Number(formData.get('HSyop')),
     };
 
-    // Validate required fields
     if (!studentData.name || !studentData.email || !studentData.course) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+    if (!imageUrl) {
+      return NextResponse.json({ error: 'Profile picture is required' }, { status: 400 });
     }
 
     const newStudent = await StudentModel.create(studentData);
@@ -57,12 +65,9 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     console.error('Error while adding Student:', error);
-    const message = error.code === 11000 
+    const message = error.code === 11000
       ? 'Email already exists'
       : 'Error while adding Student';
-    return NextResponse.json(
-      { error: message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

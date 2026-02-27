@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { toast, Toaster } from 'sonner';
 import { FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
 import { getAdminMe } from '@/lib/adminApi';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 // ── Nav link helper ────────────────────────────────────────────────────
 const SideNavLink = ({
@@ -110,8 +111,9 @@ export default function AdminDashboardLayout({
     '/admin/dashboard/faculty',
   ];
 
-  // Fetch admin profile from DB on mount
-  useEffect(() => {
+  // Fetch admin profile from DB on mount AND on pathname changes
+  // (to ensure sidebar stays synced after profile updates)
+  const fetchAdmin = () => {
     getAdminMe()
       .then((res) => {
         const a = res.data?.admin;
@@ -125,10 +127,18 @@ export default function AdminDashboardLayout({
       .catch(() => {
         // fallback — keep defaults
       });
-  }, []);
+  };
 
-  // Auto-open nav groups and show login toast
   useEffect(() => {
+    fetchAdmin();
+  }, []); // On mount
+
+  useEffect(() => {
+    // Also re-fetch if we navigate back to the dashboard from an edit page
+    if (pathname.includes('/dashboard')) {
+      fetchAdmin();
+    }
+
     if (dataEntryPaths.includes(pathname)) setDataEntryOpen(true);
     if (dataViewPaths.includes(pathname)) setDataViewOpen(true);
     const msg = sessionStorage.getItem('loginToast');
@@ -178,7 +188,7 @@ export default function AdminDashboardLayout({
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-yellow-500 flex-shrink-0 bg-blue-700 flex items-center justify-center">
             {adminImage && !adminImageError ? (
               <img
-                src={`/Uploads/${adminImage}`}
+                src={resolveImageUrl(adminImage)}
                 alt={adminName}
                 className="w-full h-full object-cover"
                 onError={() => setAdminImageError(true)}

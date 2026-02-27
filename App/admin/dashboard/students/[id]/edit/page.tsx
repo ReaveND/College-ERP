@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { getStudents, updateStudent } from '@/lib/adminApi';
 import dayjs from 'dayjs';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 const InputField = ({ label, name, value, onChange, type = 'text' }: {
   label: string; name: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; type?: string;
@@ -32,7 +33,27 @@ export default function EditStudentPage() {
     getStudents().then(res => {
       const s = res.data.find((x: any) => x._id === id);
       if (s) {
-        setFormData({ ...s, dob: s.dob ? dayjs(s.dob).format('YYYY-MM-DD') : '', file: null });
+        setFormData({
+          name: s.name ?? '',
+          fname: s.fname ?? '',
+          mname: s.mname ?? '',
+          mobile: String(s.mobile ?? ''),
+          email: s.email ?? '',
+          dob: s.dob ? dayjs(s.dob).format('YYYY-MM-DD') : '',
+          gender: s.gender ?? '',
+          address: s.address ?? '',
+          district: s.district ?? '',
+          state: s.state ?? '',
+          course: s.course ?? '',
+          image: s.image ?? '',
+          SCName: s.SCName ?? '',
+          marks: String(s.marks ?? ''),
+          yop: String(s.yop ?? ''),
+          HSCName: s.HSCName ?? '',
+          HSmarks: String(s.HSmarks ?? ''),
+          HSyop: String(s.HSyop ?? ''),
+          file: null,
+        });
       } else {
         toast.error('Student not found');
       }
@@ -50,7 +71,8 @@ export default function EditStudentPage() {
     e.preventDefault();
     const payload = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'file' && value !== null) payload.append(key, value as string);
+      // Skip 'file' (handled below) and 'image' (only send if a new file was chosen)
+      if (key !== 'file' && key !== 'image' && value !== null) payload.append(key, value as string);
     });
     if (formData.file) payload.append('image', formData.file);
 
@@ -85,7 +107,7 @@ export default function EditStudentPage() {
       {formData.image && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Current Profile Image</label>
-          <img src={`/Uploads/${formData.image}`} alt="Student" className="w-20 h-20 rounded-full object-cover mt-2 border" />
+          <img src={resolveImageUrl(formData.image)} alt="Student" className="w-20 h-20 rounded-full object-cover mt-2 border" />
         </div>
       )}
       <div className="mb-4">

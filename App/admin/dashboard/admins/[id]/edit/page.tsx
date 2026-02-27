@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { getAdmins, updateAdmin } from '@/lib/adminApi';
 import dayjs from 'dayjs';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 const InputField = ({ label, name, value, onChange, type = 'text' }: {
   label: string; name: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; type?: string;
@@ -30,7 +31,19 @@ export default function EditAdminPage() {
     getAdmins().then(res => {
       const admin = res.data.find((a: any) => a._id === id);
       if (admin) {
-        setFormData({ ...admin, dob: admin.dob ? dayjs(admin.dob).format('YYYY-MM-DD') : '', file: null });
+        setFormData({
+          name: admin.name ?? '',
+          mobile: String(admin.mobile ?? ''),
+          email: admin.email ?? '',
+          dob: admin.dob ? dayjs(admin.dob).format('YYYY-MM-DD') : '',
+          address: admin.address ?? '',
+          district: admin.district ?? '',
+          state: admin.state ?? '',
+          username: admin.username ?? '',
+          password: admin.password ?? '',
+          image: admin.image ?? '',
+          file: null,
+        });
       } else {
         toast.error('Admin not found');
       }
@@ -49,7 +62,8 @@ export default function EditAdminPage() {
     e.preventDefault();
     const payload = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'file' && value !== null) payload.append(key, value as string);
+      // Skip 'file' (handled below) and 'image' (only send if a new file was chosen)
+      if (key !== 'file' && key !== 'image' && value !== null) payload.append(key, value as string);
     });
     if (formData.file) payload.append('image', formData.file);
 
@@ -82,7 +96,7 @@ export default function EditAdminPage() {
       {formData.image && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Current Profile Image</label>
-          <img src={`/Uploads/${formData.image}`} alt="Admin" className="w-20 h-20 rounded-full object-cover mt-2 border" />
+          <img src={resolveImageUrl(formData.image)} alt="Admin" className="w-20 h-20 rounded-full object-cover mt-2 border" />
         </div>
       )}
       <div className="mb-4">
