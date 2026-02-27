@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast, Toaster } from 'sonner';
 import { FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
+import { getAdminMe } from '@/lib/adminApi';
 
 // ── Nav link helper ────────────────────────────────────────────────────
 const SideNavLink = ({
@@ -98,18 +99,6 @@ export default function AdminDashboardLayout({
   const [dataEntryOpen, setDataEntryOpen] = useState(false);
   const [dataViewOpen, setDataViewOpen] = useState(false);
 
-  useEffect(() => {
-    try {
-      // eslint-disable-next-line no-console
-      console.log('AdminDashboardLayout mounted', {
-        adminName: localStorage.getItem('adminName'),
-        adminEmail: localStorage.getItem('adminEmail'),
-        adminImage: localStorage.getItem('adminImage'),
-        pathname,
-      });
-    } catch (e) {}
-  }, [pathname]);
-
   const dataEntryPaths = [
     '/admin/dashboard/admission',
     '/admin/dashboard/admins/add',
@@ -121,16 +110,27 @@ export default function AdminDashboardLayout({
     '/admin/dashboard/faculty',
   ];
 
+  // Fetch admin profile from DB on mount
   useEffect(() => {
-    setAdminName(localStorage.getItem('adminName') || 'Admin');
-    setAdminEmail(localStorage.getItem('adminEmail') || '');
-    const img = localStorage.getItem('adminImage') || '';
-    setAdminImage(img);
-    setAdminImageError(false);
-    // Auto-open the group that contains the active route
+    getAdminMe()
+      .then((res) => {
+        const a = res.data?.admin;
+        if (a) {
+          setAdminName(a.name || 'Admin');
+          setAdminEmail(a.email || '');
+          setAdminImage(a.image || '');
+          setAdminImageError(false);
+        }
+      })
+      .catch(() => {
+        // fallback — keep defaults
+      });
+  }, []);
+
+  // Auto-open nav groups and show login toast
+  useEffect(() => {
     if (dataEntryPaths.includes(pathname)) setDataEntryOpen(true);
     if (dataViewPaths.includes(pathname)) setDataViewOpen(true);
-    // Show login welcome toast if coming straight from login
     const msg = sessionStorage.getItem('loginToast');
     if (msg) {
       toast.success(msg);
@@ -138,12 +138,18 @@ export default function AdminDashboardLayout({
     }
   }, [pathname]);
 
-  const handleLogout = () => {
-    const name = localStorage.getItem('adminName');
-    localStorage.removeItem('token');
-    localStorage.removeItem('adminName');
-    localStorage.removeItem('adminEmail');
-    localStorage.removeItem('adminId');
+  const handleLogout = async () => {
+    const name = adminName;
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch { /* ignore */ }
+    // Clear any remaining localStorage keys (legacy clean-up)
+    try {
+      localStorage.removeItem('token');
+      localStorage.removeItem('adminName');
+      localStorage.removeItem('adminEmail');
+      localStorage.removeItem('adminId');
+    } catch { /* ignore */ }
     sessionStorage.setItem('logoutToast', `See you soon, ${name || 'Admin'} 👋`);
     router.push('/');
   };
@@ -172,7 +178,7 @@ export default function AdminDashboardLayout({
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-yellow-500 flex-shrink-0 bg-blue-700 flex items-center justify-center">
             {adminImage && !adminImageError ? (
               <img
-                src={`https://college-erp-5cd2.onrender.com/Uploads/${adminImage}`}
+                src={`/Uploads/${adminImage}`}
                 alt={adminName}
                 className="w-full h-full object-cover"
                 onError={() => setAdminImageError(true)}

@@ -1,45 +1,53 @@
 import axios from 'axios';
 
-const API_URL = 'https://college-erp-5cd2.onrender.com';
+const BASE = '/api';
 
 // ── Admin ──────────────────────────────────────────
-export const addAdmin = (data: FormData) =>
-  axios.post(`${API_URL}/admin/add`, data);
+export const getAdminMe = () => axios.get(`${BASE}/admin/me`);
 
-export const getAdmins = () => axios.get(`${API_URL}/admin/all`);
+export const getAdmins = () => axios.get(`${BASE}/admin`);
+
+export const addAdmin = (data: FormData) =>
+  axios.post(`${BASE}/admin`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
 export const updateAdmin = (id: string, data: FormData) =>
-  axios.put(`${API_URL}/admin/update/${id}`, data, {
+  axios.put(`${BASE}/admin/${id}`, data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
 export const deleteAdmin = (id: string) =>
-  axios.delete(`${API_URL}/admin/delete/${id}`);
+  axios.delete(`${BASE}/admin/${id}`);
 
 // ── Student ───────────────────────────────────────
-export const addStudent = (data: FormData) =>
-  axios.post(`${API_URL}/student/add`, data);
+export const getStudents = () => axios.get(`${BASE}/student`);
 
-export const getStudents = () => axios.get(`${API_URL}/student/all`);
+export const addStudent = (data: FormData) =>
+  axios.post(`${BASE}/student`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
 export const updateStudent = (id: string, data: FormData) =>
-  axios.put(`${API_URL}/student/update/${id}`, data, {
+  axios.put(`${BASE}/student/${id}`, data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
 export const deleteStudent = (id: string) =>
-  axios.delete(`${API_URL}/student/delete/${id}`);
+  axios.delete(`${BASE}/student/${id}`);
 
 // ── Faculty ───────────────────────────────────────
-export const addFaculty = (data: FormData) =>
-  axios.post(`${API_URL}/faculty/add`, data);
+export const getFacultys = () => axios.get(`${BASE}/faculty`);
 
-export const getFacultys = () => axios.get(`${API_URL}/faculty/all`);
+export const addFaculty = (data: FormData) =>
+  axios.post(`${BASE}/faculty`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
 export const updateFaculty = (id: string, data: FormData) =>
-  axios.put(`${API_URL}/faculty/update/${id}`, data, {
+  axios.put(`${BASE}/faculty/${id}`, data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
 export const deleteFaculty = (id: string) =>
-  axios.delete(`${API_URL}/faculty/delete/${id}`);
+  axios.delete(`${BASE}/faculty/${id}`);

@@ -85,7 +85,7 @@ export default function EditStudentPage() {
       {formData.image && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Current Profile Image</label>
-          <img src={`https://college-erp-5cd2.onrender.com/Uploads/${formData.image}`} alt="Student" className="w-20 h-20 rounded-full object-cover mt-2 border" />
+          <img src={`/Uploads/${formData.image}`} alt="Student" className="w-20 h-20 rounded-full object-cover mt-2 border" />
         </div>
       )}
       <div className="mb-4">

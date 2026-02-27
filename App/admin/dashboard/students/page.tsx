@@ -58,7 +58,7 @@ export default function StudentsPage() {
       {selectedImage && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="relative">
-            <img src={`https://college-erp-5cd2.onrender.com/Uploads/${selectedImage}`} alt="Enlarged" className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white" />
+            <img src={`/Uploads/${selectedImage}`} alt="Enlarged" className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white" />
             <button onClick={() => setSelectedImage(null)} className="absolute top-1 right-2 text-white text-4xl font-bold cursor-pointer">&times;</button>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function StudentsPage() {
             <table className="min-w-max w-full text-sm text-left shadow-lg rounded-md overflow-hidden">
               <thead className="bg-blue-950 text-white uppercase text-center">
                 <tr>
-                  {['Image','Name',"Father's Name","Mother's Name",'Mobile','Email','DOB','Gender','Address','Course','Madhyamik','H.S.','Actions'].map(h => (
+                  {['Image', 'Name', "Father's Name", "Mother's Name", 'Mobile', 'Email', 'DOB', 'Gender', 'Address', 'Course', 'Madhyamik', 'H.S.', 'Actions'].map(h => (
                     <th key={h} className="px-4 py-2">{h}</th>
                   ))}
                 </tr>
@@ -95,7 +95,7 @@ export default function StudentsPage() {
                   <tr key={data._id} className="border-b font-bold text-center border-blue-800 even:bg-gray-300 odd:bg-gray-400 hover:bg-blue-200">
                     <td className="px-4 py-3">
                       {data.image ? (
-                        <img src={`https://college-erp-5cd2.onrender.com/Uploads/${data.image}`} alt={data.name} onClick={() => setSelectedImage(data.image)} className="w-10 h-10 rounded-full object-cover cursor-pointer" />
+                        <img src={`/Uploads/${data.image}`} alt={data.name} onClick={() => setSelectedImage(data.image)} className="w-10 h-10 rounded-full object-cover cursor-pointer" />
                       ) : 'N/A'}
                     </td>
                     <td className="px-4 py-3 text-blue-900">{data.name}</td>
@@ -125,7 +125,7 @@ export default function StudentsPage() {
           <div className="flex justify-center mt-4 gap-2">
             <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1} className="px-3 py-1 rounded bg-blue-800 text-white disabled:opacity-50">Prev</button>
             {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i+1} onClick={() => setCurrentPage(i+1)} className={`px-3 py-1 rounded ${currentPage === i+1 ? 'bg-white text-blue-950 font-bold' : 'bg-blue-800 text-white'}`}>{i+1}</button>
+              <button key={i + 1} onClick={() => setCurrentPage(i + 1)} className={`px-3 py-1 rounded ${currentPage === i + 1 ? 'bg-white text-blue-950 font-bold' : 'bg-blue-800 text-white'}`}>{i + 1}</button>
             ))}
             <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages} className="px-3 py-1 rounded bg-blue-800 text-white disabled:opacity-50">Next</button>
           </div>

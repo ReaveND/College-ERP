@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAdmins } from '@/lib/adminApi';
+import { getAdminMe } from '@/lib/adminApi';
 import { Admin } from '@/types';
 import dayjs from 'dayjs';
 
-const API_URL = 'https://college-erp-5cd2.onrender.com';
 
 export default function AdminProfilePage() {
   const router = useRouter();
@@ -16,12 +15,9 @@ export default function AdminProfilePage() {
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
-    const adminId = localStorage.getItem('adminId');
-    getAdmins()
+    getAdminMe()
       .then((res) => {
-        const list: Admin[] = res.data;
-        const found = list.find((a) => a._id === adminId) || null;
-        setAdmin(found);
+        setAdmin(res.data?.admin || null);
       })
       .catch(() => setAdmin(null))
       .finally(() => setLoading(false));
@@ -79,7 +75,7 @@ export default function AdminProfilePage() {
         >
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <img
-              src={`${API_URL}/Uploads/${selectedImage}`}
+              src={`/Uploads/${selectedImage}`}
               alt="Enlarged"
               className="h-80 w-80 object-cover rounded-full shadow-2xl border-4 border-white"
             />
@@ -121,7 +117,7 @@ export default function AdminProfilePage() {
           >
             {admin.image && !imgError ? (
               <img
-                src={`${API_URL}/Uploads/${admin.image}`}
+                src={`/Uploads/${admin.image}`}
                 alt={admin.name}
                 className="w-full h-full object-cover"
                 onError={() => setImgError(true)}
