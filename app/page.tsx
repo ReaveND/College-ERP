@@ -132,16 +132,67 @@ export default function Home() {
       </div>
 
       {/* ────────────────── MARQUEE ────────────────── */}
-      <div className="w-full bg-blue-950 overflow-hidden py-2">
-        <div style={{ display: 'inline-block', whiteSpace: 'nowrap', animation: 'marquee 22s linear infinite' }}>
-          <span className="mx-8 text-white">🎓 Admissions Open 2025!</span>
-          <span className="mx-8 text-white">📢 Annual Tech Fest Coming Soon!</span>
-          <span className="mx-8 text-white">💡 Scholarship Applications Accepted!</span>
-          <span className="mx-8 text-white">🎓 Admissions Open 2025!</span>
-          <span className="mx-8 text-white">📢 Annual Tech Fest Coming Soon!</span>
-          <span className="mx-8 text-white">💡 Scholarship Applications Accepted!</span>
+      <div className="w-full bg-blue-950 overflow-hidden py-3 border-y border-blue-900/50 relative">
+        <div className="marquee-container">
+          <div className="marquee-content">
+            {[
+              { text: '🎓 Admissions Open 2025!' },
+              { text: '📢 Annual Tech Fest Coming Soon!' },
+              { text: '💡 Scholarship Applications Accepted!' },
+              { text: '🏆 Sports Meet Registration Starts Next Week!' },
+              { text: '🔬 New Research Lab Inauguration on Monday!' },
+              { text: '📅 Mid-Semester Exam Schedule Published.' },
+            ].map((notice, idx) => (
+              <div key={`notice-1-${idx}`} className="marquee-item">
+                {notice.text}
+              </div>
+            ))}
+          </div>
+          {/* Exact duplicate for seamless infinite flow */}
+          <div className="marquee-content" aria-hidden="true">
+            {[
+              { text: '🎓 Admissions Open 2025!' },
+              { text: '📢 Annual Tech Fest Coming Soon!' },
+              { text: '💡 Scholarship Applications Accepted!' },
+              { text: '🏆 Sports Meet Registration Starts Next Week!' },
+              { text: '🔬 New Research Lab Inauguration on Monday!' },
+              { text: '📅 Mid-Semester Exam Schedule Published.' },
+            ].map((notice, idx) => (
+              <div key={`notice-2-${idx}`} className="marquee-item">
+                {notice.text}
+              </div>
+            ))}
+          </div>
         </div>
-        <style>{`@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
+        <style>{`
+          .marquee-container {
+            display: flex;
+            width: max-content;
+            animation: scroll 35s linear infinite;
+          }
+          .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            gap: 4rem; /* Gap between items */
+            padding-right: 4rem; /* Match gap for seamless transition between lists */
+          }
+          .marquee-item {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            white-space: nowrap;
+            letter-spacing: 0.025em;
+          }
+          @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .w-full:hover .marquee-container {
+            animation-play-state: paused;
+          }
+        `}</style>
       </div>
 
       {/* ────────────────── SLIDER ────────────────── */}
