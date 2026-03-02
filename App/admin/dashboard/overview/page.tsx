@@ -153,13 +153,27 @@ export default function OverviewPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {STAT_CONFIG.map(({ key, label, color, icon }) => (
-          <div key={key} className="flex items-center bg-gradient-to-br from-blue-50 via-blue-100 to-blue-150 p-4 rounded-md">
-            <div className="w-12 h-12 flex items-center justify-center rounded-full shadow-md" style={{ backgroundColor: color }}>
-              <i className={`${icon} text-white`}></i>
-            </div>
-            <div className="ml-4">
-              <p className="text-xl font-bold">{loading ? '—' : formatNumber((counts as any)?.[key] ?? 0)}</p>
-              <p className="text-sm text-gray-600">{label}</p>
+          <div
+            key={key}
+            className="relative overflow-hidden p-4 rounded-lg bg-white border-2 border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-200"
+          >
+            <div
+              className="absolute -top-8 -right-8 w-36 h-36 rounded-full pointer-events-none"
+              style={{ background: color, opacity: 0.08 }}
+            />
+
+            <div className="flex items-center gap-4">
+              <div
+                className="flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-full text-white text-2xl shadow"
+                style={{ backgroundColor: color }}
+              >
+                <i className={`${icon} text-2xl`}></i>
+              </div>
+
+              <div>
+                <p className="text-2xl font-extrabold text-gray-900">{loading ? '—' : formatNumber((counts as any)?.[key] ?? 0)}</p>
+                <p className="text-sm text-gray-500">{label}</p>
+              </div>
             </div>
           </div>
         ))}
