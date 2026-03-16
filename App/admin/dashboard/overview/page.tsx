@@ -181,13 +181,13 @@ export default function OverviewPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg shadow-md border-gray-100 border-2">
           <h2 className="text-lg font-semibold mb-4 text-center">Enrollment Breakdown</h2>
           <div className="relative h-[300px]">
             <Doughnut data={chartjsData} options={chartjsOptions} />
           </div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg shadow-md border-gray-100 border-2">
           <h2 className="text-lg font-semibold mb-4 text-center">Monthly Enrollment</h2>
           <div className="relative h-[300px]">
             <Line data={lineChartData} options={lineChartOptions} />
